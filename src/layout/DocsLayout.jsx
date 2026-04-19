@@ -21,6 +21,7 @@ export default function DocsLayout({ children }) {
     { path: '/stat-card', label: 'Stat Card' },
     { path: '/tabs', label: 'Tabs' },
     { path: '/toggle', label: 'Toggle' },
+    { path: '/text-input', label: 'Text Input' },
     { path: '/tooltip', label: 'Tooltip' },
   ];
   

@@ -15,6 +15,7 @@ import TogglePage from './pages/TogglePage';
 import TabsPage from './pages/TabsPage';
 import TooltipPage from './pages/TooltipPage';
 import DataTablePage from './pages/DataTablePage';
+import TextInputPage from './pages/TextInputPage';
 import './styles/global.css';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
@@ -35,6 +36,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
           <Route path="/toggle" element={<TogglePage />} />
           <Route path="/tooltip" element={<TooltipPage />} />
           <Route path="/data-table" element={<DataTablePage />} />
+          <Route path="/text-input" element={<TextInputPage />} />
         </Routes>
       </DocsLayout>
     </BrowserRouter>
