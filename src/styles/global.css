@@ -2,6 +2,44 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  :root {
+    /* Surfaces */
+    --color-surface: 255 255 255;          /* white */
+    --color-surface-raised: 255 255 255;   /* white (cards/panels) */
+    --color-surface-muted: 243 244 246;    /* gray-100 (page bg, subtle fills) */
+    --color-surface-inverse: 17 24 39;     /* gray-900 */
+
+    /* Text / foreground */
+    --color-ink: 17 24 39;                  /* gray-900 */
+    --color-ink-muted: 75 85 99;            /* gray-600 */
+    --color-ink-subtle: 156 163 175;        /* gray-400 */
+    --color-ink-inverse: 255 255 255;       /* white */
+
+    /* Borders / dividers */
+    --color-line: 229 231 235;              /* gray-200 */
+    --color-line-strong: 209 213 219;       /* gray-300 */
+  }
+
+  .dark {
+    /* Surfaces */
+    --color-surface: 17 24 39;              /* gray-900 */
+    --color-surface-raised: 31 41 55;       /* gray-800 */
+    --color-surface-muted: 31 41 55;        /* gray-800 */
+    --color-surface-inverse: 243 244 246;   /* gray-100 */
+
+    /* Text / foreground */
+    --color-ink: 243 244 246;               /* gray-100 */
+    --color-ink-muted: 156 163 175;         /* gray-400 */
+    --color-ink-subtle: 107 114 128;        /* gray-500 */
+    --color-ink-inverse: 17 24 39;          /* gray-900 */
+
+    /* Borders / dividers */
+    --color-line: 55 65 81;                 /* gray-700 */
+    --color-line-strong: 75 85 99;          /* gray-600 */
+  }
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',

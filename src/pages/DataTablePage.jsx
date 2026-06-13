@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import DataTable from '../components/DataTable';
 import Badge from '../components/Badge';
 import { RefreshCw } from 'lucide-react';
@@ -44,6 +44,36 @@ const PropsTable = () => (
           <td className="py-3 px-4 font-mono text-xs text-gray-600">boolean</td>
           <td className="py-3 px-4 font-mono text-xs">true</td>
           <td className="py-3 px-4">Show or hide pagination controls</td>
+        </tr>
+        <tr className="border-b border-gray-100">
+          <td className="py-3 px-4 font-mono text-sm">selectable</td>
+          <td className="py-3 px-4 font-mono text-xs text-gray-600">boolean</td>
+          <td className="py-3 px-4 font-mono text-xs">false</td>
+          <td className="py-3 px-4">Add a checkbox column for row selection</td>
+        </tr>
+        <tr className="border-b border-gray-100">
+          <td className="py-3 px-4 font-mono text-sm">searchable</td>
+          <td className="py-3 px-4 font-mono text-xs text-gray-600">boolean</td>
+          <td className="py-3 px-4 font-mono text-xs">false</td>
+          <td className="py-3 px-4">Show a global search field in the toolbar</td>
+        </tr>
+        <tr className="border-b border-gray-100">
+          <td className="py-3 px-4 font-mono text-sm">showColumnVisibility</td>
+          <td className="py-3 px-4 font-mono text-xs text-gray-600">boolean</td>
+          <td className="py-3 px-4 font-mono text-xs">false</td>
+          <td className="py-3 px-4">Show a menu to toggle column visibility</td>
+        </tr>
+        <tr className="border-b border-gray-100">
+          <td className="py-3 px-4 font-mono text-sm">onRowSelectionChange</td>
+          <td className="py-3 px-4 font-mono text-xs text-gray-600">function</td>
+          <td className="py-3 px-4 font-mono text-xs">—</td>
+          <td className="py-3 px-4">Callback fired with the array of selected rows</td>
+        </tr>
+        <tr className="border-b border-gray-100">
+          <td className="py-3 px-4 font-mono text-sm">emptyMessage</td>
+          <td className="py-3 px-4 font-mono text-xs text-gray-600">string</td>
+          <td className="py-3 px-4 font-mono text-xs">'No results found.'</td>
+          <td className="py-3 px-4">Message shown when there are no rows</td>
         </tr>
         <tr className="border-b border-gray-100">
           <td className="py-3 px-4 font-mono text-sm">className</td>
@@ -104,6 +134,8 @@ const ColumnConfigTable = () => (
 );
 
 export default function DataTablePage() {
+  const [selectedRows, setSelectedRows] = useState([]);
+
   // Sample data for examples
   const basicData = [
     { id: 'TKT-001', title: 'Login Issue', status: 'Open', priority: 'High' },
@@ -225,7 +257,8 @@ export default function DataTablePage() {
         <div className="mb-12">
           <h1 className="text-5xl font-bold mb-4">Data Table</h1>
           <p className="text-xl text-gray-600">
-            A flexible and feature-rich table component with sorting, pagination, and custom rendering capabilities.
+            A flexible, feature-rich table powered by <a href="https://tanstack.com/table" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">TanStack Table</a> — sorting,
+            column &amp; global filtering, row selection, column visibility, pagination, and custom cell rendering.
           </p>
         </div>
 
@@ -264,8 +297,9 @@ const data = [
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-4">Sorting and Filtering</h2>
           <p className="text-gray-600 mb-6">
-            Enable sorting by adding <code className="bg-gray-100 px-2 py-1 rounded text-sm">sortable: true</code> to column config.
-            Show filter icons with <code className="bg-gray-100 px-2 py-1 rounded text-sm">filterable: true</code>.
+            Enable sorting by adding <code className="bg-gray-100 px-2 py-1 rounded text-sm">sortable: true</code> to a column.
+            Click a header's sort icon to cycle ascending → descending → unsorted. Add <code className="bg-gray-100 px-2 py-1 rounded text-sm">filterable: true</code> to
+            reveal a per-column filter — click the filter icon to type a value, and it narrows the rows live.
           </p>
           <div className="bg-white rounded-lg border border-gray-200 p-8 mb-4">
             <DataTable columns={customColumns} data={customData} />
@@ -332,6 +366,44 @@ const columns = [
 
 // Disable pagination
 <DataTable columns={columns} data={data} showPagination={false} />`} />
+        </section>
+
+        {/* Search, Selection & Column Visibility */}
+        <section className="mb-12">
+          <h2 className="text-2xl font-bold mb-4">Search, Selection &amp; Columns</h2>
+          <p className="text-gray-600 mb-6">
+            Turn on the toolbar features with <code className="bg-gray-100 px-2 py-1 rounded text-sm">searchable</code> (global search across all columns),
+            <code className="bg-gray-100 px-2 py-1 rounded text-sm">selectable</code> (row checkboxes with a select-all), and
+            <code className="bg-gray-100 px-2 py-1 rounded text-sm">showColumnVisibility</code> (a menu to show/hide columns).
+            Use <code className="bg-gray-100 px-2 py-1 rounded text-sm">onRowSelectionChange</code> to react to the current selection.
+          </p>
+          <div className="bg-white rounded-lg border border-gray-200 p-8 mb-4">
+            <DataTable
+              columns={customColumns}
+              data={customData}
+              selectable
+              searchable
+              showColumnVisibility
+              itemsPerPage={5}
+              onRowSelectionChange={setSelectedRows}
+            />
+            <p className="mt-4 text-sm text-gray-600">
+              Selected rows: <span className="font-mono">{selectedRows.length}</span>
+              {selectedRows.length > 0 && (
+                <> — {selectedRows.map((r) => r.id).join(', ')}</>
+              )}
+            </p>
+          </div>
+          <CodeBlock code={`const [selected, setSelected] = useState([]);
+
+<DataTable
+  columns={columns}
+  data={data}
+  selectable
+  searchable
+  showColumnVisibility
+  onRowSelectionChange={setSelected}
+/>`} />
         </section>
 
         {/* Props Table */}

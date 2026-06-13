@@ -36,7 +36,7 @@ describe('Button Component', () => {
     it('renders secondary variant correctly', () => {
       render(<Button variant="secondary">Secondary</Button>);
       const button = screen.getByRole('button');
-      expect(button).toHaveClass('bg-secondary', 'text-black');
+      expect(button).toHaveClass('bg-secondary', 'text-white');
     });
 
     it('renders destructive variant correctly', () => {

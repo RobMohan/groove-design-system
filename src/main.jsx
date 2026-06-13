@@ -9,6 +9,9 @@ import StatCardPage from './pages/StatCardPage';
 import BadgePage from './pages/BadgePage';
 import ColorTokensPage from './pages/ColorTokensPage';
 import TypographyPage from './pages/TypographyPage';
+import SpacingPage from './pages/SpacingPage';
+import ElevationPage from './pages/ElevationPage';
+import RadiusPage from './pages/RadiusPage';
 import CheckboxPage from './pages/CheckboxPage';
 import RadioPage from './pages/RadioPage';
 import TogglePage from './pages/TogglePage';
@@ -26,6 +29,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
           <Route path="/" element={<HomePage />} />
           <Route path="/color-tokens" element={<ColorTokensPage />} />
           <Route path="/typography" element={<TypographyPage />} />
+          <Route path="/spacing" element={<SpacingPage />} />
+          <Route path="/elevation" element={<ElevationPage />} />
+          <Route path="/radius" element={<RadiusPage />} />
           <Route path="/badge" element={<BadgePage />} />
           <Route path="/button" element={<ButtonPage />} />
           <Route path="/card" element={<CardPage />} />

@@ -17,25 +17,25 @@ const TextInput = ({
   const inputId = id || `text-input-${Math.random().toString(36).substr(2, 9)}`;
 
   const getBorderClasses = () => {
-    if (disabled) return 'border border-[#c4c3c3]';
-    if (error) return 'border-2 border-[#b72518]';
-    if (isFocused) return 'border-2 border-[#588ae0]';
-    return 'border border-[#5f5b5b]';
+    if (disabled) return 'border border-line';
+    if (error) return 'border-2 border-destructive';
+    if (isFocused) return 'border-2 border-primary';
+    return 'border border-line-strong';
   };
 
   const getLabelColor = () => {
-    if (disabled) return 'text-[#c4c3c3]';
-    return 'text-[#3f3d3d]';
+    if (disabled) return 'text-ink-subtle';
+    return 'text-ink';
   };
 
   const getInputColor = () => {
-    if (disabled) return 'text-[#c4c3c3] placeholder-[#c4c3c3] cursor-not-allowed';
-    return 'text-black placeholder-[#3f3d3d]';
+    if (disabled) return 'text-ink-subtle placeholder-ink-subtle cursor-not-allowed';
+    return 'text-ink placeholder-ink-muted';
   };
 
   const getIconColor = () => {
-    if (disabled) return 'text-[#c4c3c3]';
-    return 'text-[#3f3d3d]';
+    if (disabled) return 'text-ink-subtle';
+    return 'text-ink-muted';
   };
 
   return (
@@ -49,7 +49,7 @@ const TextInput = ({
         </label>
       )}
       <div
-        className={`flex items-center h-10 px-2 bg-white rounded gap-2 ${getBorderClasses()} ${disabled ? 'cursor-not-allowed' : ''}`}
+        className={`flex items-center h-10 px-2 bg-surface-raised rounded-control gap-2 ${getBorderClasses()} ${disabled ? 'cursor-not-allowed' : ''}`}
       >
         <input
           id={inputId}
@@ -67,11 +67,11 @@ const TextInput = ({
           <Search size={20} className={`shrink-0 ${getIconColor()}`} />
         )}
         {error && (
-          <AlertCircle size={20} className="shrink-0 text-[#b72518]" />
+          <AlertCircle size={20} className="shrink-0 text-destructive" />
         )}
       </div>
       {error && typeof error === 'string' && (
-        <p className="text-sm text-[#b72518]">{error}</p>
+        <p className="text-sm text-destructive">{error}</p>
       )}
     </div>
   );

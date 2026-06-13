@@ -9,6 +9,9 @@ export default function DocsLayout({ children }) {
   const foundationItems = [
     { path: '/color-tokens', label: 'Color Tokens' },
     { path: '/typography', label: 'Typography' },
+    { path: '/spacing', label: 'Spacing' },
+    { path: '/elevation', label: 'Elevation' },
+    { path: '/radius', label: 'Radius' },
   ];
 
   const componentItems = [
