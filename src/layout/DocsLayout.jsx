@@ -15,16 +15,23 @@ export default function DocsLayout({ children }) {
   ];
 
   const componentItems = [
+    { path: '/alert', label: 'Alert' },
     { path: '/badge', label: 'Badge' },
     { path: '/button', label: 'Button' },
     { path: '/card', label: 'Card' },
     { path: '/checkbox', label: 'Checkbox' },
     { path: '/data-table', label: 'Data Table' },
+    { path: '/modal', label: 'Modal' },
+    { path: '/progress', label: 'Progress' },
     { path: '/radio', label: 'Radio' },
+    { path: '/select', label: 'Select' },
+    { path: '/spinner', label: 'Spinner' },
     { path: '/stat-card', label: 'Stat Card' },
     { path: '/tabs', label: 'Tabs' },
+    { path: '/toast', label: 'Toast' },
     { path: '/toggle', label: 'Toggle' },
     { path: '/text-input', label: 'Text Input' },
+    { path: '/textarea', label: 'Textarea' },
     { path: '/tooltip', label: 'Tooltip' },
   ];
   

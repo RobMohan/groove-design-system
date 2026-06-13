@@ -68,6 +68,31 @@ module.exports = {
           'modal': '1rem',      // 16px - dialogs, large surfaces
           'pill': '9999px',     // fully rounded - tags, avatars
         },
+        // ---- Motion ----
+        keyframes: {
+          'progress-indeterminate': {
+            '0%': { transform: 'translateX(-100%)' },
+            '100%': { transform: 'translateX(400%)' },
+          },
+          'fade-in': {
+            from: { opacity: '0' },
+            to: { opacity: '1' },
+          },
+          'scale-in': {
+            from: { opacity: '0', transform: 'scale(0.96)' },
+            to: { opacity: '1', transform: 'scale(1)' },
+          },
+          'slide-in-right': {
+            from: { opacity: '0', transform: 'translateX(1rem)' },
+            to: { opacity: '1', transform: 'translateX(0)' },
+          },
+        },
+        animation: {
+          'progress-indeterminate': 'progress-indeterminate 1.2s ease-in-out infinite',
+          'fade-in': 'fade-in 0.15s ease-out',
+          'scale-in': 'scale-in 0.15s ease-out',
+          'slide-in-right': 'slide-in-right 0.2s ease-out',
+        },
       },
     },
     plugins: [],
