@@ -8,9 +8,9 @@ const CodeBlock = ({ code }) => (
 );
 
 const PropRow = ({ name, type, def, desc }) => (
-  <tr className="border-b border-gray-100">
+  <tr className="border-b border-line">
     <td className="py-3 px-4 font-mono text-sm">{name}</td>
-    <td className="py-3 px-4 font-mono text-xs text-gray-600">{type}</td>
+    <td className="py-3 px-4 font-mono text-xs text-ink-muted">{type}</td>
     <td className="py-3 px-4 font-mono text-xs">{def}</td>
     <td className="py-3 px-4">{desc}</td>
   </tr>
@@ -33,7 +33,7 @@ export default function SelectPage() {
       <div className="max-w-5xl mx-auto">
         <div className="mb-12">
           <h1 className="text-5xl font-bold mb-4">Select</h1>
-          <p className="text-xl text-gray-600">
+          <p className="text-xl text-ink-muted">
             A custom dropdown for choosing a single option, with full keyboard support.
           </p>
         </div>
@@ -45,7 +45,7 @@ export default function SelectPage() {
 
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-4">Basic usage</h2>
-          <div className="bg-white rounded-lg border border-gray-200 p-8 mb-4 max-w-xs">
+          <div className="bg-surface-raised rounded-lg border border-line p-8 mb-4 max-w-xs">
             <Select
               label="Favorite fruit"
               options={fruits}
@@ -73,7 +73,7 @@ const options = [
 
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-4">Preselected &amp; string options</h2>
-          <div className="bg-white rounded-lg border border-gray-200 p-8 mb-4 max-w-xs">
+          <div className="bg-surface-raised rounded-lg border border-line p-8 mb-4 max-w-xs">
             <Select
               label="City"
               options={['nyc', 'sf', 'london', 'tokyo']}
@@ -86,7 +86,7 @@ const options = [
 
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-4">States</h2>
-          <div className="bg-white rounded-lg border border-gray-200 p-8 mb-4 grid gap-6 md:grid-cols-2 max-w-2xl">
+          <div className="bg-surface-raised rounded-lg border border-line p-8 mb-4 grid gap-6 md:grid-cols-2 max-w-2xl">
             <Select label="Error" options={fruits} error="Please make a selection" placeholder="Required" />
             <Select label="Disabled" options={fruits} value="apple" disabled />
           </div>
@@ -96,10 +96,10 @@ const options = [
 
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-4">Props</h2>
-          <div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
+          <div className="bg-surface-raised rounded-lg border border-line overflow-hidden">
             <table className="w-full text-left border-collapse">
               <thead>
-                <tr className="border-b border-gray-200">
+                <tr className="border-b border-line">
                   <th className="py-3 px-4 font-semibold">Prop</th>
                   <th className="py-3 px-4 font-semibold">Type</th>
                   <th className="py-3 px-4 font-semibold">Default</th>
@@ -122,10 +122,10 @@ const options = [
 
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-4">Keyboard</h2>
-          <div className="bg-white rounded-lg border border-gray-200 p-6 text-gray-700 space-y-2">
-            <p><span className="font-mono text-sm bg-gray-100 px-2 py-1 rounded">Enter</span> / <span className="font-mono text-sm bg-gray-100 px-2 py-1 rounded">Space</span> / <span className="font-mono text-sm bg-gray-100 px-2 py-1 rounded">↓</span> opens the menu.</p>
-            <p><span className="font-mono text-sm bg-gray-100 px-2 py-1 rounded">↑</span> / <span className="font-mono text-sm bg-gray-100 px-2 py-1 rounded">↓</span> move the highlight, <span className="font-mono text-sm bg-gray-100 px-2 py-1 rounded">Enter</span> selects.</p>
-            <p><span className="font-mono text-sm bg-gray-100 px-2 py-1 rounded">Esc</span> closes the menu.</p>
+          <div className="bg-surface-raised rounded-lg border border-line p-6 text-ink-muted space-y-2">
+            <p><span className="font-mono text-sm bg-surface-muted px-2 py-1 rounded">Enter</span> / <span className="font-mono text-sm bg-surface-muted px-2 py-1 rounded">Space</span> / <span className="font-mono text-sm bg-surface-muted px-2 py-1 rounded">↓</span> opens the menu.</p>
+            <p><span className="font-mono text-sm bg-surface-muted px-2 py-1 rounded">↑</span> / <span className="font-mono text-sm bg-surface-muted px-2 py-1 rounded">↓</span> move the highlight, <span className="font-mono text-sm bg-surface-muted px-2 py-1 rounded">Enter</span> selects.</p>
+            <p><span className="font-mono text-sm bg-surface-muted px-2 py-1 rounded">Esc</span> closes the menu.</p>
           </div>
         </section>
       </div>

@@ -12,7 +12,7 @@ const PropsTable = () => (
   <div className="overflow-x-auto">
     <table className="w-full text-left border-collapse">
       <thead>
-        <tr className="border-b border-gray-200">
+        <tr className="border-b border-line">
           <th className="py-3 px-4 font-semibold">Prop</th>
           <th className="py-3 px-4 font-semibold">Type</th>
           <th className="py-3 px-4 font-semibold">Default</th>
@@ -20,49 +20,49 @@ const PropsTable = () => (
         </tr>
       </thead>
       <tbody className="text-sm">
-        <tr className="border-b border-gray-100">
+        <tr className="border-b border-line">
           <td className="py-3 px-4 font-mono text-sm">variant</td>
-          <td className="py-3 px-4 font-mono text-xs text-gray-600">
+          <td className="py-3 px-4 font-mono text-xs text-ink-muted">
             'primary' | 'secondary' | 'destructive' | 'positive' | 'outline' | 'ghost' | 'link'
           </td>
           <td className="py-3 px-4 font-mono text-xs">'primary'</td>
           <td className="py-3 px-4">Visual style variant</td>
         </tr>
-        <tr className="border-b border-gray-100">
+        <tr className="border-b border-line">
           <td className="py-3 px-4 font-mono text-sm">size</td>
-          <td className="py-3 px-4 font-mono text-xs text-gray-600">
+          <td className="py-3 px-4 font-mono text-xs text-ink-muted">
             'small' | 'default' | 'large' | 'icon'
           </td>
           <td className="py-3 px-4 font-mono text-xs">'default'</td>
           <td className="py-3 px-4">Button size</td>
         </tr>
-        <tr className="border-b border-gray-100">
+        <tr className="border-b border-line">
           <td className="py-3 px-4 font-mono text-sm">disabled</td>
-          <td className="py-3 px-4 font-mono text-xs text-gray-600">boolean</td>
+          <td className="py-3 px-4 font-mono text-xs text-ink-muted">boolean</td>
           <td className="py-3 px-4 font-mono text-xs">false</td>
           <td className="py-3 px-4">Disabled state</td>
         </tr>
-        <tr className="border-b border-gray-100">
+        <tr className="border-b border-line">
           <td className="py-3 px-4 font-mono text-sm">icon</td>
-          <td className="py-3 px-4 font-mono text-xs text-gray-600">LucideIcon</td>
+          <td className="py-3 px-4 font-mono text-xs text-ink-muted">LucideIcon</td>
           <td className="py-3 px-4 font-mono text-xs">undefined</td>
           <td className="py-3 px-4">Icon component from lucide-react</td>
         </tr>
-        <tr className="border-b border-gray-100">
+        <tr className="border-b border-line">
           <td className="py-3 px-4 font-mono text-sm">iconPosition</td>
-          <td className="py-3 px-4 font-mono text-xs text-gray-600">'left' | 'right'</td>
+          <td className="py-3 px-4 font-mono text-xs text-ink-muted">'left' | 'right'</td>
           <td className="py-3 px-4 font-mono text-xs">'left'</td>
           <td className="py-3 px-4">Position of the icon</td>
         </tr>
-        <tr className="border-b border-gray-100">
+        <tr className="border-b border-line">
           <td className="py-3 px-4 font-mono text-sm">onClick</td>
-          <td className="py-3 px-4 font-mono text-xs text-gray-600">function</td>
+          <td className="py-3 px-4 font-mono text-xs text-ink-muted">function</td>
           <td className="py-3 px-4 font-mono text-xs">undefined</td>
           <td className="py-3 px-4">Click handler</td>
         </tr>
-        <tr className="border-b border-gray-100">
+        <tr className="border-b border-line">
           <td className="py-3 px-4 font-mono text-sm">className</td>
-          <td className="py-3 px-4 font-mono text-xs text-gray-600">string</td>
+          <td className="py-3 px-4 font-mono text-xs text-ink-muted">string</td>
           <td className="py-3 px-4 font-mono text-xs">''</td>
           <td className="py-3 px-4">Additional CSS classes</td>
         </tr>
@@ -80,7 +80,7 @@ export default function ButtonPage() {
         {/* Header */}
         <div className="mb-12">
           <h1 className="text-5xl font-bold mb-4">Button</h1>
-          <p className="text-xl text-gray-600">
+          <p className="text-xl text-ink-muted">
             A versatile button component with multiple variants, sizes, and interactive states.
           </p>
         </div>
@@ -94,10 +94,10 @@ export default function ButtonPage() {
         {/* Variants */}
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-4">Variants</h2>
-          <p className="text-gray-600 mb-6">
+          <p className="text-ink-muted mb-6">
             The Button component comes in 7 different visual styles to fit various use cases.
           </p>
-          <div className="bg-white rounded-lg border border-gray-200 p-8 mb-4">
+          <div className="bg-surface-raised rounded-lg border border-line p-8 mb-4">
             <div className="flex flex-wrap gap-4">
               <Button variant="primary">Primary</Button>
               <Button variant="secondary">Secondary</Button>
@@ -120,10 +120,10 @@ export default function ButtonPage() {
         {/* Sizes */}
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-4">Sizes</h2>
-          <p className="text-gray-600 mb-6">
+          <p className="text-ink-muted mb-6">
             Four different sizes to match your interface needs.
           </p>
-          <div className="bg-white rounded-lg border border-gray-200 p-8 mb-4">
+          <div className="bg-surface-raised rounded-lg border border-line p-8 mb-4">
             <div className="flex flex-wrap gap-4 items-center">
               <Button size="small">Small</Button>
               <Button size="default">Default</Button>
@@ -140,10 +140,10 @@ export default function ButtonPage() {
         {/* With Icons */}
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-4">With Icons</h2>
-          <p className="text-gray-600 mb-6">
+          <p className="text-ink-muted mb-6">
             Add icons from lucide-react to enhance your buttons. Icons can be positioned on the left or right.
           </p>
-          <div className="bg-white rounded-lg border border-gray-200 p-8 mb-4">
+          <div className="bg-surface-raised rounded-lg border border-line p-8 mb-4">
             <div className="flex flex-wrap gap-4">
               <Button variant="primary" icon={Download}>Download</Button>
               <Button variant="secondary" icon={Plus}>Add Item</Button>
@@ -167,10 +167,10 @@ export default function ButtonPage() {
         {/* Disabled State */}
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-4">Disabled State</h2>
-          <p className="text-gray-600 mb-6">
+          <p className="text-ink-muted mb-6">
             All button variants support the disabled state.
           </p>
-          <div className="bg-white rounded-lg border border-gray-200 p-8 mb-4">
+          <div className="bg-surface-raised rounded-lg border border-line p-8 mb-4">
             <div className="flex flex-wrap gap-4">
               <Button variant="primary" disabled>Primary</Button>
               <Button variant="secondary" disabled>Secondary</Button>
@@ -184,7 +184,7 @@ export default function ButtonPage() {
         {/* Props Table */}
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-4">Props</h2>
-          <div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
+          <div className="bg-surface-raised rounded-lg border border-line overflow-hidden">
             <PropsTable />
           </div>
         </section>
@@ -192,7 +192,7 @@ export default function ButtonPage() {
         {/* Usage Example */}
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-4">Complete Example</h2>
-          <p className="text-gray-600 mb-6">
+          <p className="text-ink-muted mb-6">
             Here's a complete example showing how to use the Button component in a form.
           </p>
           <CodeBlock code={`import Button from './components/Button';

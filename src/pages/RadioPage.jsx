@@ -11,7 +11,7 @@ const PropsTable = () => (
   <div className="overflow-x-auto">
     <table className="w-full text-left border-collapse">
       <thead>
-        <tr className="border-b border-gray-200">
+        <tr className="border-b border-line">
           <th className="py-3 px-4 font-semibold">Prop</th>
           <th className="py-3 px-4 font-semibold">Type</th>
           <th className="py-3 px-4 font-semibold">Default</th>
@@ -19,51 +19,51 @@ const PropsTable = () => (
         </tr>
       </thead>
       <tbody className="text-sm">
-        <tr className="border-b border-gray-100">
+        <tr className="border-b border-line">
           <td className="py-3 px-4 font-mono text-sm">checked</td>
-          <td className="py-3 px-4 font-mono text-xs text-gray-600">boolean</td>
+          <td className="py-3 px-4 font-mono text-xs text-ink-muted">boolean</td>
           <td className="py-3 px-4 font-mono text-xs">false</td>
           <td className="py-3 px-4">Whether the radio button is selected</td>
         </tr>
-        <tr className="border-b border-gray-100">
+        <tr className="border-b border-line">
           <td className="py-3 px-4 font-mono text-sm">disabled</td>
-          <td className="py-3 px-4 font-mono text-xs text-gray-600">boolean</td>
+          <td className="py-3 px-4 font-mono text-xs text-ink-muted">boolean</td>
           <td className="py-3 px-4 font-mono text-xs">false</td>
           <td className="py-3 px-4">Whether the radio button is disabled</td>
         </tr>
-        <tr className="border-b border-gray-100">
+        <tr className="border-b border-line">
           <td className="py-3 px-4 font-mono text-sm">label</td>
-          <td className="py-3 px-4 font-mono text-xs text-gray-600">string</td>
+          <td className="py-3 px-4 font-mono text-xs text-ink-muted">string</td>
           <td className="py-3 px-4 font-mono text-xs">''</td>
           <td className="py-3 px-4">Label text to display next to the radio button</td>
         </tr>
-        <tr className="border-b border-gray-100">
+        <tr className="border-b border-line">
           <td className="py-3 px-4 font-mono text-sm">name</td>
-          <td className="py-3 px-4 font-mono text-xs text-gray-600">string</td>
+          <td className="py-3 px-4 font-mono text-xs text-ink-muted">string</td>
           <td className="py-3 px-4 font-mono text-xs">undefined</td>
           <td className="py-3 px-4">Name attribute for grouping radio buttons</td>
         </tr>
-        <tr className="border-b border-gray-100">
+        <tr className="border-b border-line">
           <td className="py-3 px-4 font-mono text-sm">value</td>
-          <td className="py-3 px-4 font-mono text-xs text-gray-600">string</td>
+          <td className="py-3 px-4 font-mono text-xs text-ink-muted">string</td>
           <td className="py-3 px-4 font-mono text-xs">undefined</td>
           <td className="py-3 px-4">Value of the radio button</td>
         </tr>
-        <tr className="border-b border-gray-100">
+        <tr className="border-b border-line">
           <td className="py-3 px-4 font-mono text-sm">onChange</td>
-          <td className="py-3 px-4 font-mono text-xs text-gray-600">function</td>
+          <td className="py-3 px-4 font-mono text-xs text-ink-muted">function</td>
           <td className="py-3 px-4 font-mono text-xs">undefined</td>
           <td className="py-3 px-4">Callback when radio button is selected</td>
         </tr>
-        <tr className="border-b border-gray-100">
+        <tr className="border-b border-line">
           <td className="py-3 px-4 font-mono text-sm">id</td>
-          <td className="py-3 px-4 font-mono text-xs text-gray-600">string</td>
+          <td className="py-3 px-4 font-mono text-xs text-ink-muted">string</td>
           <td className="py-3 px-4 font-mono text-xs">auto-generated</td>
           <td className="py-3 px-4">Custom ID for the radio input</td>
         </tr>
-        <tr className="border-b border-gray-100">
+        <tr className="border-b border-line">
           <td className="py-3 px-4 font-mono text-sm">className</td>
-          <td className="py-3 px-4 font-mono text-xs text-gray-600">string</td>
+          <td className="py-3 px-4 font-mono text-xs text-ink-muted">string</td>
           <td className="py-3 px-4 font-mono text-xs">''</td>
           <td className="py-3 px-4">Additional CSS classes</td>
         </tr>
@@ -83,7 +83,7 @@ export default function RadioPage() {
         {/* Header */}
         <div className="mb-12">
           <h1 className="text-5xl font-bold mb-4">Radio Button</h1>
-          <p className="text-xl text-gray-600">
+          <p className="text-xl text-ink-muted">
             A radio button component for selecting a single option from a group of choices.
           </p>
         </div>
@@ -97,10 +97,10 @@ export default function RadioPage() {
         {/* States */}
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-4">States</h2>
-          <p className="text-gray-600 mb-6">
+          <p className="text-ink-muted mb-6">
             The Radio component has three states: default, selected, and inactive (disabled).
           </p>
-          <div className="bg-white rounded-lg border border-gray-200 p-8 mb-4">
+          <div className="bg-surface-raised rounded-lg border border-line p-8 mb-4">
             <div className="flex flex-col gap-4">
               <Radio label="Default (unselected)" name="demo1" checked={false} onChange={() => {}} />
               <Radio label="Selected" name="demo2" checked={true} onChange={() => {}} />
@@ -117,12 +117,12 @@ export default function RadioPage() {
         {/* Radio Group */}
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-4">Radio Group</h2>
-          <p className="text-gray-600 mb-6">
+          <p className="text-ink-muted mb-6">
             Radio buttons should be grouped together using the same name attribute to ensure only one can be selected.
           </p>
-          <div className="bg-white rounded-lg border border-gray-200 p-8 mb-4">
+          <div className="bg-surface-raised rounded-lg border border-line p-8 mb-4">
             <div className="space-y-4">
-              <p className="text-sm font-semibold text-gray-700">Payment Method</p>
+              <p className="text-sm font-semibold text-ink-muted">Payment Method</p>
               <div className="flex flex-col gap-3 pl-4">
                 <Radio
                   label="Credit Card"
@@ -176,13 +176,13 @@ export default function RadioPage() {
         {/* Multiple Groups */}
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-4">Multiple Groups</h2>
-          <p className="text-gray-600 mb-6">
+          <p className="text-ink-muted mb-6">
             You can have multiple independent radio groups on the same page by using different name attributes.
           </p>
-          <div className="bg-white rounded-lg border border-gray-200 p-8 mb-4">
+          <div className="bg-surface-raised rounded-lg border border-line p-8 mb-4">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <div className="space-y-4">
-                <p className="text-sm font-semibold text-gray-700">Delivery Speed</p>
+                <p className="text-sm font-semibold text-ink-muted">Delivery Speed</p>
                 <div className="flex flex-col gap-3 pl-4">
                   <Radio
                     label="Standard (5-7 days)"
@@ -209,7 +209,7 @@ export default function RadioPage() {
               </div>
 
               <div className="space-y-4">
-                <p className="text-sm font-semibold text-gray-700">Theme Preference</p>
+                <p className="text-sm font-semibold text-ink-muted">Theme Preference</p>
                 <div className="flex flex-col gap-3 pl-4">
                   <Radio
                     label="Light"
@@ -261,10 +261,10 @@ const [theme, setTheme] = useState('light');
         {/* Without Label */}
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-4">Without Label</h2>
-          <p className="text-gray-600 mb-6">
+          <p className="text-ink-muted mb-6">
             Radio buttons can be used without labels for compact layouts.
           </p>
-          <div className="bg-white rounded-lg border border-gray-200 p-8 mb-4">
+          <div className="bg-surface-raised rounded-lg border border-line p-8 mb-4">
             <div className="flex gap-6">
               <Radio name="compact" value="1" checked={false} onChange={() => {}} />
               <Radio name="compact" value="2" checked={true} onChange={() => {}} />
@@ -278,7 +278,7 @@ const [theme, setTheme] = useState('light');
         {/* Props Table */}
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-4">Props</h2>
-          <div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
+          <div className="bg-surface-raised rounded-lg border border-line overflow-hidden">
             <PropsTable />
           </div>
         </section>
@@ -286,7 +286,7 @@ const [theme, setTheme] = useState('light');
         {/* Usage Example */}
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-4">Complete Example</h2>
-          <p className="text-gray-600 mb-6">
+          <p className="text-ink-muted mb-6">
             Here's a complete example showing how to use the Radio component in a settings form.
           </p>
           <CodeBlock code={`import { useState } from 'react';

@@ -11,7 +11,7 @@ const PropsTable = () => (
   <div className="overflow-x-auto">
     <table className="w-full text-left border-collapse">
       <thead>
-        <tr className="border-b border-gray-200">
+        <tr className="border-b border-line">
           <th className="py-3 px-4 font-semibold">Prop</th>
           <th className="py-3 px-4 font-semibold">Type</th>
           <th className="py-3 px-4 font-semibold">Default</th>
@@ -19,23 +19,23 @@ const PropsTable = () => (
         </tr>
       </thead>
       <tbody className="text-sm">
-        <tr className="border-b border-gray-100">
+        <tr className="border-b border-line">
           <td className="py-3 px-4 font-mono text-sm">type</td>
-          <td className="py-3 px-4 font-mono text-xs text-gray-600">
+          <td className="py-3 px-4 font-mono text-xs text-ink-muted">
             'default' | 'warning' | 'positive' | 'negative'
           </td>
           <td className="py-3 px-4 font-mono text-xs">'default'</td>
           <td className="py-3 px-4">Visual style variant</td>
         </tr>
-        <tr className="border-b border-gray-100">
+        <tr className="border-b border-line">
           <td className="py-3 px-4 font-mono text-sm">children</td>
-          <td className="py-3 px-4 font-mono text-xs text-gray-600">ReactNode</td>
+          <td className="py-3 px-4 font-mono text-xs text-ink-muted">ReactNode</td>
           <td className="py-3 px-4 font-mono text-xs">undefined</td>
           <td className="py-3 px-4">Badge content</td>
         </tr>
-        <tr className="border-b border-gray-100">
+        <tr className="border-b border-line">
           <td className="py-3 px-4 font-mono text-sm">className</td>
-          <td className="py-3 px-4 font-mono text-xs text-gray-600">string</td>
+          <td className="py-3 px-4 font-mono text-xs text-ink-muted">string</td>
           <td className="py-3 px-4 font-mono text-xs">''</td>
           <td className="py-3 px-4">Additional CSS classes</td>
         </tr>
@@ -51,7 +51,7 @@ export default function BadgePage() {
         {/* Header */}
         <div className="mb-12">
           <h1 className="text-5xl font-bold mb-4">Badge</h1>
-          <p className="text-xl text-gray-600">
+          <p className="text-xl text-ink-muted">
             A compact status indicator component for displaying labels, categories, or status information.
           </p>
         </div>
@@ -65,10 +65,10 @@ export default function BadgePage() {
         {/* Types */}
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-4">Types</h2>
-          <p className="text-gray-600 mb-6">
+          <p className="text-ink-muted mb-6">
             The Badge component comes in 4 different types to represent various states and contexts.
           </p>
-          <div className="bg-white rounded-lg border border-gray-200 p-8 mb-4">
+          <div className="bg-surface-raised rounded-lg border border-line p-8 mb-4">
             <div className="flex flex-wrap gap-4">
               <Badge type="default">Default</Badge>
               <Badge type="warning">Warning</Badge>
@@ -85,13 +85,13 @@ export default function BadgePage() {
         {/* Use Cases */}
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-4">Common Use Cases</h2>
-          <p className="text-gray-600 mb-6">
+          <p className="text-ink-muted mb-6">
             Badges are great for displaying status, categories, or counts.
           </p>
-          <div className="bg-white rounded-lg border border-gray-200 p-8 mb-4">
+          <div className="bg-surface-raised rounded-lg border border-line p-8 mb-4">
             <div className="space-y-6">
               <div>
-                <p className="text-sm text-gray-600 mb-2">Status indicators:</p>
+                <p className="text-sm text-ink-muted mb-2">Status indicators:</p>
                 <div className="flex flex-wrap gap-3">
                   <Badge type="positive">Active</Badge>
                   <Badge type="warning">Pending</Badge>
@@ -101,7 +101,7 @@ export default function BadgePage() {
               </div>
 
               <div>
-                <p className="text-sm text-gray-600 mb-2">Categories:</p>
+                <p className="text-sm text-ink-muted mb-2">Categories:</p>
                 <div className="flex flex-wrap gap-3">
                   <Badge type="default">Technology</Badge>
                   <Badge type="default">Design</Badge>
@@ -110,7 +110,7 @@ export default function BadgePage() {
               </div>
 
               <div>
-                <p className="text-sm text-gray-600 mb-2">Notifications:</p>
+                <p className="text-sm text-ink-muted mb-2">Notifications:</p>
                 <div className="flex flex-wrap gap-3">
                   <Badge type="negative">3 errors</Badge>
                   <Badge type="warning">5 warnings</Badge>
@@ -134,10 +134,10 @@ export default function BadgePage() {
         {/* In Context */}
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-4">In Context</h2>
-          <p className="text-gray-600 mb-6">
+          <p className="text-ink-muted mb-6">
             Examples of badges used alongside other content.
           </p>
-          <div className="bg-white rounded-lg border border-gray-200 p-8 mb-4">
+          <div className="bg-surface-raised rounded-lg border border-line p-8 mb-4">
             <div className="space-y-4">
               <div className="flex items-center gap-3">
                 <span className="text-base font-medium">User Account</span>
@@ -164,7 +164,7 @@ export default function BadgePage() {
         {/* Props Table */}
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-4">Props</h2>
-          <div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
+          <div className="bg-surface-raised rounded-lg border border-line overflow-hidden">
             <PropsTable />
           </div>
         </section>
@@ -172,7 +172,7 @@ export default function BadgePage() {
         {/* Usage Example */}
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-4">Complete Example</h2>
-          <p className="text-gray-600 mb-6">
+          <p className="text-ink-muted mb-6">
             Here's a complete example showing how to use the Badge component in a list.
           </p>
           <CodeBlock code={`import Badge from './components/Badge';

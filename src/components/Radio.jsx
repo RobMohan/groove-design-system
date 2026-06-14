@@ -40,15 +40,15 @@ const Radio = ({
             transition-all duration-200 cursor-pointer relative
             ${
               disabled
-                ? 'bg-gray-300 border-gray-300 cursor-not-allowed'
+                ? 'bg-surface-muted border-line cursor-not-allowed'
                 : checked
-                ? 'bg-white border-2 border-blue-500'
-                : 'bg-white border border-gray-600 hover:border-blue-500'
+                ? 'bg-surface-raised border-2 border-primary'
+                : 'bg-surface-raised border border-line-strong hover:border-primary'
             }
           `}
         >
           {checked && !disabled && (
-            <div className="absolute w-[18px] h-[18px] rounded-full bg-blue-500" />
+            <div className="absolute w-[18px] h-[18px] rounded-full bg-primary" />
           )}
         </label>
       </div>
@@ -57,7 +57,7 @@ const Radio = ({
           htmlFor={radioId}
           className={`
             text-base leading-6
-            ${disabled ? 'text-gray-400 cursor-not-allowed' : 'text-gray-900 cursor-pointer'}
+            ${disabled ? 'text-ink-subtle cursor-not-allowed' : 'text-ink cursor-pointer'}
           `}
         >
           {label}

@@ -7,15 +7,15 @@ const CodeBlock = ({ code }) => (
 );
 
 const ColorSwatch = ({ name, color, description }) => (
-  <div className="flex items-center gap-4 p-4 bg-white rounded-lg border border-gray-200">
+  <div className="flex items-center gap-4 p-4 bg-surface-raised rounded-lg border border-line">
     <div
-      className="w-16 h-16 rounded-lg border border-gray-200 shadow-sm flex-shrink-0"
+      className="w-16 h-16 rounded-lg border border-line shadow-sm flex-shrink-0"
       style={{ backgroundColor: color }}
     />
     <div className="flex-1">
-      <p className="font-semibold text-gray-900">{name}</p>
-      <p className="text-sm text-gray-600 font-mono">{color}</p>
-      {description && <p className="text-sm text-gray-500 mt-1">{description}</p>}
+      <p className="font-semibold text-ink">{name}</p>
+      <p className="text-sm text-ink-muted font-mono">{color}</p>
+      {description && <p className="text-sm text-ink-muted mt-1">{description}</p>}
     </div>
   </div>
 );
@@ -108,7 +108,7 @@ export default function ColorTokensPage() {
         {/* Header */}
         <div className="mb-12">
           <h1 className="text-5xl font-bold mb-4">Color Tokens</h1>
-          <p className="text-xl text-gray-600">
+          <p className="text-xl text-ink-muted">
             Semantic color system designed for consistency and accessibility across the entire design system.
           </p>
         </div>
@@ -116,12 +116,12 @@ export default function ColorTokensPage() {
         {/* Introduction */}
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-4">Overview</h2>
-          <p className="text-gray-600 mb-4">
+          <p className="text-ink-muted mb-4">
             Our color system uses semantic naming to ensure colors communicate meaning and purpose.
             Each color category (Primary, Secondary, Error, Warning, Success, Grayscale) contains
             tokens for different use cases: surfaces, borders, and text.
           </p>
-          <p className="text-gray-600">
+          <p className="text-ink-muted">
             This approach allows for consistent theming and makes it easy to maintain design consistency
             across components.
           </p>
@@ -130,14 +130,14 @@ export default function ColorTokensPage() {
         {/* Color Structure */}
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-4">Token Structure</h2>
-          <div className="bg-white rounded-lg border border-gray-200 p-6 mb-4">
-            <p className="text-gray-700 mb-4">
+          <div className="bg-surface-raised rounded-lg border border-line p-6 mb-4">
+            <p className="text-ink-muted mb-4">
               Color tokens follow a three-part naming convention:
             </p>
-            <div className="font-mono text-sm bg-gray-50 p-4 rounded border border-gray-200">
+            <div className="font-mono text-sm bg-surface-muted p-4 rounded border border-line">
               <span className="text-blue-600">Category</span> / <span className="text-purple-600">Purpose</span> / <span className="text-green-600">Variant</span>
             </div>
-            <div className="mt-4 space-y-2 text-sm text-gray-600">
+            <div className="mt-4 space-y-2 text-sm text-ink-muted">
               <p><span className="font-semibold text-blue-600">Category:</span> Primary, Secondary, Error, Warning, Success, Grayscale</p>
               <p><span className="font-semibold text-purple-600">Purpose:</span> Surface, Border, Text/Icon</p>
               <p><span className="font-semibold text-green-600">Variant:</span> Subtle, Lighter, Default, Darker, Disabled</p>
@@ -148,7 +148,7 @@ export default function ColorTokensPage() {
         {/* Grayscale */}
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-6">Grayscale</h2>
-          <p className="text-gray-600 mb-6">
+          <p className="text-ink-muted mb-6">
             Foundation colors for layouts, text, and neutral UI elements.
           </p>
           <ColorCategory colors={grayscaleColors} />
@@ -157,7 +157,7 @@ export default function ColorTokensPage() {
         {/* Primary */}
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-6">Primary (Blue)</h2>
-          <p className="text-gray-600 mb-6">
+          <p className="text-ink-muted mb-6">
             Main brand color for primary actions, links, and key interactive elements.
           </p>
           <ColorCategory colors={primaryColors} />
@@ -166,7 +166,7 @@ export default function ColorTokensPage() {
         {/* Secondary */}
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-6">Secondary (Purple)</h2>
-          <p className="text-gray-600 mb-6">
+          <p className="text-ink-muted mb-6">
             Complementary color for secondary actions and visual hierarchy.
           </p>
           <ColorCategory colors={secondaryColors} />
@@ -175,7 +175,7 @@ export default function ColorTokensPage() {
         {/* Error */}
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-6">Error (Red)</h2>
-          <p className="text-gray-600 mb-6">
+          <p className="text-ink-muted mb-6">
             Destructive actions, errors, and critical warnings.
           </p>
           <ColorCategory colors={errorColors} />
@@ -184,7 +184,7 @@ export default function ColorTokensPage() {
         {/* Warning */}
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-6">Warning (Yellow)</h2>
-          <p className="text-gray-600 mb-6">
+          <p className="text-ink-muted mb-6">
             Caution states, alerts, and important notices.
           </p>
           <ColorCategory colors={warningColors} />
@@ -193,7 +193,7 @@ export default function ColorTokensPage() {
         {/* Success */}
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-6">Success (Green)</h2>
-          <p className="text-gray-600 mb-6">
+          <p className="text-ink-muted mb-6">
             Positive actions, success states, and confirmations.
           </p>
           <ColorCategory colors={successColors} />
@@ -203,9 +203,9 @@ export default function ColorTokensPage() {
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-4">Usage Guidelines</h2>
           <div className="space-y-6">
-            <div className="bg-white rounded-lg border border-gray-200 p-6">
+            <div className="bg-surface-raised rounded-lg border border-line p-6">
               <h3 className="font-semibold text-lg mb-3">Surface Colors</h3>
-              <ul className="space-y-2 text-gray-600">
+              <ul className="space-y-2 text-ink-muted">
                 <li><span className="font-semibold">Subtle:</span> Use for very light backgrounds and subtle containers</li>
                 <li><span className="font-semibold">Lighter:</span> Use for hover states and secondary backgrounds</li>
                 <li><span className="font-semibold">Default:</span> Use for primary interactive elements like buttons</li>
@@ -213,18 +213,18 @@ export default function ColorTokensPage() {
               </ul>
             </div>
 
-            <div className="bg-white rounded-lg border border-gray-200 p-6">
+            <div className="bg-surface-raised rounded-lg border border-line p-6">
               <h3 className="font-semibold text-lg mb-3">Border Colors</h3>
-              <ul className="space-y-2 text-gray-600">
+              <ul className="space-y-2 text-ink-muted">
                 <li><span className="font-semibold">Subtle:</span> Use for very light borders and dividers</li>
                 <li><span className="font-semibold">Default:</span> Use for standard borders on interactive elements</li>
                 <li><span className="font-semibold">Darker:</span> Use for emphasized borders and focus states</li>
               </ul>
             </div>
 
-            <div className="bg-white rounded-lg border border-gray-200 p-6">
+            <div className="bg-surface-raised rounded-lg border border-line p-6">
               <h3 className="font-semibold text-lg mb-3">Text Colors</h3>
-              <ul className="space-y-2 text-gray-600">
+              <ul className="space-y-2 text-ink-muted">
                 <li><span className="font-semibold">Title:</span> Use for headings and primary text hierarchy</li>
                 <li><span className="font-semibold">Body:</span> Use for standard body text</li>
                 <li><span className="font-semibold">Subtitle:</span> Use for secondary information</li>
@@ -238,7 +238,7 @@ export default function ColorTokensPage() {
         {/* Code Examples */}
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-4">Implementation</h2>
-          <p className="text-gray-600 mb-6">
+          <p className="text-ink-muted mb-6">
             Use these color tokens in your Tailwind configuration for consistent theming.
           </p>
           <CodeBlock code={`// tailwind.config.js

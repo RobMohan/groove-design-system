@@ -8,9 +8,9 @@ const CodeBlock = ({ code }) => (
 );
 
 const PropRow = ({ name, type, def, desc }) => (
-  <tr className="border-b border-gray-100">
+  <tr className="border-b border-line">
     <td className="py-3 px-4 font-mono text-sm">{name}</td>
-    <td className="py-3 px-4 font-mono text-xs text-gray-600">{type}</td>
+    <td className="py-3 px-4 font-mono text-xs text-ink-muted">{type}</td>
     <td className="py-3 px-4 font-mono text-xs">{def}</td>
     <td className="py-3 px-4">{desc}</td>
   </tr>
@@ -22,7 +22,7 @@ export default function SkeletonPage() {
       <div className="max-w-5xl mx-auto">
         <div className="mb-12">
           <h1 className="text-5xl font-bold mb-4">Skeleton</h1>
-          <p className="text-xl text-gray-600">
+          <p className="text-xl text-ink-muted">
             Placeholder shapes that mimic content while it loads.
           </p>
         </div>
@@ -34,7 +34,7 @@ export default function SkeletonPage() {
 
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-4">Variants</h2>
-          <div className="bg-white rounded-lg border border-gray-200 p-8 mb-4 space-y-4">
+          <div className="bg-surface-raised rounded-lg border border-line p-8 mb-4 space-y-4">
             <Skeleton variant="text" width="100%" />
             <Skeleton variant="circle" width="48px" height="48px" />
             <Skeleton variant="rect" width="100%" height="120px" />
@@ -46,7 +46,7 @@ export default function SkeletonPage() {
 
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-4">Text lines</h2>
-          <div className="bg-white rounded-lg border border-gray-200 p-8 mb-4">
+          <div className="bg-surface-raised rounded-lg border border-line p-8 mb-4">
             <SkeletonText lines={3} />
           </div>
           <CodeBlock code={`<SkeletonText lines={3} />`} />
@@ -54,7 +54,7 @@ export default function SkeletonPage() {
 
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-4">Card loading</h2>
-          <div className="bg-white rounded-lg border border-gray-200 p-8 mb-4">
+          <div className="bg-surface-raised rounded-lg border border-line p-8 mb-4">
             <div className="flex items-center gap-4">
               <Skeleton variant="circle" width="48px" height="48px" />
               <div className="flex-1">
@@ -72,10 +72,10 @@ export default function SkeletonPage() {
 
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-4">Props</h2>
-          <div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
+          <div className="bg-surface-raised rounded-lg border border-line overflow-hidden">
             <table className="w-full text-left border-collapse">
               <thead>
-                <tr className="border-b border-gray-200">
+                <tr className="border-b border-line">
                   <th className="py-3 px-4 font-semibold">Prop</th>
                   <th className="py-3 px-4 font-semibold">Type</th>
                   <th className="py-3 px-4 font-semibold">Default</th>
@@ -90,12 +90,12 @@ export default function SkeletonPage() {
               </tbody>
             </table>
           </div>
-          <p className="mt-4 text-gray-700">
-            <code className="bg-gray-100 px-2 py-1 rounded text-sm">SkeletonText</code> accepts{' '}
-            <code className="bg-gray-100 px-2 py-1 rounded text-sm">lines</code> (number, default{' '}
-            <code className="bg-gray-100 px-2 py-1 rounded text-sm">3</code>) to set how many stacked
+          <p className="mt-4 text-ink-muted">
+            <code className="bg-surface-muted px-2 py-1 rounded text-sm">SkeletonText</code> accepts{' '}
+            <code className="bg-surface-muted px-2 py-1 rounded text-sm">lines</code> (number, default{' '}
+            <code className="bg-surface-muted px-2 py-1 rounded text-sm">3</code>) to set how many stacked
             text lines render, and{' '}
-            <code className="bg-gray-100 px-2 py-1 rounded text-sm">className</code> for additional
+            <code className="bg-surface-muted px-2 py-1 rounded text-sm">className</code> for additional
             CSS classes.
           </p>
         </section>

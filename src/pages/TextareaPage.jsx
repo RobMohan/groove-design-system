@@ -8,9 +8,9 @@ const CodeBlock = ({ code }) => (
 );
 
 const PropRow = ({ name, type, def, desc }) => (
-  <tr className="border-b border-gray-100">
+  <tr className="border-b border-line">
     <td className="py-3 px-4 font-mono text-sm">{name}</td>
-    <td className="py-3 px-4 font-mono text-xs text-gray-600">{type}</td>
+    <td className="py-3 px-4 font-mono text-xs text-ink-muted">{type}</td>
     <td className="py-3 px-4 font-mono text-xs">{def}</td>
     <td className="py-3 px-4">{desc}</td>
   </tr>
@@ -25,7 +25,7 @@ export default function TextareaPage() {
       <div className="max-w-5xl mx-auto">
         <div className="mb-12">
           <h1 className="text-5xl font-bold mb-4">Textarea</h1>
-          <p className="text-xl text-gray-600">
+          <p className="text-xl text-ink-muted">
             A multi-line text field for longer free-form input.
           </p>
         </div>
@@ -37,7 +37,7 @@ export default function TextareaPage() {
 
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-4">Basic usage</h2>
-          <div className="bg-white rounded-lg border border-gray-200 p-8 mb-4 max-w-md">
+          <div className="bg-surface-raised rounded-lg border border-line p-8 mb-4 max-w-md">
             <Textarea
               label="Description"
               placeholder="Tell us what happened…"
@@ -57,7 +57,7 @@ export default function TextareaPage() {
 
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-4">Character count</h2>
-          <div className="bg-white rounded-lg border border-gray-200 p-8 mb-4 max-w-md">
+          <div className="bg-surface-raised rounded-lg border border-line p-8 mb-4 max-w-md">
             <Textarea
               label="Bio"
               maxLength={120}
@@ -71,7 +71,7 @@ export default function TextareaPage() {
 
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-4">States</h2>
-          <div className="bg-white rounded-lg border border-gray-200 p-8 mb-4 grid gap-6 md:grid-cols-2">
+          <div className="bg-surface-raised rounded-lg border border-line p-8 mb-4 grid gap-6 md:grid-cols-2">
             <Textarea label="Error" error="This field is required" placeholder="Required" />
             <Textarea label="Disabled" disabled value="Can't edit this" />
           </div>
@@ -81,10 +81,10 @@ export default function TextareaPage() {
 
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-4">Props</h2>
-          <div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
+          <div className="bg-surface-raised rounded-lg border border-line overflow-hidden">
             <table className="w-full text-left border-collapse">
               <thead>
-                <tr className="border-b border-gray-200">
+                <tr className="border-b border-line">
                   <th className="py-3 px-4 font-semibold">Prop</th>
                   <th className="py-3 px-4 font-semibold">Type</th>
                   <th className="py-3 px-4 font-semibold">Default</th>

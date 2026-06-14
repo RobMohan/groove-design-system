@@ -12,7 +12,7 @@ const PropsTable = () => (
   <div className="overflow-x-auto">
     <table className="w-full text-left border-collapse">
       <thead>
-        <tr className="border-b border-gray-200">
+        <tr className="border-b border-line">
           <th className="py-3 px-4 font-semibold">Prop</th>
           <th className="py-3 px-4 font-semibold">Type</th>
           <th className="py-3 px-4 font-semibold">Default</th>
@@ -20,33 +20,33 @@ const PropsTable = () => (
         </tr>
       </thead>
       <tbody className="text-sm">
-        <tr className="border-b border-gray-100">
+        <tr className="border-b border-line">
           <td className="py-3 px-4 font-mono text-sm">title</td>
-          <td className="py-3 px-4 font-mono text-xs text-gray-600">string</td>
+          <td className="py-3 px-4 font-mono text-xs text-ink-muted">string</td>
           <td className="py-3 px-4 font-mono text-xs">undefined</td>
           <td className="py-3 px-4">Card title (optional)</td>
         </tr>
-        <tr className="border-b border-gray-100">
+        <tr className="border-b border-line">
           <td className="py-3 px-4 font-mono text-sm">description</td>
-          <td className="py-3 px-4 font-mono text-xs text-gray-600">string</td>
+          <td className="py-3 px-4 font-mono text-xs text-ink-muted">string</td>
           <td className="py-3 px-4 font-mono text-xs">undefined</td>
           <td className="py-3 px-4">Card description (optional)</td>
         </tr>
-        <tr className="border-b border-gray-100">
+        <tr className="border-b border-line">
           <td className="py-3 px-4 font-mono text-sm">children</td>
-          <td className="py-3 px-4 font-mono text-xs text-gray-600">ReactNode</td>
+          <td className="py-3 px-4 font-mono text-xs text-ink-muted">ReactNode</td>
           <td className="py-3 px-4 font-mono text-xs">undefined</td>
           <td className="py-3 px-4">Card content (optional)</td>
         </tr>
-        <tr className="border-b border-gray-100">
+        <tr className="border-b border-line">
           <td className="py-3 px-4 font-mono text-sm">footer</td>
-          <td className="py-3 px-4 font-mono text-xs text-gray-600">ReactNode</td>
+          <td className="py-3 px-4 font-mono text-xs text-ink-muted">ReactNode</td>
           <td className="py-3 px-4 font-mono text-xs">undefined</td>
           <td className="py-3 px-4">Footer content, typically buttons (optional)</td>
         </tr>
-        <tr className="border-b border-gray-100">
+        <tr className="border-b border-line">
           <td className="py-3 px-4 font-mono text-sm">className</td>
-          <td className="py-3 px-4 font-mono text-xs text-gray-600">string</td>
+          <td className="py-3 px-4 font-mono text-xs text-ink-muted">string</td>
           <td className="py-3 px-4 font-mono text-xs">''</td>
           <td className="py-3 px-4">Additional CSS classes</td>
         </tr>
@@ -62,7 +62,7 @@ export default function CardPage() {
         {/* Header */}
         <div className="mb-12">
           <h1 className="text-5xl font-bold mb-4">Card</h1>
-          <p className="text-xl text-gray-600">
+          <p className="text-xl text-ink-muted">
             A flexible content card component for displaying information with optional headers, content, and footers.
           </p>
         </div>
@@ -76,7 +76,7 @@ export default function CardPage() {
         {/* Basic Card */}
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-4">Basic Card</h2>
-          <p className="text-gray-600 mb-6">
+          <p className="text-ink-muted mb-6">
             A simple card with just a title and description.
           </p>
           <div className="mb-4">
@@ -94,7 +94,7 @@ export default function CardPage() {
         {/* Card with Content */}
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-4">Card with Content</h2>
-          <p className="text-gray-600 mb-6">
+          <p className="text-ink-muted mb-6">
             Add custom content to the card body using the children prop.
           </p>
           <div className="mb-4">
@@ -119,7 +119,7 @@ export default function CardPage() {
         {/* Card with Footer */}
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-4">Card with Footer</h2>
-          <p className="text-gray-600 mb-6">
+          <p className="text-ink-muted mb-6">
             Add action buttons or other footer content using the footer prop.
           </p>
           <div className="mb-4">
@@ -155,7 +155,7 @@ export default function CardPage() {
         {/* Multiple Cards Layout */}
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-4">Grid Layout</h2>
-          <p className="text-gray-600 mb-6">
+          <p className="text-ink-muted mb-6">
             Cards work great in grid layouts for displaying multiple items.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-4">
@@ -182,7 +182,7 @@ export default function CardPage() {
         {/* Props Table */}
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-4">Props</h2>
-          <div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
+          <div className="bg-surface-raised rounded-lg border border-line overflow-hidden">
             <PropsTable />
           </div>
         </section>
@@ -190,7 +190,7 @@ export default function CardPage() {
         {/* Usage Example */}
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-4">Complete Example</h2>
-          <p className="text-gray-600 mb-6">
+          <p className="text-ink-muted mb-6">
             Here's a complete example of a card used in a settings form.
           </p>
           <CodeBlock code={`import Card from './components/Card';

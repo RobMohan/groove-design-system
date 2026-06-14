@@ -7,11 +7,11 @@ const CodeBlock = ({ code }) => (
 );
 
 const SpacingRow = ({ token, rem, px }) => (
-  <div className="flex items-center gap-4 p-4 bg-white rounded-lg border border-gray-200">
+  <div className="flex items-center gap-4 p-4 bg-surface-raised rounded-lg border border-line">
     <div className="w-24 flex-shrink-0">
-      <p className="font-mono font-semibold text-gray-900">{token}</p>
+      <p className="font-mono font-semibold text-ink">{token}</p>
     </div>
-    <div className="w-32 flex-shrink-0 text-sm text-gray-600 font-mono">
+    <div className="w-32 flex-shrink-0 text-sm text-ink-muted font-mono">
       {rem} / {px}px
     </div>
     <div className="flex-1">
@@ -42,7 +42,7 @@ export default function SpacingPage() {
         {/* Header */}
         <div className="mb-12">
           <h1 className="text-5xl font-bold mb-4">Spacing</h1>
-          <p className="text-xl text-gray-600">
+          <p className="text-xl text-ink-muted">
             A consistent 4px-based spacing scale for margins, padding, and gaps across the system.
           </p>
         </div>
@@ -50,7 +50,7 @@ export default function SpacingPage() {
         {/* Overview */}
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-4">Overview</h2>
-          <p className="text-gray-600 mb-4">
+          <p className="text-ink-muted mb-4">
             Spacing is built on a 4px base unit. Each step in the scale is a multiple of 4,
             which keeps layouts rhythmic and predictable. Use these tokens for padding (<span className="font-mono text-sm">p-*</span>),
             margin (<span className="font-mono text-sm">m-*</span>), and fl/grid gaps (<span className="font-mono text-sm">gap-*</span>).
@@ -73,17 +73,17 @@ export default function SpacingPage() {
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-4">Usage Guidelines</h2>
           <div className="space-y-4">
-            <div className="bg-white rounded-lg border border-gray-200 p-6">
+            <div className="bg-surface-raised rounded-lg border border-line p-6">
               <h3 className="font-semibold text-lg mb-2">Component padding</h3>
-              <p className="text-gray-600">Use <span className="font-mono text-sm">2</span>–<span className="font-mono text-sm">4</span> (8–16px) for the internal padding of controls and cards.</p>
+              <p className="text-ink-muted">Use <span className="font-mono text-sm">2</span>–<span className="font-mono text-sm">4</span> (8–16px) for the internal padding of controls and cards.</p>
             </div>
-            <div className="bg-white rounded-lg border border-gray-200 p-6">
+            <div className="bg-surface-raised rounded-lg border border-line p-6">
               <h3 className="font-semibold text-lg mb-2">Stacking content</h3>
-              <p className="text-gray-600">Use <span className="font-mono text-sm">4</span>–<span className="font-mono text-sm">8</span> (16–32px) between related blocks, and <span className="font-mono text-sm">12</span>+ (48px+) between major sections.</p>
+              <p className="text-ink-muted">Use <span className="font-mono text-sm">4</span>–<span className="font-mono text-sm">8</span> (16–32px) between related blocks, and <span className="font-mono text-sm">12</span>+ (48px+) between major sections.</p>
             </div>
-            <div className="bg-white rounded-lg border border-gray-200 p-6">
+            <div className="bg-surface-raised rounded-lg border border-line p-6">
               <h3 className="font-semibold text-lg mb-2">Stay on the scale</h3>
-              <p className="text-gray-600">Avoid arbitrary values like <span className="font-mono text-sm">p-[13px]</span>. Round to the nearest scale step to preserve vertical rhythm.</p>
+              <p className="text-ink-muted">Avoid arbitrary values like <span className="font-mono text-sm">p-[13px]</span>. Round to the nearest scale step to preserve vertical rhythm.</p>
             </div>
           </div>
         </section>

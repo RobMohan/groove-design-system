@@ -36,10 +36,10 @@ const Toggle = ({
             transition-all duration-200 cursor-pointer
             ${
               disabled
-                ? 'bg-gray-300 border-gray-300 cursor-not-allowed'
+                ? 'bg-surface-muted border-line cursor-not-allowed'
                 : checked
-                ? 'bg-blue-500 border-blue-500'
-                : 'bg-white border-gray-600'
+                ? 'bg-primary border-primary'
+                : 'bg-surface-raised border-line-strong'
             }
           `}
         >
@@ -48,10 +48,10 @@ const Toggle = ({
               absolute w-[24px] h-[24px] rounded-full transition-all duration-200
               ${
                 disabled
-                  ? 'bg-gray-900 opacity-20'
+                  ? 'bg-ink opacity-20'
                   : checked
                   ? 'bg-white left-[26px]'
-                  : 'bg-gray-500 left-[2px]'
+                  : 'bg-ink-subtle left-[2px]'
               }
             `}
           />
@@ -62,7 +62,7 @@ const Toggle = ({
           htmlFor={toggleId}
           className={`
             text-base leading-6
-            ${disabled ? 'text-gray-400 cursor-not-allowed' : 'text-gray-900 cursor-pointer'}
+            ${disabled ? 'text-ink-subtle cursor-not-allowed' : 'text-ink cursor-pointer'}
           `}
         >
           {label}

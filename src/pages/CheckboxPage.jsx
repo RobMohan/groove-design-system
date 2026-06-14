@@ -11,7 +11,7 @@ const PropsTable = () => (
   <div className="overflow-x-auto">
     <table className="w-full text-left border-collapse">
       <thead>
-        <tr className="border-b border-gray-200">
+        <tr className="border-b border-line">
           <th className="py-3 px-4 font-semibold">Prop</th>
           <th className="py-3 px-4 font-semibold">Type</th>
           <th className="py-3 px-4 font-semibold">Default</th>
@@ -19,39 +19,39 @@ const PropsTable = () => (
         </tr>
       </thead>
       <tbody className="text-sm">
-        <tr className="border-b border-gray-100">
+        <tr className="border-b border-line">
           <td className="py-3 px-4 font-mono text-sm">checked</td>
-          <td className="py-3 px-4 font-mono text-xs text-gray-600">boolean</td>
+          <td className="py-3 px-4 font-mono text-xs text-ink-muted">boolean</td>
           <td className="py-3 px-4 font-mono text-xs">false</td>
           <td className="py-3 px-4">Whether the checkbox is checked</td>
         </tr>
-        <tr className="border-b border-gray-100">
+        <tr className="border-b border-line">
           <td className="py-3 px-4 font-mono text-sm">disabled</td>
-          <td className="py-3 px-4 font-mono text-xs text-gray-600">boolean</td>
+          <td className="py-3 px-4 font-mono text-xs text-ink-muted">boolean</td>
           <td className="py-3 px-4 font-mono text-xs">false</td>
           <td className="py-3 px-4">Whether the checkbox is disabled</td>
         </tr>
-        <tr className="border-b border-gray-100">
+        <tr className="border-b border-line">
           <td className="py-3 px-4 font-mono text-sm">label</td>
-          <td className="py-3 px-4 font-mono text-xs text-gray-600">string</td>
+          <td className="py-3 px-4 font-mono text-xs text-ink-muted">string</td>
           <td className="py-3 px-4 font-mono text-xs">''</td>
           <td className="py-3 px-4">Label text to display next to the checkbox</td>
         </tr>
-        <tr className="border-b border-gray-100">
+        <tr className="border-b border-line">
           <td className="py-3 px-4 font-mono text-sm">onChange</td>
-          <td className="py-3 px-4 font-mono text-xs text-gray-600">function</td>
+          <td className="py-3 px-4 font-mono text-xs text-ink-muted">function</td>
           <td className="py-3 px-4 font-mono text-xs">undefined</td>
           <td className="py-3 px-4">Callback when checkbox state changes</td>
         </tr>
-        <tr className="border-b border-gray-100">
+        <tr className="border-b border-line">
           <td className="py-3 px-4 font-mono text-sm">id</td>
-          <td className="py-3 px-4 font-mono text-xs text-gray-600">string</td>
+          <td className="py-3 px-4 font-mono text-xs text-ink-muted">string</td>
           <td className="py-3 px-4 font-mono text-xs">auto-generated</td>
           <td className="py-3 px-4">Custom ID for the checkbox input</td>
         </tr>
-        <tr className="border-b border-gray-100">
+        <tr className="border-b border-line">
           <td className="py-3 px-4 font-mono text-sm">className</td>
-          <td className="py-3 px-4 font-mono text-xs text-gray-600">string</td>
+          <td className="py-3 px-4 font-mono text-xs text-ink-muted">string</td>
           <td className="py-3 px-4 font-mono text-xs">''</td>
           <td className="py-3 px-4">Additional CSS classes</td>
         </tr>
@@ -75,7 +75,7 @@ export default function CheckboxPage() {
         {/* Header */}
         <div className="mb-12">
           <h1 className="text-5xl font-bold mb-4">Checkbox</h1>
-          <p className="text-xl text-gray-600">
+          <p className="text-xl text-ink-muted">
             A customizable checkbox component for binary choices and multi-select options.
           </p>
         </div>
@@ -89,10 +89,10 @@ export default function CheckboxPage() {
         {/* States */}
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-4">States</h2>
-          <p className="text-gray-600 mb-6">
+          <p className="text-ink-muted mb-6">
             The Checkbox component has three states: default, checked, and inactive (disabled).
           </p>
-          <div className="bg-white rounded-lg border border-gray-200 p-8 mb-4">
+          <div className="bg-surface-raised rounded-lg border border-line p-8 mb-4">
             <div className="flex flex-col gap-4">
               <Checkbox label="Default (unchecked)" checked={false} onChange={() => {}} />
               <Checkbox label="Checked" checked={true} onChange={() => {}} />
@@ -109,10 +109,10 @@ export default function CheckboxPage() {
         {/* With Label */}
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-4">With Label</h2>
-          <p className="text-gray-600 mb-6">
+          <p className="text-ink-muted mb-6">
             Checkboxes can display optional labels that are clickable to toggle the state.
           </p>
-          <div className="bg-white rounded-lg border border-gray-200 p-8 mb-4">
+          <div className="bg-surface-raised rounded-lg border border-line p-8 mb-4">
             <div className="flex flex-col gap-4">
               <Checkbox
                 label="I agree to the terms and conditions"
@@ -138,12 +138,12 @@ export default function CheckboxPage() {
         {/* Checkbox Group */}
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-4">Checkbox Group</h2>
-          <p className="text-gray-600 mb-6">
+          <p className="text-ink-muted mb-6">
             Multiple checkboxes can be grouped together for multi-select functionality.
           </p>
-          <div className="bg-white rounded-lg border border-gray-200 p-8 mb-4">
+          <div className="bg-surface-raised rounded-lg border border-line p-8 mb-4">
             <div className="space-y-4">
-              <p className="text-sm font-semibold text-gray-700">Notification Preferences</p>
+              <p className="text-sm font-semibold text-ink-muted">Notification Preferences</p>
               <div className="flex flex-col gap-3 pl-4">
                 <Checkbox
                   label="Email notifications"
@@ -194,10 +194,10 @@ export default function CheckboxPage() {
         {/* Without Label */}
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-4">Without Label</h2>
-          <p className="text-gray-600 mb-6">
+          <p className="text-ink-muted mb-6">
             Checkboxes can be used without labels for compact layouts or table views.
           </p>
-          <div className="bg-white rounded-lg border border-gray-200 p-8 mb-4">
+          <div className="bg-surface-raised rounded-lg border border-line p-8 mb-4">
             <div className="flex gap-6">
               <Checkbox checked={false} onChange={() => {}} />
               <Checkbox checked={true} onChange={() => {}} />
@@ -211,7 +211,7 @@ export default function CheckboxPage() {
         {/* Props Table */}
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-4">Props</h2>
-          <div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
+          <div className="bg-surface-raised rounded-lg border border-line overflow-hidden">
             <PropsTable />
           </div>
         </section>
@@ -219,7 +219,7 @@ export default function CheckboxPage() {
         {/* Usage Example */}
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-4">Complete Example</h2>
-          <p className="text-gray-600 mb-6">
+          <p className="text-ink-muted mb-6">
             Here's a complete example showing how to use the Checkbox component in a form.
           </p>
           <CodeBlock code={`import { useState } from 'react';

@@ -8,9 +8,9 @@ const CodeBlock = ({ code }) => (
 );
 
 const PropRow = ({ name, type, def, desc }) => (
-  <tr className="border-b border-gray-100">
+  <tr className="border-b border-line">
     <td className="py-3 px-4 font-mono text-sm">{name}</td>
-    <td className="py-3 px-4 font-mono text-xs text-gray-600">{type}</td>
+    <td className="py-3 px-4 font-mono text-xs text-ink-muted">{type}</td>
     <td className="py-3 px-4 font-mono text-xs">{def}</td>
     <td className="py-3 px-4">{desc}</td>
   </tr>
@@ -22,7 +22,7 @@ export default function SpinnerPage() {
       <div className="max-w-5xl mx-auto">
         <div className="mb-12">
           <h1 className="text-5xl font-bold mb-4">Spinner</h1>
-          <p className="text-xl text-gray-600">
+          <p className="text-xl text-ink-muted">
             An animated indicator for indeterminate loading states.
           </p>
         </div>
@@ -34,7 +34,7 @@ export default function SpinnerPage() {
 
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-4">Sizes</h2>
-          <div className="bg-white rounded-lg border border-gray-200 p-8 mb-4 flex items-center gap-8">
+          <div className="bg-surface-raised rounded-lg border border-line p-8 mb-4 flex items-center gap-8">
             <Spinner size="sm" />
             <Spinner size="md" />
             <Spinner size="lg" />
@@ -48,7 +48,7 @@ export default function SpinnerPage() {
 
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-4">Colors</h2>
-          <div className="bg-white rounded-lg border border-gray-200 p-8 mb-4 flex items-center gap-8">
+          <div className="bg-surface-raised rounded-lg border border-line p-8 mb-4 flex items-center gap-8">
             <Spinner color="primary" />
             <Spinner color="secondary" />
             <Spinner color="positive" />
@@ -61,7 +61,7 @@ export default function SpinnerPage() {
 
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-4">With label</h2>
-          <div className="bg-white rounded-lg border border-gray-200 p-8 mb-4">
+          <div className="bg-surface-raised rounded-lg border border-line p-8 mb-4">
             <Spinner label="Loading your data…" />
           </div>
           <CodeBlock code={`<Spinner label="Loading your data…" />`} />
@@ -69,10 +69,10 @@ export default function SpinnerPage() {
 
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-4">Props</h2>
-          <div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
+          <div className="bg-surface-raised rounded-lg border border-line overflow-hidden">
             <table className="w-full text-left border-collapse">
               <thead>
-                <tr className="border-b border-gray-200">
+                <tr className="border-b border-line">
                   <th className="py-3 px-4 font-semibold">Prop</th>
                   <th className="py-3 px-4 font-semibold">Type</th>
                   <th className="py-3 px-4 font-semibold">Default</th>
@@ -91,9 +91,9 @@ export default function SpinnerPage() {
 
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-4">Accessibility</h2>
-          <div className="bg-white rounded-lg border border-gray-200 p-6 text-gray-700 space-y-2">
-            <p>The spinner exposes <code className="bg-gray-100 px-2 py-1 rounded text-sm">role="status"</code> and a visually-hidden label so screen readers announce the loading state.</p>
-            <p>Provide a <code className="bg-gray-100 px-2 py-1 rounded text-sm">label</code> describing what is loading whenever the context isn't obvious.</p>
+          <div className="bg-surface-raised rounded-lg border border-line p-6 text-ink-muted space-y-2">
+            <p>The spinner exposes <code className="bg-surface-muted px-2 py-1 rounded text-sm">role="status"</code> and a visually-hidden label so screen readers announce the loading state.</p>
+            <p>Provide a <code className="bg-surface-muted px-2 py-1 rounded text-sm">label</code> describing what is loading whenever the context isn't obvious.</p>
           </div>
         </section>
       </div>

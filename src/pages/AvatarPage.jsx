@@ -8,9 +8,9 @@ const CodeBlock = ({ code }) => (
 );
 
 const PropRow = ({ name, type, def, desc }) => (
-  <tr className="border-b border-gray-100">
+  <tr className="border-b border-line">
     <td className="py-3 px-4 font-mono text-sm">{name}</td>
-    <td className="py-3 px-4 font-mono text-xs text-gray-600">{type}</td>
+    <td className="py-3 px-4 font-mono text-xs text-ink-muted">{type}</td>
     <td className="py-3 px-4 font-mono text-xs">{def}</td>
     <td className="py-3 px-4">{desc}</td>
   </tr>
@@ -22,7 +22,7 @@ export default function AvatarPage() {
       <div className="max-w-5xl mx-auto">
         <div className="mb-12">
           <h1 className="text-5xl font-bold mb-4">Avatar</h1>
-          <p className="text-xl text-gray-600">
+          <p className="text-xl text-ink-muted">
             A compact visual representation of a user, with image, initials, status, and grouping support.
           </p>
         </div>
@@ -34,7 +34,7 @@ export default function AvatarPage() {
 
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-4">Sizes</h2>
-          <div className="bg-white rounded-lg border border-gray-200 p-8 mb-4 flex items-center gap-8">
+          <div className="bg-surface-raised rounded-lg border border-line p-8 mb-4 flex items-center gap-8">
             <Avatar name="Jane Doe" size="xs" />
             <Avatar name="Jane Doe" size="sm" />
             <Avatar name="Jane Doe" size="md" />
@@ -50,7 +50,7 @@ export default function AvatarPage() {
 
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-4">Shapes</h2>
-          <div className="bg-white rounded-lg border border-gray-200 p-8 mb-4 flex items-center gap-8">
+          <div className="bg-surface-raised rounded-lg border border-line p-8 mb-4 flex items-center gap-8">
             <Avatar name="Jane Doe" shape="circle" size="lg" />
             <Avatar name="Jane Doe" shape="square" size="lg" />
           </div>
@@ -60,12 +60,12 @@ export default function AvatarPage() {
 
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-4">Image</h2>
-          <p className="text-gray-600 mb-4">
-            Provide a <code className="bg-gray-100 px-2 py-1 rounded text-sm">src</code> to render a photo.
+          <p className="text-ink-muted mb-4">
+            Provide a <code className="bg-surface-muted px-2 py-1 rounded text-sm">src</code> to render a photo.
             If the image fails to load, the avatar gracefully falls back to the initials derived from{' '}
-            <code className="bg-gray-100 px-2 py-1 rounded text-sm">name</code>.
+            <code className="bg-surface-muted px-2 py-1 rounded text-sm">name</code>.
           </p>
-          <div className="bg-white rounded-lg border border-gray-200 p-8 mb-4 flex items-center gap-8">
+          <div className="bg-surface-raised rounded-lg border border-line p-8 mb-4 flex items-center gap-8">
             <Avatar src="https://i.pravatar.cc/150?img=12" alt="Profile photo" name="Jane Doe" size="lg" />
             <Avatar src="https://invalid.example/broken.png" name="Jane Doe" size="lg" />
           </div>
@@ -78,7 +78,7 @@ export default function AvatarPage() {
 
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-4">Status indicator</h2>
-          <div className="bg-white rounded-lg border border-gray-200 p-8 mb-4 flex items-center gap-8">
+          <div className="bg-surface-raised rounded-lg border border-line p-8 mb-4 flex items-center gap-8">
             <Avatar name="Jane Doe" size="lg" status="online" />
             <Avatar name="Jane Doe" size="lg" status="away" />
             <Avatar name="Jane Doe" size="lg" status="busy" />
@@ -92,12 +92,12 @@ export default function AvatarPage() {
 
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-4">Avatar Group</h2>
-          <p className="text-gray-600 mb-4">
-            Cluster overlapping avatars with <code className="bg-gray-100 px-2 py-1 rounded text-sm">AvatarGroup</code>.
-            Use <code className="bg-gray-100 px-2 py-1 rounded text-sm">max</code> to cap the number shown and render a{' '}
-            <code className="bg-gray-100 px-2 py-1 rounded text-sm">+N</code> overflow chip.
+          <p className="text-ink-muted mb-4">
+            Cluster overlapping avatars with <code className="bg-surface-muted px-2 py-1 rounded text-sm">AvatarGroup</code>.
+            Use <code className="bg-surface-muted px-2 py-1 rounded text-sm">max</code> to cap the number shown and render a{' '}
+            <code className="bg-surface-muted px-2 py-1 rounded text-sm">+N</code> overflow chip.
           </p>
-          <div className="bg-white rounded-lg border border-gray-200 p-8 mb-4">
+          <div className="bg-surface-raised rounded-lg border border-line p-8 mb-4">
             <AvatarGroup max={3} size="lg">
               <Avatar name="Jane Doe" />
               <Avatar name="John Smith" />
@@ -117,10 +117,10 @@ export default function AvatarPage() {
 
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-4">Props</h2>
-          <div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
+          <div className="bg-surface-raised rounded-lg border border-line overflow-hidden">
             <table className="w-full text-left border-collapse">
               <thead>
-                <tr className="border-b border-gray-200">
+                <tr className="border-b border-line">
                   <th className="py-3 px-4 font-semibold">Prop</th>
                   <th className="py-3 px-4 font-semibold">Type</th>
                   <th className="py-3 px-4 font-semibold">Default</th>
@@ -142,10 +142,10 @@ export default function AvatarPage() {
 
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-4">AvatarGroup props</h2>
-          <div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
+          <div className="bg-surface-raised rounded-lg border border-line overflow-hidden">
             <table className="w-full text-left border-collapse">
               <thead>
-                <tr className="border-b border-gray-200">
+                <tr className="border-b border-line">
                   <th className="py-3 px-4 font-semibold">Prop</th>
                   <th className="py-3 px-4 font-semibold">Type</th>
                   <th className="py-3 px-4 font-semibold">Default</th>

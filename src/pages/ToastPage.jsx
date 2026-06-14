@@ -9,9 +9,9 @@ const CodeBlock = ({ code }) => (
 );
 
 const PropRow = ({ name, type, def, desc }) => (
-  <tr className="border-b border-gray-100">
+  <tr className="border-b border-line">
     <td className="py-3 px-4 font-mono text-sm">{name}</td>
-    <td className="py-3 px-4 font-mono text-xs text-gray-600">{type}</td>
+    <td className="py-3 px-4 font-mono text-xs text-ink-muted">{type}</td>
     <td className="py-3 px-4 font-mono text-xs">{def}</td>
     <td className="py-3 px-4">{desc}</td>
   </tr>
@@ -25,16 +25,16 @@ export default function ToastPage() {
       <div className="max-w-5xl mx-auto">
         <div className="mb-12">
           <h1 className="text-5xl font-bold mb-4">Toast</h1>
-          <p className="text-xl text-gray-600">
+          <p className="text-xl text-ink-muted">
             Transient notifications triggered imperatively from anywhere in the app.
           </p>
         </div>
 
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-4">Setup</h2>
-          <p className="text-gray-600 mb-4">
-            Wrap your app once in <code className="bg-gray-100 px-2 py-1 rounded text-sm">ToastProvider</code>,
-            then call <code className="bg-gray-100 px-2 py-1 rounded text-sm">useToast()</code> from any component.
+          <p className="text-ink-muted mb-4">
+            Wrap your app once in <code className="bg-surface-muted px-2 py-1 rounded text-sm">ToastProvider</code>,
+            then call <code className="bg-surface-muted px-2 py-1 rounded text-sm">useToast()</code> from any component.
           </p>
           <CodeBlock code={`// main.jsx
 import { ToastProvider } from './components/Toast';
@@ -52,7 +52,7 @@ toast({ title: 'Saved', description: 'Your changes are live.', variant: 'success
 
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-4">Variants</h2>
-          <div className="bg-white rounded-lg border border-gray-200 p-8 mb-4 flex flex-wrap gap-3">
+          <div className="bg-surface-raised rounded-lg border border-line p-8 mb-4 flex flex-wrap gap-3">
             <Button variant="outline" onClick={() => toast({ title: 'Heads up', description: 'Just so you know.', variant: 'info' })}>Info</Button>
             <Button variant="positive" onClick={() => toast({ title: 'Saved', description: 'Your changes are live.', variant: 'success' })}>Success</Button>
             <Button variant="secondary" onClick={() => toast({ title: 'Careful', description: 'Storage almost full.', variant: 'warning' })}>Warning</Button>
@@ -63,7 +63,7 @@ toast({ title: 'Saved', description: 'Your changes are live.', variant: 'success
 
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-4">Options</h2>
-          <div className="bg-white rounded-lg border border-gray-200 p-8 mb-4 flex flex-wrap gap-3">
+          <div className="bg-surface-raised rounded-lg border border-line p-8 mb-4 flex flex-wrap gap-3">
             <Button variant="outline" onClick={() => toast('Quick message')}>String shorthand</Button>
             <Button variant="outline" onClick={() => toast({ title: 'Sticky', description: 'Stays until dismissed.', duration: Infinity })}>Persistent</Button>
           </div>
@@ -76,10 +76,10 @@ toast({ title: 'Sticky', description: 'Stays until dismissed.', duration: Infini
 
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-4">toast(options)</h2>
-          <div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
+          <div className="bg-surface-raised rounded-lg border border-line overflow-hidden">
             <table className="w-full text-left border-collapse">
               <thead>
-                <tr className="border-b border-gray-200">
+                <tr className="border-b border-line">
                   <th className="py-3 px-4 font-semibold">Option</th>
                   <th className="py-3 px-4 font-semibold">Type</th>
                   <th className="py-3 px-4 font-semibold">Default</th>
@@ -94,10 +94,10 @@ toast({ title: 'Sticky', description: 'Stays until dismissed.', duration: Infini
               </tbody>
             </table>
           </div>
-          <p className="text-gray-600 mt-4">
-            <code className="bg-gray-100 px-2 py-1 rounded text-sm">ToastProvider</code> also accepts a
-            <code className="bg-gray-100 px-2 py-1 rounded text-sm ml-1">position</code> prop
-            (<code className="bg-gray-100 px-2 py-1 rounded text-sm">'bottom-right'</code> by default).
+          <p className="text-ink-muted mt-4">
+            <code className="bg-surface-muted px-2 py-1 rounded text-sm">ToastProvider</code> also accepts a
+            <code className="bg-surface-muted px-2 py-1 rounded text-sm ml-1">position</code> prop
+            (<code className="bg-surface-muted px-2 py-1 rounded text-sm">'bottom-right'</code> by default).
           </p>
         </section>
       </div>

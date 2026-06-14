@@ -8,9 +8,9 @@ const CodeBlock = ({ code }) => (
 );
 
 const PropRow = ({ name, type, def, desc }) => (
-  <tr className="border-b border-gray-100">
+  <tr className="border-b border-line">
     <td className="py-3 px-4 font-mono text-sm">{name}</td>
-    <td className="py-3 px-4 font-mono text-xs text-gray-600">{type}</td>
+    <td className="py-3 px-4 font-mono text-xs text-ink-muted">{type}</td>
     <td className="py-3 px-4 font-mono text-xs">{def}</td>
     <td className="py-3 px-4">{desc}</td>
   </tr>
@@ -58,7 +58,7 @@ export default function AccordionPage() {
       <div className="max-w-5xl mx-auto">
         <div className="mb-12">
           <h1 className="text-5xl font-bold mb-4">Accordion</h1>
-          <p className="text-xl text-gray-600">
+          <p className="text-xl text-ink-muted">
             Stacked, collapsible panels that let people reveal one section of
             content at a time.
           </p>
@@ -71,11 +71,11 @@ export default function AccordionPage() {
 
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-4">Basic usage</h2>
-          <p className="text-gray-600 mb-4">
+          <p className="text-ink-muted mb-4">
             By default the accordion is single-open: opening one panel collapses
             whichever panel was previously open.
           </p>
-          <div className="bg-white rounded-lg border border-gray-200 p-8 mb-4">
+          <div className="bg-surface-raised rounded-lg border border-line p-8 mb-4">
             <Accordion items={items} />
           </div>
           <CodeBlock code={`const items = [
@@ -89,11 +89,11 @@ export default function AccordionPage() {
 
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-4">Allow multiple</h2>
-          <p className="text-gray-600 mb-4">
+          <p className="text-ink-muted mb-4">
             Set <code className="font-mono">allowMultiple</code> to let people
             keep several panels open at the same time.
           </p>
-          <div className="bg-white rounded-lg border border-gray-200 p-8 mb-4">
+          <div className="bg-surface-raised rounded-lg border border-line p-8 mb-4">
             <Accordion items={items} allowMultiple />
           </div>
           <CodeBlock code={`<Accordion items={items} allowMultiple />`} />
@@ -101,12 +101,12 @@ export default function AccordionPage() {
 
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-4">Default open</h2>
-          <p className="text-gray-600 mb-4">
+          <p className="text-ink-muted mb-4">
             Pass an array of indexes to{' '}
             <code className="font-mono">defaultOpen</code> to expand panels on
             first render.
           </p>
-          <div className="bg-white rounded-lg border border-gray-200 p-8 mb-4">
+          <div className="bg-surface-raised rounded-lg border border-line p-8 mb-4">
             <Accordion items={items} defaultOpen={[0]} />
           </div>
           <CodeBlock code={`<Accordion items={items} defaultOpen={[0]} />`} />
@@ -114,12 +114,12 @@ export default function AccordionPage() {
 
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-4">Disabled item</h2>
-          <p className="text-gray-600 mb-4">
+          <p className="text-ink-muted mb-4">
             Mark an item with{' '}
             <code className="font-mono">disabled: true</code> to prevent it from
             being opened.
           </p>
-          <div className="bg-white rounded-lg border border-gray-200 p-8 mb-4">
+          <div className="bg-surface-raised rounded-lg border border-line p-8 mb-4">
             <Accordion items={items} />
           </div>
           <CodeBlock code={`const items = [
@@ -132,10 +132,10 @@ export default function AccordionPage() {
 
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-4">Props</h2>
-          <div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
+          <div className="bg-surface-raised rounded-lg border border-line overflow-hidden">
             <table className="w-full text-left border-collapse">
               <thead>
-                <tr className="border-b border-gray-200">
+                <tr className="border-b border-line">
                   <th className="py-3 px-4 font-semibold">Prop</th>
                   <th className="py-3 px-4 font-semibold">Type</th>
                   <th className="py-3 px-4 font-semibold">Default</th>
@@ -150,7 +150,7 @@ export default function AccordionPage() {
               </tbody>
             </table>
           </div>
-          <p className="text-gray-600 mt-4">
+          <p className="text-ink-muted mt-4">
             Each entry in <code className="font-mono">items</code> is an object of
             the shape{' '}
             <code className="font-mono">

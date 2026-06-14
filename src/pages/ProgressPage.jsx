@@ -8,9 +8,9 @@ const CodeBlock = ({ code }) => (
 );
 
 const PropRow = ({ name, type, def, desc }) => (
-  <tr className="border-b border-gray-100">
+  <tr className="border-b border-line">
     <td className="py-3 px-4 font-mono text-sm">{name}</td>
-    <td className="py-3 px-4 font-mono text-xs text-gray-600">{type}</td>
+    <td className="py-3 px-4 font-mono text-xs text-ink-muted">{type}</td>
     <td className="py-3 px-4 font-mono text-xs">{def}</td>
     <td className="py-3 px-4">{desc}</td>
   </tr>
@@ -32,7 +32,7 @@ export default function ProgressPage() {
       <div className="max-w-5xl mx-auto">
         <div className="mb-12">
           <h1 className="text-5xl font-bold mb-4">Progress</h1>
-          <p className="text-xl text-gray-600">
+          <p className="text-xl text-ink-muted">
             A linear bar for determinate and indeterminate progress.
           </p>
         </div>
@@ -44,7 +44,7 @@ export default function ProgressPage() {
 
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-4">Determinate</h2>
-          <div className="bg-white rounded-lg border border-gray-200 p-8 mb-4 space-y-6">
+          <div className="bg-surface-raised rounded-lg border border-line p-8 mb-4 space-y-6">
             <Progress value={25} />
             <Progress value={60} showLabel label="Uploading" />
             <Progress value={value} showLabel label="Live" />
@@ -54,7 +54,7 @@ export default function ProgressPage() {
 
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-4">Indeterminate</h2>
-          <div className="bg-white rounded-lg border border-gray-200 p-8 mb-4">
+          <div className="bg-surface-raised rounded-lg border border-line p-8 mb-4">
             <Progress indeterminate label="Working…" />
           </div>
           <CodeBlock code={`<Progress indeterminate label="Working…" />`} />
@@ -62,7 +62,7 @@ export default function ProgressPage() {
 
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-4">Sizes &amp; colors</h2>
-          <div className="bg-white rounded-lg border border-gray-200 p-8 mb-4 space-y-6">
+          <div className="bg-surface-raised rounded-lg border border-line p-8 mb-4 space-y-6">
             <Progress value={50} size="sm" />
             <Progress value={50} size="md" color="positive" />
             <Progress value={50} size="lg" color="destructive" />
@@ -72,10 +72,10 @@ export default function ProgressPage() {
 
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-4">Props</h2>
-          <div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
+          <div className="bg-surface-raised rounded-lg border border-line overflow-hidden">
             <table className="w-full text-left border-collapse">
               <thead>
-                <tr className="border-b border-gray-200">
+                <tr className="border-b border-line">
                   <th className="py-3 px-4 font-semibold">Prop</th>
                   <th className="py-3 px-4 font-semibold">Type</th>
                   <th className="py-3 px-4 font-semibold">Default</th>

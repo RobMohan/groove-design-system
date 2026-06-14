@@ -14,7 +14,7 @@ const PropsTable = () => (
   <div className="overflow-x-auto">
     <table className="w-full text-left border-collapse">
       <thead>
-        <tr className="border-b border-gray-200">
+        <tr className="border-b border-line">
           <th className="py-3 px-4 font-semibold">Prop</th>
           <th className="py-3 px-4 font-semibold">Type</th>
           <th className="py-3 px-4 font-semibold">Default</th>
@@ -22,29 +22,29 @@ const PropsTable = () => (
         </tr>
       </thead>
       <tbody className="text-sm">
-        <tr className="border-b border-gray-100">
+        <tr className="border-b border-line">
           <td className="py-3 px-4 font-mono text-sm">children</td>
-          <td className="py-3 px-4 font-mono text-xs text-gray-600">ReactNode</td>
+          <td className="py-3 px-4 font-mono text-xs text-ink-muted">ReactNode</td>
           <td className="py-3 px-4 font-mono text-xs">required</td>
           <td className="py-3 px-4">The element that triggers the tooltip on hover</td>
         </tr>
-        <tr className="border-b border-gray-100">
+        <tr className="border-b border-line">
           <td className="py-3 px-4 font-mono text-sm">content</td>
-          <td className="py-3 px-4 font-mono text-xs text-gray-600">string</td>
+          <td className="py-3 px-4 font-mono text-xs text-ink-muted">string</td>
           <td className="py-3 px-4 font-mono text-xs">required</td>
           <td className="py-3 px-4">The text content to display in the tooltip</td>
         </tr>
-        <tr className="border-b border-gray-100">
+        <tr className="border-b border-line">
           <td className="py-3 px-4 font-mono text-sm">position</td>
-          <td className="py-3 px-4 font-mono text-xs text-gray-600">
+          <td className="py-3 px-4 font-mono text-xs text-ink-muted">
             'top' | 'bottom' | 'left' | 'right'
           </td>
           <td className="py-3 px-4 font-mono text-xs">'top'</td>
           <td className="py-3 px-4">Position of the tooltip relative to the trigger element</td>
         </tr>
-        <tr className="border-b border-gray-100">
+        <tr className="border-b border-line">
           <td className="py-3 px-4 font-mono text-sm">className</td>
-          <td className="py-3 px-4 font-mono text-xs text-gray-600">string</td>
+          <td className="py-3 px-4 font-mono text-xs text-ink-muted">string</td>
           <td className="py-3 px-4 font-mono text-xs">''</td>
           <td className="py-3 px-4">Additional CSS classes</td>
         </tr>
@@ -60,7 +60,7 @@ export default function TooltipPage() {
         {/* Header */}
         <div className="mb-12">
           <h1 className="text-5xl font-bold mb-4">Tooltip</h1>
-          <p className="text-xl text-gray-600">
+          <p className="text-xl text-ink-muted">
             A tooltip component that displays informative text when users hover over an element.
           </p>
         </div>
@@ -74,10 +74,10 @@ export default function TooltipPage() {
         {/* Basic Example */}
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-4">Basic Usage</h2>
-          <p className="text-gray-600 mb-6">
+          <p className="text-ink-muted mb-6">
             Wrap any element with the Tooltip component and provide content to display.
           </p>
-          <div className="bg-white rounded-lg border border-gray-200 p-8 mb-4">
+          <div className="bg-surface-raised rounded-lg border border-line p-8 mb-4">
             <div className="flex items-center justify-center gap-8">
               <Tooltip content="This is a tooltip">
                 <button className="px-4 py-2 bg-gray-200 rounded hover:bg-gray-300">
@@ -94,10 +94,10 @@ export default function TooltipPage() {
         {/* Positions */}
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-4">Positions</h2>
-          <p className="text-gray-600 mb-6">
+          <p className="text-ink-muted mb-6">
             Tooltips can be positioned on any side of the trigger element: top, bottom, left, or right.
           </p>
-          <div className="bg-white rounded-lg border border-gray-200 p-12 mb-4">
+          <div className="bg-surface-raised rounded-lg border border-line p-12 mb-4">
             <div className="flex flex-col items-center gap-12">
               <Tooltip content="Tooltip on top" position="top">
                 <button className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
@@ -146,31 +146,31 @@ export default function TooltipPage() {
         {/* With Icons */}
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-4">With Icons</h2>
-          <p className="text-gray-600 mb-6">
+          <p className="text-ink-muted mb-6">
             Tooltips work great with icon buttons to provide context.
           </p>
-          <div className="bg-white rounded-lg border border-gray-200 p-8 mb-4">
+          <div className="bg-surface-raised rounded-lg border border-line p-8 mb-4">
             <div className="flex items-center justify-center gap-6">
               <Tooltip content="More information">
-                <button className="p-2 rounded hover:bg-gray-100">
+                <button className="p-2 rounded hover:bg-surface-muted">
                   <Info size={24} className="text-blue-500" />
                 </button>
               </Tooltip>
 
               <Tooltip content="Get help">
-                <button className="p-2 rounded hover:bg-gray-100">
+                <button className="p-2 rounded hover:bg-surface-muted">
                   <HelpCircle size={24} className="text-green-500" />
                 </button>
               </Tooltip>
 
               <Tooltip content="Settings">
-                <button className="p-2 rounded hover:bg-gray-100">
-                  <Settings size={24} className="text-gray-600" />
+                <button className="p-2 rounded hover:bg-surface-muted">
+                  <Settings size={24} className="text-ink-muted" />
                 </button>
               </Tooltip>
 
               <Tooltip content="Warning: This action cannot be undone">
-                <button className="p-2 rounded hover:bg-gray-100">
+                <button className="p-2 rounded hover:bg-surface-muted">
                   <AlertCircle size={24} className="text-red-500" />
                 </button>
               </Tooltip>
@@ -194,10 +194,10 @@ export default function TooltipPage() {
         {/* With Buttons */}
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-4">With Buttons</h2>
-          <p className="text-gray-600 mb-6">
+          <p className="text-ink-muted mb-6">
             Add tooltips to buttons to provide additional context or help text.
           </p>
-          <div className="bg-white rounded-lg border border-gray-200 p-8 mb-4">
+          <div className="bg-surface-raised rounded-lg border border-line p-8 mb-4">
             <div className="flex items-center justify-center gap-4">
               <Tooltip content="Save your changes">
                 <Button variant="primary">Save</Button>
@@ -224,20 +224,20 @@ export default function TooltipPage() {
         {/* With Text */}
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-4">With Text and Badges</h2>
-          <p className="text-gray-600 mb-6">
+          <p className="text-ink-muted mb-6">
             Tooltips can be used with any element, including text and badges.
           </p>
-          <div className="bg-white rounded-lg border border-gray-200 p-8 mb-4">
+          <div className="bg-surface-raised rounded-lg border border-line p-8 mb-4">
             <div className="space-y-6">
               <div className="flex items-center gap-3">
-                <span className="text-gray-700">Project Status:</span>
+                <span className="text-ink-muted">Project Status:</span>
                 <Tooltip content="This project is currently in progress">
                   <Badge type="warning">In Progress</Badge>
                 </Tooltip>
               </div>
 
               <div className="flex items-center gap-3">
-                <span className="text-gray-700">Account Status:</span>
+                <span className="text-ink-muted">Account Status:</span>
                 <Tooltip content="Your account is active and verified">
                   <Badge type="positive">Active</Badge>
                 </Tooltip>
@@ -249,7 +249,7 @@ export default function TooltipPage() {
                     Technical term
                   </span>
                 </Tooltip>
-                <span className="text-gray-600">used in the documentation</span>
+                <span className="text-ink-muted">used in the documentation</span>
               </div>
             </div>
           </div>
@@ -265,10 +265,10 @@ export default function TooltipPage() {
         {/* Disabled Elements */}
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-4">Disabled Elements</h2>
-          <p className="text-gray-600 mb-6">
+          <p className="text-ink-muted mb-6">
             Show tooltips on disabled elements to explain why they're disabled.
           </p>
-          <div className="bg-white rounded-lg border border-gray-200 p-8 mb-4">
+          <div className="bg-surface-raised rounded-lg border border-line p-8 mb-4">
             <div className="flex items-center justify-center gap-4">
               <Tooltip content="You don't have permission to delete">
                 <div className="inline-block">
@@ -299,7 +299,7 @@ export default function TooltipPage() {
         {/* Props Table */}
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-4">Props</h2>
-          <div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
+          <div className="bg-surface-raised rounded-lg border border-line overflow-hidden">
             <PropsTable />
           </div>
         </section>
@@ -307,10 +307,10 @@ export default function TooltipPage() {
         {/* Best Practices */}
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-4">Best Practices</h2>
-          <div className="bg-white rounded-lg border border-gray-200 p-8">
-            <div className="space-y-4 text-gray-700">
+          <div className="bg-surface-raised rounded-lg border border-line p-8">
+            <div className="space-y-4 text-ink-muted">
               <div>
-                <p className="font-semibold text-gray-900 mb-2">Keep it concise:</p>
+                <p className="font-semibold text-ink mb-2">Keep it concise:</p>
                 <ul className="list-disc list-inside space-y-2 pl-4">
                   <li>Limit tooltip content to 1-2 short sentences</li>
                   <li>Avoid complex formatting or lengthy explanations</li>
@@ -318,7 +318,7 @@ export default function TooltipPage() {
                 </ul>
               </div>
               <div>
-                <p className="font-semibold text-gray-900 mb-2">Don't hide critical information:</p>
+                <p className="font-semibold text-ink mb-2">Don't hide critical information:</p>
                 <ul className="list-disc list-inside space-y-2 pl-4">
                   <li>Tooltips should supplement, not replace, visible information</li>
                   <li>Don't use tooltips for essential instructions or warnings</li>
@@ -326,7 +326,7 @@ export default function TooltipPage() {
                 </ul>
               </div>
               <div>
-                <p className="font-semibold text-gray-900 mb-2">Position wisely:</p>
+                <p className="font-semibold text-ink mb-2">Position wisely:</p>
                 <ul className="list-disc list-inside space-y-2 pl-4">
                   <li>Default to top position for most cases</li>
                   <li>Use other positions when space is constrained</li>
@@ -334,7 +334,7 @@ export default function TooltipPage() {
                 </ul>
               </div>
               <div>
-                <p className="font-semibold text-gray-900 mb-2">Accessibility:</p>
+                <p className="font-semibold text-ink mb-2">Accessibility:</p>
                 <ul className="list-disc list-inside space-y-2 pl-4">
                   <li>Tooltips are triggered by hover, making them inaccessible for keyboard-only users</li>
                   <li>For critical information, consider using visible labels or help text instead</li>
@@ -342,7 +342,7 @@ export default function TooltipPage() {
                 </ul>
               </div>
               <div>
-                <p className="font-semibold text-gray-900 mb-2">Mobile considerations:</p>
+                <p className="font-semibold text-ink mb-2">Mobile considerations:</p>
                 <ul className="list-disc list-inside space-y-2 pl-4">
                   <li>Tooltips don't work well on touch devices (no hover state)</li>
                   <li>Consider alternative patterns for mobile, such as info buttons with modals</li>
@@ -356,7 +356,7 @@ export default function TooltipPage() {
         {/* Usage Example */}
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-4">Complete Example</h2>
-          <p className="text-gray-600 mb-6">
+          <p className="text-ink-muted mb-6">
             Here's a complete example showing how to use tooltips in a toolbar.
           </p>
           <CodeBlock code={`import Tooltip from './components/Tooltip';

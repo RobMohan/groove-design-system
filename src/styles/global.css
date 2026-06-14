@@ -4,10 +4,10 @@
 
 @layer base {
   :root {
-    /* Surfaces */
-    --color-surface: 255 255 255;          /* white */
-    --color-surface-raised: 255 255 255;   /* white (cards/panels) */
-    --color-surface-muted: 243 244 246;    /* gray-100 (page bg, subtle fills) */
+    /* Surfaces — three-level hierarchy: surface (page) < raised (cards) ~ muted (insets) */
+    --color-surface: 249 250 251;          /* gray-50 (page background) */
+    --color-surface-raised: 255 255 255;   /* white (cards/panels/menus) */
+    --color-surface-muted: 243 244 246;    /* gray-100 (subtle fills, hovers, insets) */
     --color-surface-inverse: 17 24 39;     /* gray-900 */
 
     /* Text / foreground */
@@ -23,9 +23,9 @@
 
   .dark {
     /* Surfaces */
-    --color-surface: 17 24 39;              /* gray-900 */
-    --color-surface-raised: 31 41 55;       /* gray-800 */
-    --color-surface-muted: 31 41 55;        /* gray-800 */
+    --color-surface: 17 24 39;              /* gray-900 (page background) */
+    --color-surface-raised: 31 41 55;       /* gray-800 (cards/panels/menus) */
+    --color-surface-muted: 55 65 81;        /* gray-700 (subtle fills, hovers, insets) */
     --color-surface-inverse: 243 244 246;   /* gray-100 */
 
     /* Text / foreground */
@@ -47,4 +47,6 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: rgb(var(--color-surface));
+  color: rgb(var(--color-ink));
 }

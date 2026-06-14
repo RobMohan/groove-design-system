@@ -48,7 +48,7 @@ describe('Button Component', () => {
     it('renders outline variant correctly', () => {
       render(<Button variant="outline">Outline</Button>);
       const button = screen.getByRole('button');
-      expect(button).toHaveClass('bg-white', 'border-2');
+      expect(button).toHaveClass('bg-surface-raised', 'border-2');
     });
 
     it('renders ghost variant correctly', () => {

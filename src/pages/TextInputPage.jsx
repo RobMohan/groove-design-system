@@ -11,7 +11,7 @@ const PropsTable = () => (
   <div className="overflow-x-auto">
     <table className="w-full text-left border-collapse">
       <thead>
-        <tr className="border-b border-gray-200">
+        <tr className="border-b border-line">
           <th className="py-3 px-4 font-semibold">Prop</th>
           <th className="py-3 px-4 font-semibold">Type</th>
           <th className="py-3 px-4 font-semibold">Default</th>
@@ -19,57 +19,57 @@ const PropsTable = () => (
         </tr>
       </thead>
       <tbody className="text-sm">
-        <tr className="border-b border-gray-100">
+        <tr className="border-b border-line">
           <td className="py-3 px-4 font-mono text-sm">label</td>
-          <td className="py-3 px-4 font-mono text-xs text-gray-600">string</td>
+          <td className="py-3 px-4 font-mono text-xs text-ink-muted">string</td>
           <td className="py-3 px-4 font-mono text-xs">—</td>
           <td className="py-3 px-4">Label text displayed above the input</td>
         </tr>
-        <tr className="border-b border-gray-100">
+        <tr className="border-b border-line">
           <td className="py-3 px-4 font-mono text-sm">placeholder</td>
-          <td className="py-3 px-4 font-mono text-xs text-gray-600">string</td>
+          <td className="py-3 px-4 font-mono text-xs text-ink-muted">string</td>
           <td className="py-3 px-4 font-mono text-xs">'Placeholder'</td>
           <td className="py-3 px-4">Placeholder text shown when the input is empty</td>
         </tr>
-        <tr className="border-b border-gray-100">
+        <tr className="border-b border-line">
           <td className="py-3 px-4 font-mono text-sm">value</td>
-          <td className="py-3 px-4 font-mono text-xs text-gray-600">string</td>
+          <td className="py-3 px-4 font-mono text-xs text-ink-muted">string</td>
           <td className="py-3 px-4 font-mono text-xs">''</td>
           <td className="py-3 px-4">Controlled value of the input</td>
         </tr>
-        <tr className="border-b border-gray-100">
+        <tr className="border-b border-line">
           <td className="py-3 px-4 font-mono text-sm">onChange</td>
-          <td className="py-3 px-4 font-mono text-xs text-gray-600">function</td>
+          <td className="py-3 px-4 font-mono text-xs text-ink-muted">function</td>
           <td className="py-3 px-4 font-mono text-xs">—</td>
           <td className="py-3 px-4">Callback fired when the input value changes</td>
         </tr>
-        <tr className="border-b border-gray-100">
+        <tr className="border-b border-line">
           <td className="py-3 px-4 font-mono text-sm">disabled</td>
-          <td className="py-3 px-4 font-mono text-xs text-gray-600">boolean</td>
+          <td className="py-3 px-4 font-mono text-xs text-ink-muted">boolean</td>
           <td className="py-3 px-4 font-mono text-xs">false</td>
           <td className="py-3 px-4">Disables the input and renders the inactive visual state</td>
         </tr>
-        <tr className="border-b border-gray-100">
+        <tr className="border-b border-line">
           <td className="py-3 px-4 font-mono text-sm">error</td>
-          <td className="py-3 px-4 font-mono text-xs text-gray-600">string | boolean</td>
+          <td className="py-3 px-4 font-mono text-xs text-ink-muted">string | boolean</td>
           <td className="py-3 px-4 font-mono text-xs">''</td>
           <td className="py-3 px-4">Shows error state with red border and warning icon. Pass a string to also display an error message below the input.</td>
         </tr>
-        <tr className="border-b border-gray-100">
+        <tr className="border-b border-line">
           <td className="py-3 px-4 font-mono text-sm">showIcon</td>
-          <td className="py-3 px-4 font-mono text-xs text-gray-600">boolean</td>
+          <td className="py-3 px-4 font-mono text-xs text-ink-muted">boolean</td>
           <td className="py-3 px-4 font-mono text-xs">true</td>
           <td className="py-3 px-4">Shows the search icon inside the input. Hidden when error is present.</td>
         </tr>
-        <tr className="border-b border-gray-100">
+        <tr className="border-b border-line">
           <td className="py-3 px-4 font-mono text-sm">id</td>
-          <td className="py-3 px-4 font-mono text-xs text-gray-600">string</td>
+          <td className="py-3 px-4 font-mono text-xs text-ink-muted">string</td>
           <td className="py-3 px-4 font-mono text-xs">auto-generated</td>
           <td className="py-3 px-4">HTML id for the input element, used to associate the label</td>
         </tr>
-        <tr className="border-b border-gray-100">
+        <tr className="border-b border-line">
           <td className="py-3 px-4 font-mono text-sm">className</td>
-          <td className="py-3 px-4 font-mono text-xs text-gray-600">string</td>
+          <td className="py-3 px-4 font-mono text-xs text-ink-muted">string</td>
           <td className="py-3 px-4 font-mono text-xs">''</td>
           <td className="py-3 px-4">Additional CSS classes applied to the outer wrapper</td>
         </tr>
@@ -95,7 +95,7 @@ export default function TextInputPage() {
         {/* Header */}
         <div className="mb-12">
           <h1 className="text-5xl font-bold mb-4">Text Input</h1>
-          <p className="text-xl text-gray-600">
+          <p className="text-xl text-ink-muted">
             A text input component for collecting user-entered data, with support for labels, icons, disabled, and error states.
           </p>
         </div>
@@ -109,10 +109,10 @@ export default function TextInputPage() {
         {/* Basic Usage */}
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-4">Basic Usage</h2>
-          <p className="text-gray-600 mb-6">
+          <p className="text-ink-muted mb-6">
             A labeled input with a search icon. Click into the field to see the active (focused) state.
           </p>
-          <div className="bg-white rounded-lg border border-gray-200 p-8 mb-4">
+          <div className="bg-surface-raised rounded-lg border border-line p-8 mb-4">
             <div className="max-w-xs">
               <TextInput
                 label="Label"
@@ -135,30 +135,30 @@ export default function TextInputPage() {
         {/* States */}
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-4">States</h2>
-          <p className="text-gray-600 mb-6">
+          <p className="text-ink-muted mb-6">
             The input has five visual states: default, active (focused), filled, disabled, and error.
           </p>
-          <div className="bg-white rounded-lg border border-gray-200 p-8 mb-4">
+          <div className="bg-surface-raised rounded-lg border border-line p-8 mb-4">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 max-w-2xl">
               <div>
-                <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3">Default</p>
+                <p className="text-xs font-semibold text-ink-muted uppercase tracking-wider mb-3">Default</p>
                 <TextInput label="Label" placeholder="Placeholder" value="" onChange={() => {}} />
               </div>
               <div>
-                <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3">Active (focus)</p>
+                <p className="text-xs font-semibold text-ink-muted uppercase tracking-wider mb-3">Active (focus)</p>
                 <TextInput label="Label" placeholder="Placeholder" value="" onChange={() => {}} id="active-demo" />
-                <p className="text-xs text-gray-400 mt-2">Click the field above</p>
+                <p className="text-xs text-ink-subtle mt-2">Click the field above</p>
               </div>
               <div>
-                <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3">Filled</p>
+                <p className="text-xs font-semibold text-ink-muted uppercase tracking-wider mb-3">Filled</p>
                 <TextInput label="Label" placeholder="Placeholder" value="User input text" onChange={() => {}} />
               </div>
               <div>
-                <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3">Disabled</p>
+                <p className="text-xs font-semibold text-ink-muted uppercase tracking-wider mb-3">Disabled</p>
                 <TextInput label="Label" placeholder="Placeholder Text" value="" onChange={() => {}} disabled />
               </div>
               <div>
-                <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3">Error</p>
+                <p className="text-xs font-semibold text-ink-muted uppercase tracking-wider mb-3">Error</p>
                 <TextInput
                   label="Label"
                   placeholder="Placeholder"
@@ -193,10 +193,10 @@ export default function TextInputPage() {
         {/* Without Icon */}
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-4">Without Icon</h2>
-          <p className="text-gray-600 mb-6">
-            The search icon can be hidden with <code className="text-sm bg-gray-100 px-1 rounded">showIcon=&#123;false&#125;</code>.
+          <p className="text-ink-muted mb-6">
+            The search icon can be hidden with <code className="text-sm bg-surface-muted px-1 rounded">showIcon=&#123;false&#125;</code>.
           </p>
-          <div className="bg-white rounded-lg border border-gray-200 p-8 mb-4">
+          <div className="bg-surface-raised rounded-lg border border-line p-8 mb-4">
             <div className="max-w-xs">
               <TextInput
                 label="First Name"
@@ -219,10 +219,10 @@ export default function TextInputPage() {
         {/* Without Label */}
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-4">Without Label</h2>
-          <p className="text-gray-600 mb-6">
-            Omit the <code className="text-sm bg-gray-100 px-1 rounded">label</code> prop to render the input alone — useful for search bars or inline fields.
+          <p className="text-ink-muted mb-6">
+            Omit the <code className="text-sm bg-surface-muted px-1 rounded">label</code> prop to render the input alone — useful for search bars or inline fields.
           </p>
-          <div className="bg-white rounded-lg border border-gray-200 p-8 mb-4">
+          <div className="bg-surface-raised rounded-lg border border-line p-8 mb-4">
             <div className="max-w-xs">
               <TextInput placeholder="Search..." value="" onChange={() => {}} />
             </div>
@@ -233,10 +233,10 @@ export default function TextInputPage() {
         {/* Form Example */}
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-4">Form Example</h2>
-          <p className="text-gray-600 mb-6">
+          <p className="text-ink-muted mb-6">
             A complete example showing validation with error states on submit.
           </p>
-          <div className="bg-white rounded-lg border border-gray-200 p-8 mb-4">
+          <div className="bg-surface-raised rounded-lg border border-line p-8 mb-4">
             <form
               className="flex flex-col gap-6 max-w-sm"
               onSubmit={(e) => {
@@ -305,7 +305,7 @@ const emailError =
         {/* Props Table */}
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-4">Props</h2>
-          <div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
+          <div className="bg-surface-raised rounded-lg border border-line overflow-hidden">
             <PropsTable />
           </div>
         </section>
@@ -313,10 +313,10 @@ const emailError =
         {/* Best Practices */}
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-4">Best Practices</h2>
-          <div className="bg-white rounded-lg border border-gray-200 p-8">
-            <div className="space-y-4 text-gray-700">
+          <div className="bg-surface-raised rounded-lg border border-line p-8">
+            <div className="space-y-4 text-ink-muted">
               <div>
-                <p className="font-semibold text-gray-900 mb-2">Always use a label:</p>
+                <p className="font-semibold text-ink mb-2">Always use a label:</p>
                 <ul className="list-disc list-inside space-y-2 pl-4">
                   <li>Every input should have a visible label or an accessible aria-label</li>
                   <li>Placeholder text is not a substitute for a label</li>
@@ -324,7 +324,7 @@ const emailError =
                 </ul>
               </div>
               <div>
-                <p className="font-semibold text-gray-900 mb-2">Error messages:</p>
+                <p className="font-semibold text-ink mb-2">Error messages:</p>
                 <ul className="list-disc list-inside space-y-2 pl-4">
                   <li>Show errors after the user has attempted to submit or leave the field</li>
                   <li>Be specific — explain what went wrong and how to fix it</li>
@@ -332,14 +332,14 @@ const emailError =
                 </ul>
               </div>
               <div>
-                <p className="font-semibold text-gray-900 mb-2">Disabled state:</p>
+                <p className="font-semibold text-ink mb-2">Disabled state:</p>
                 <ul className="list-disc list-inside space-y-2 pl-4">
                   <li>Use disabled inputs sparingly — consider removing them entirely if they'll never be enabled</li>
                   <li>If a field is disabled, make sure it's clear to the user why</li>
                 </ul>
               </div>
               <div>
-                <p className="font-semibold text-gray-900 mb-2">Controlled inputs:</p>
+                <p className="font-semibold text-ink mb-2">Controlled inputs:</p>
                 <ul className="list-disc list-inside space-y-2 pl-4">
                   <li>Always manage value and onChange together to keep the input controlled</li>
                   <li>Avoid mixing controlled and uncontrolled patterns</li>

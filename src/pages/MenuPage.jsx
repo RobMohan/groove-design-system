@@ -10,9 +10,9 @@ const CodeBlock = ({ code }) => (
 );
 
 const PropRow = ({ name, type, def, desc }) => (
-  <tr className="border-b border-gray-100">
+  <tr className="border-b border-line">
     <td className="py-3 px-4 font-mono text-sm">{name}</td>
-    <td className="py-3 px-4 font-mono text-xs text-gray-600">{type}</td>
+    <td className="py-3 px-4 font-mono text-xs text-ink-muted">{type}</td>
     <td className="py-3 px-4 font-mono text-xs">{def}</td>
     <td className="py-3 px-4">{desc}</td>
   </tr>
@@ -24,7 +24,7 @@ export default function MenuPage() {
       <div className="max-w-5xl mx-auto">
         <div className="mb-12">
           <h1 className="text-5xl font-bold mb-4">Menu</h1>
-          <p className="text-xl text-gray-600">
+          <p className="text-xl text-ink-muted">
             A dropdown action menu that opens from a trigger and lists selectable actions.
           </p>
         </div>
@@ -36,7 +36,7 @@ export default function MenuPage() {
 
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-4">Basic usage</h2>
-          <div className="bg-white rounded-lg border border-gray-200 p-8 mb-4">
+          <div className="bg-surface-raised rounded-lg border border-line p-8 mb-4">
             <Menu
               trigger={<Button variant="outline">Actions</Button>}
               items={[
@@ -60,12 +60,12 @@ export default function MenuPage() {
 
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-4">Alignment</h2>
-          <p className="text-gray-600 mb-4">
+          <p className="text-ink-muted mb-4">
             Use <code className="font-mono text-sm">align="right"</code> to anchor the dropdown to
             the right edge of the trigger. This is useful for triggers near the end of a row, such
             as an overflow icon button.
           </p>
-          <div className="bg-white rounded-lg border border-gray-200 p-8 mb-4 flex justify-end">
+          <div className="bg-surface-raised rounded-lg border border-line p-8 mb-4 flex justify-end">
             <Menu
               align="right"
               trigger={<Button variant="ghost" size="icon" icon={MoreVertical} aria-label="More options" />}
@@ -91,11 +91,11 @@ export default function MenuPage() {
 
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-4">Disabled item</h2>
-          <p className="text-gray-600 mb-4">
+          <p className="text-ink-muted mb-4">
             Set <code className="font-mono text-sm">disabled: true</code> on an item to render it
             unselectable. Its <code className="font-mono text-sm">onClick</code> will not fire.
           </p>
-          <div className="bg-white rounded-lg border border-gray-200 p-8 mb-4">
+          <div className="bg-surface-raised rounded-lg border border-line p-8 mb-4">
             <Menu
               trigger={<Button variant="outline">Actions</Button>}
               items={[
@@ -117,10 +117,10 @@ export default function MenuPage() {
 
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-4">Props</h2>
-          <div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
+          <div className="bg-surface-raised rounded-lg border border-line overflow-hidden">
             <table className="w-full text-left border-collapse">
               <thead>
-                <tr className="border-b border-gray-200">
+                <tr className="border-b border-line">
                   <th className="py-3 px-4 font-semibold">Prop</th>
                   <th className="py-3 px-4 font-semibold">Type</th>
                   <th className="py-3 px-4 font-semibold">Default</th>
@@ -135,7 +135,7 @@ export default function MenuPage() {
               </tbody>
             </table>
           </div>
-          <p className="text-gray-600 mt-4">
+          <p className="text-ink-muted mt-4">
             Each entry in <code className="font-mono text-sm">items</code> is either an action of the
             shape{' '}
             <code className="font-mono text-sm">

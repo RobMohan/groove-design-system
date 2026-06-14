@@ -12,7 +12,7 @@ const PropsTable = () => (
   <div className="overflow-x-auto">
     <table className="w-full text-left border-collapse">
       <thead>
-        <tr className="border-b border-gray-200">
+        <tr className="border-b border-line">
           <th className="py-3 px-4 font-semibold">Prop</th>
           <th className="py-3 px-4 font-semibold">Type</th>
           <th className="py-3 px-4 font-semibold">Default</th>
@@ -20,45 +20,45 @@ const PropsTable = () => (
         </tr>
       </thead>
       <tbody className="text-sm">
-        <tr className="border-b border-gray-100">
+        <tr className="border-b border-line">
           <td className="py-3 px-4 font-mono text-sm">value</td>
-          <td className="py-3 px-4 font-mono text-xs text-gray-600">string | number</td>
+          <td className="py-3 px-4 font-mono text-xs text-ink-muted">string | number</td>
           <td className="py-3 px-4 font-mono text-xs">required</td>
           <td className="py-3 px-4">Main metric value to display</td>
         </tr>
-        <tr className="border-b border-gray-100">
+        <tr className="border-b border-line">
           <td className="py-3 px-4 font-mono text-sm">label</td>
-          <td className="py-3 px-4 font-mono text-xs text-gray-600">string</td>
+          <td className="py-3 px-4 font-mono text-xs text-ink-muted">string</td>
           <td className="py-3 px-4 font-mono text-xs">required</td>
           <td className="py-3 px-4">Label describing the metric</td>
         </tr>
-        <tr className="border-b border-gray-100">
+        <tr className="border-b border-line">
           <td className="py-3 px-4 font-mono text-sm">icon</td>
-          <td className="py-3 px-4 font-mono text-xs text-gray-600">LucideIcon</td>
+          <td className="py-3 px-4 font-mono text-xs text-ink-muted">LucideIcon</td>
           <td className="py-3 px-4 font-mono text-xs">undefined</td>
           <td className="py-3 px-4">Icon component from lucide-react (optional)</td>
         </tr>
-        <tr className="border-b border-gray-100">
+        <tr className="border-b border-line">
           <td className="py-3 px-4 font-mono text-sm">trend</td>
-          <td className="py-3 px-4 font-mono text-xs text-gray-600">string</td>
+          <td className="py-3 px-4 font-mono text-xs text-ink-muted">string</td>
           <td className="py-3 px-4 font-mono text-xs">undefined</td>
           <td className="py-3 px-4">Trend indicator with icon (e.g., "+20%") (optional)</td>
         </tr>
-        <tr className="border-b border-gray-100">
+        <tr className="border-b border-line">
           <td className="py-3 px-4 font-mono text-sm">trendLabel</td>
-          <td className="py-3 px-4 font-mono text-xs text-gray-600">string</td>
+          <td className="py-3 px-4 font-mono text-xs text-ink-muted">string</td>
           <td className="py-3 px-4 font-mono text-xs">undefined</td>
           <td className="py-3 px-4">Alternative trend text without icon (optional)</td>
         </tr>
-        <tr className="border-b border-gray-100">
+        <tr className="border-b border-line">
           <td className="py-3 px-4 font-mono text-sm">trendType</td>
-          <td className="py-3 px-4 font-mono text-xs text-gray-600">'positive' | 'neutral' | 'negative'</td>
+          <td className="py-3 px-4 font-mono text-xs text-ink-muted">'positive' | 'neutral' | 'negative'</td>
           <td className="py-3 px-4 font-mono text-xs">'positive'</td>
           <td className="py-3 px-4">Color styling for the trend</td>
         </tr>
-        <tr className="border-b border-gray-100">
+        <tr className="border-b border-line">
           <td className="py-3 px-4 font-mono text-sm">className</td>
-          <td className="py-3 px-4 font-mono text-xs text-gray-600">string</td>
+          <td className="py-3 px-4 font-mono text-xs text-ink-muted">string</td>
           <td className="py-3 px-4 font-mono text-xs">''</td>
           <td className="py-3 px-4">Additional CSS classes</td>
         </tr>
@@ -74,7 +74,7 @@ export default function StatCardPage() {
         {/* Header */}
         <div className="mb-12">
           <h1 className="text-5xl font-bold mb-4">Stat Card</h1>
-          <p className="text-xl text-gray-600">
+          <p className="text-xl text-ink-muted">
             Dashboard-style metric cards for displaying statistics with trend indicators and icons.
           </p>
         </div>
@@ -88,7 +88,7 @@ export default function StatCardPage() {
         {/* Basic Example */}
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-4">Basic Example</h2>
-          <p className="text-gray-600 mb-6">
+          <p className="text-ink-muted mb-6">
             A stat card with a value, label, icon, and positive trend.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-4">
@@ -121,7 +121,7 @@ export default function StatCardPage() {
         {/* Trend Types */}
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-4">Trend Types</h2>
-          <p className="text-gray-600 mb-6">
+          <p className="text-ink-muted mb-6">
             Three trend types with different color styling: positive (green), neutral (gray), and negative (red).
           </p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-4">
@@ -172,7 +172,7 @@ export default function StatCardPage() {
         {/* Trend Label */}
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-4">Trend Label</h2>
-          <p className="text-gray-600 mb-6">
+          <p className="text-ink-muted mb-6">
             Use trendLabel instead of trend for descriptive text without the trending icon.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-4">
@@ -203,7 +203,7 @@ export default function StatCardPage() {
         {/* Dashboard Layout */}
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-4">Dashboard Layout</h2>
-          <p className="text-gray-600 mb-6">
+          <p className="text-ink-muted mb-6">
             Stat cards work great in grid layouts for dashboards and analytics views.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-4">
@@ -247,7 +247,7 @@ export default function StatCardPage() {
         {/* Props Table */}
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-4">Props</h2>
-          <div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
+          <div className="bg-surface-raised rounded-lg border border-line overflow-hidden">
             <PropsTable />
           </div>
         </section>
@@ -255,7 +255,7 @@ export default function StatCardPage() {
         {/* Usage Example */}
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-4">Complete Example</h2>
-          <p className="text-gray-600 mb-6">
+          <p className="text-ink-muted mb-6">
             Here's a complete example of using stat cards in a dashboard.
           </p>
           <CodeBlock code={`import StatCard from './components/StatCard';

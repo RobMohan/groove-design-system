@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import Button from '../components/Button';
 import Card from '../components/Card';
 import StatCard from '../components/StatCard';
-import { DollarSign, ArrowRight } from 'lucide-react';
+import { Component, Moon, TestTube2, Accessibility, ArrowRight } from 'lucide-react';
 
 export default function HomePage() {
   return (
@@ -12,9 +12,10 @@ export default function HomePage() {
         {/* Hero Section */}
         <div className="mb-16 text-center">
           <h1 className="text-6xl font-bold mb-6">Groove Design System</h1>
-          <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
-            A comprehensive, customizable component library built with React and Tailwind CSS, 
-            featuring buttons, cards, and stat cards with a custom color palette.
+          <p className="text-xl text-ink-muted mb-8 max-w-2xl mx-auto">
+            A comprehensive, accessible component library built with React and Tailwind CSS —
+            24 components and 5 design foundations, with full light &amp; dark theming and a
+            TanStack-powered data table.
           </p>
           <div className="flex gap-4 justify-center">
             <Link to="/button">
@@ -22,12 +23,20 @@ export default function HomePage() {
                 Get Started
               </Button>
             </Link>
-            <a href="https://github.com/RobMohan/component-test" target="_blank" rel="noopener noreferrer">
+            <a href="https://github.com/RobMohan/groove-design-system" target="_blank" rel="noopener noreferrer">
               <Button variant="outline" size="large">
                 View on GitHub
               </Button>
             </a>
           </div>
+        </div>
+
+        {/* Stats */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16">
+          <StatCard value="24" label="Components" />
+          <StatCard value="5" label="Foundations" />
+          <StatCard value="112" label="Passing tests" />
+          <StatCard value="2" label="Themes (light / dark)" />
         </div>
 
         {/* About This Project */}
@@ -36,45 +45,44 @@ export default function HomePage() {
             title="About This Project"
             description="An exploration of AI-assisted design system development"
           >
-            <div className="space-y-4 text-gray-700">
+            <div className="space-y-4 text-ink-muted">
               <p>
-                This is a test project created to explore how AI can be leveraged to speed up design system workflows 
-                and improve collaboration between designers and developers. Through this experiment, I'm learning how 
-                AI tools can help translate design concepts into production-ready components, generate comprehensive 
-                documentation, and maintain consistency across a component library.
+                Groove explores how AI can speed up design system workflows and improve
+                collaboration between designers and developers — translating design concepts
+                into production-ready components, generating documentation, and keeping the
+                library consistent and well-tested.
               </p>
               <p>
-                The goal is to understand the practical applications of AI in design systems work—from initial component 
-                creation to testing and documentation—and to identify where AI assistance adds the most value in the 
-                design-to-development pipeline.
+                Every component is built on a shared token foundation (color, typography,
+                spacing, elevation, radius) and ships with interactive docs and unit tests.
               </p>
             </div>
           </Card>
         </div>
 
         {/* Features Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
-          <Card
-            title="Custom Colors"
-            description="Unique purple, lime-green, and red color palette that stands out."
-          />
-          <Card
-            title="Fully Tested"
-            description="Comprehensive unit tests ensure reliability and quality."
-          />
-          <Card
-            title="Accessible"
-            description="Built with accessibility in mind, including keyboard navigation."
-          />
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
+          <Card title="Token-driven theming" description="Semantic tokens power a built-in light and dark mode — toggle it from the sidebar.">
+            <Moon size={28} className="text-primary" />
+          </Card>
+          <Card title="24 components" description="From buttons and inputs to modals, toasts, menus, and a full data table.">
+            <Component size={28} className="text-primary" />
+          </Card>
+          <Card title="Fully tested" description="112 unit tests across 15 suites keep behavior reliable.">
+            <TestTube2 size={28} className="text-primary" />
+          </Card>
+          <Card title="Accessible" description="Keyboard navigation, ARIA roles, and focus states throughout.">
+            <Accessibility size={28} className="text-primary" />
+          </Card>
         </div>
 
         {/* Components Overview */}
         <div className="mb-16">
-          <h2 className="text-4xl font-bold mb-8">Components</h2>
+          <h2 className="text-4xl font-bold mb-8">Highlights</h2>
           <div className="space-y-6">
             <Card
               title="Button"
-              description="6 variants, 4 sizes, icon support, and comprehensive states"
+              description="7 variants, 4 sizes, icon support, and comprehensive states"
               footer={
                 <Link to="/button" className="flex items-center gap-2 text-primary font-medium hover:underline">
                   View Documentation <ArrowRight size={18} />
@@ -90,44 +98,31 @@ export default function HomePage() {
             </Card>
 
             <Card
-              title="Card"
-              description="Flexible content cards with optional headers, content, and footers"
+              title="Data Table"
+              description="Powered by TanStack Table — sorting, filtering, search, row selection, and pagination"
               footer={
-                <Link to="/card" className="flex items-center gap-2 text-primary font-medium hover:underline">
+                <Link to="/data-table" className="flex items-center gap-2 text-primary font-medium hover:underline">
                   View Documentation <ArrowRight size={18} />
                 </Link>
               }
             >
-              <p className="text-sm text-gray-600">
-                Perfect for displaying content with consistent spacing and styling
+              <p className="text-sm text-ink-muted">
+                Keeps the Groove visual style while delegating table logic to a headless engine.
               </p>
             </Card>
 
             <Card
-              title="Stat Card"
-              description="Dashboard-style metric cards with trend indicators"
+              title="Overlays &amp; feedback"
+              description="Modal, Toast, Tooltip, Alert, Menu, and Popover patterns"
               footer={
-                <Link to="/stat-card" className="flex items-center gap-2 text-primary font-medium hover:underline">
+                <Link to="/modal" className="flex items-center gap-2 text-primary font-medium hover:underline">
                   View Documentation <ArrowRight size={18} />
                 </Link>
               }
             >
-              <div className="grid grid-cols-2 gap-4">
-                <StatCard
-                  value="$12K"
-                  label="Revenue"
-                  icon={DollarSign}
-                  trend="+20%"
-                  trendType="positive"
-                />
-                <StatCard
-                  value="2.3K"
-                  label="Users"
-                  icon={DollarSign}
-                  trend="+180%"
-                  trendType="positive"
-                />
-              </div>
+              <p className="text-sm text-ink-muted">
+                Portal-based dialogs and an imperative toast system built for real apps.
+              </p>
             </Card>
           </div>
         </div>
@@ -135,21 +130,26 @@ export default function HomePage() {
         {/* Color Palette */}
         <div className="mb-16">
           <h2 className="text-4xl font-bold mb-8">Color Palette</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             <div>
               <div className="bg-primary h-24 rounded-lg mb-3"></div>
               <div className="font-semibold">Primary</div>
-              <div className="text-sm text-gray-600">#8B7BA8</div>
+              <div className="text-sm text-ink-muted">#588ae0</div>
             </div>
             <div>
               <div className="bg-secondary h-24 rounded-lg mb-3"></div>
               <div className="font-semibold">Secondary</div>
-              <div className="text-sm text-gray-600">#C8D494</div>
+              <div className="text-sm text-ink-muted">#7c3aed</div>
+            </div>
+            <div>
+              <div className="bg-positive h-24 rounded-lg mb-3"></div>
+              <div className="font-semibold">Positive</div>
+              <div className="text-sm text-ink-muted">#16a34a</div>
             </div>
             <div>
               <div className="bg-destructive h-24 rounded-lg mb-3"></div>
               <div className="font-semibold">Destructive</div>
-              <div className="text-sm text-gray-600">#D84444</div>
+              <div className="text-sm text-ink-muted">#dc2626</div>
             </div>
           </div>
         </div>
@@ -162,7 +162,7 @@ export default function HomePage() {
         >
           <pre className="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto text-sm">
 {`# Clone the repository
-git clone https://github.com/RobMohan/component-test.git
+git clone https://github.com/RobMohan/groove-design-system.git
 
 # Install dependencies
 npm install
@@ -179,18 +179,18 @@ npm run dev`}
         >
           <div className="space-y-4">
             <div className="flex items-center gap-3">
-              <span className="font-semibold text-gray-700">Email:</span>
-              <a 
-                href="mailto:rob@robertmohandesign.com" 
+              <span className="font-semibold text-ink-muted">Email:</span>
+              <a
+                href="mailto:rob@robertmohandesign.com"
                 className="text-primary hover:underline"
               >
                 rob@robertmohandesign.com
               </a>
             </div>
             <div className="flex items-center gap-3">
-              <span className="font-semibold text-gray-700">LinkedIn:</span>
-              <a 
-                href="https://www.linkedin.com/in/robertmohan" 
+              <span className="font-semibold text-ink-muted">LinkedIn:</span>
+              <a
+                href="https://www.linkedin.com/in/robertmohan"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-primary hover:underline"

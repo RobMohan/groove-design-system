@@ -1,32 +1,27 @@
 # Groove Design System
 
-A comprehensive, customizable component library built with React and Tailwind CSS, featuring buttons, cards, and stat cards with a custom color palette. This project explores how AI can accelerate design system workflows and improve design-to-development collaboration.
-
-![Design System Preview](https://via.placeholder.com/1200x600?text=Add+Screenshot+Here)
+A comprehensive, accessible component library built with React and Tailwind CSS. Groove ships **24 components** and **5 design foundations**, with a token-driven **light & dark theme**, a **TanStack-powered data table**, and interactive documentation for every piece. This project explores how AI can accelerate design system workflows and improve design-to-development collaboration.
 
 ## 🚀 Live Demo
 
-**[View Live Demo](https://component-test-ashy.vercel.app)** | **[GitHub Repository](https://github.com/RobMohan/component-test)**
+**[View Live Demo](https://component-test-ashy.vercel.app)** | **[GitHub Repository](https://github.com/RobMohan/groove-design-system)**
 
 ## ✨ Features
 
-- 🎨 **Custom Design System** - Unique color palette with purple, lime-green, and red variants
-- 🔘 **Button Component** - 6 variants, 4 sizes, icon support, and all interactive states
-- 📇 **Card Component** - Flexible content cards with optional headers and footers
-- 📊 **Stat Card Component** - Dashboard-style metric cards with trend indicators
-- 📚 **Interactive Documentation** - Separate pages for each component with live examples
-- 🧭 **React Router Navigation** - Easy navigation between component pages
-- 📋 **Props Tables** - Complete documentation for every prop
-- 💻 **Code Examples** - Copy-paste ready code snippets for each component
-- ♿ **Accessible** - Proper focus states, keyboard navigation, and semantic HTML
-- 🧪 **Tested** - Comprehensive unit tests with Vitest
-- 📱 **Responsive** - Works beautifully on all screen sizes
+- 🎨 **Token-driven theming** — semantic color/typography/spacing/elevation/radius tokens power a built-in light & dark mode (toggle from the sidebar)
+- 🧩 **24 components** — from buttons and inputs to modals, toasts, menus, and a full data table
+- 📊 **TanStack data table** — headless sorting, filtering, global search, row selection, column visibility, and pagination, wrapped in the Groove visual style
+- 📚 **Interactive documentation** — a dedicated page with live examples and props tables for every component and foundation
+- ♿ **Accessible** — keyboard navigation, ARIA roles, focus states, and semantic HTML throughout
+- 🧪 **Tested** — 112 unit tests across 15 suites (Vitest + React Testing Library)
+- 📱 **Responsive** — works across screen sizes with a collapsible sidebar
 
 ## 📦 Installation
+
 ```bash
 # Clone the repository
-git clone https://github.com/RobMohan/component-test.git
-cd component-test
+git clone https://github.com/RobMohan/groove-design-system.git
+cd groove-design-system
 
 # Install dependencies
 npm install
@@ -41,154 +36,86 @@ npm run build
 npm test
 ```
 
-## 🎨 Components
+## 🧱 Foundations
 
-### Button
+| Foundation | Description |
+|---|---|
+| **Color Tokens** | Brand scales + semantic surface/ink/line tokens (theme-aware) |
+| **Typography** | Type scale, weights, and usage |
+| **Spacing** | 4px-based spacing scale |
+| **Elevation** | Five-step shadow scale (`shadow-elevation-1…5`) |
+| **Radius** | Semantic radius tokens (`rounded-control` / `card` / `modal` / `pill`) |
 
-A versatile button component with multiple variants, sizes, and states.
+## 🧩 Components
 
-**Features:**
-- 6 variants: primary, secondary, destructive, outline, ghost, link
-- 4 sizes: small, default, large, icon-only
-- Icon support (left or right positioning)
-- Disabled states
-- Full keyboard accessibility
+**Forms & inputs:** Button, Checkbox, Radio, Toggle, Text Input, Textarea, Select
+**Data display:** Badge, Avatar, Card, Stat Card, Data Table, Skeleton
+**Feedback:** Alert, Toast, Spinner, Progress, Tooltip
+**Navigation & overlays:** Tabs, Accordion, Breadcrumbs, Menu, Modal
 
-[View Button Documentation →](https://component-test-ashy.vercel.app/button)
+Each component has its own documentation page with live examples, a props table, and copy-paste code snippets.
 
-### Card
+## 🌗 Theming & tokens
 
-A flexible content card component for displaying information with optional headers, content, and footers.
+Groove uses CSS-variable-backed semantic tokens so components adapt to light/dark automatically. Prefer these over raw Tailwind grays:
 
-**Features:**
-- Optional title and description
-- Custom content area
-- Optional footer (perfect for action buttons)
-- Clean, minimal design
+- **Surfaces:** `bg-surface` (page), `bg-surface-raised` (cards/menus), `bg-surface-muted` (insets/hovers)
+- **Text:** `text-ink`, `text-ink-muted`, `text-ink-subtle`, `text-ink-inverse`
+- **Borders:** `border-line`, `border-line-strong`
+- **Brand:** `primary`, `secondary`, `destructive`, `positive` (each with `-hover` / `-pressed` / `-disabled`)
 
-[View Card Documentation →](https://component-test-ashy.vercel.app/card)
-
-### StatCard
-
-Dashboard-style metric cards for displaying statistics with trend indicators.
-
-**Features:**
-- Large value display
-- Icon support
-- Trend indicators with color coding (positive/neutral/negative)
-- Perfect for dashboards and analytics
-
-[View StatCard Documentation →](https://component-test-ashy.vercel.app/stat-card)
+Dark mode is class-based (`darkMode: 'class'`); the docs toggle persists the choice to `localStorage`.
 
 ## 🎨 Color Palette
+
 ```javascript
 colors: {
-  primary: {
-    DEFAULT: '#8B7BA8',  // Purple
-    hover: '#7A6A97',
-    disabled: '#B5AAC8',
-  },
-  secondary: {
-    DEFAULT: '#C8D494',  // Lime Green
-    hover: '#B7C383',
-    disabled: '#DDE4BA',
-  },
-  destructive: {
-    DEFAULT: '#D84444',  // Red
-    hover: '#C33333',
-    disabled: '#E89999',
-  },
+  primary:     { DEFAULT: '#588ae0' }, // Blue
+  secondary:   { DEFAULT: '#7c3aed' }, // Purple
+  positive:    { DEFAULT: '#16a34a' }, // Green
+  destructive: { DEFAULT: '#dc2626' }, // Red
 }
 ```
 
 ## 📁 Project Structure
+
 ```
-component-test/
+groove-design-system/
 ├── src/
-│   ├── components/           # Reusable components
-│   │   ├── Button.jsx
-│   │   ├── Button.test.jsx
-│   │   ├── Card.jsx
-│   │   └── StatCard.jsx
-│   ├── pages/               # Documentation pages
-│   │   ├── HomePage.jsx
-│   │   ├── ButtonPage.jsx
-│   │   ├── CardPage.jsx
-│   │   └── StatCardPage.jsx
-│   ├── layout/              # Shared layout
-│   │   └── DocsLayout.jsx
-│   ├── styles/
-│   │   └── global.css
-│   ├── test/
-│   │   └── setup.js
-│   └── main.jsx
-├── public/
-├── index.html
-├── package.json
-├── tailwind.config.js
+│   ├── components/          # Components + co-located tests (Component.jsx / Component.test.jsx)
+│   ├── pages/               # One documentation page per component & foundation
+│   ├── layout/              # DocsLayout (sidebar, nav, theme toggle)
+│   ├── styles/              # global.css (token definitions + dark overrides)
+│   ├── test/                # Vitest setup
+│   └── main.jsx             # Routes + ToastProvider
+├── tailwind.config.js       # Tokens: colors, elevation, radius, motion
 ├── vite.config.js
-├── vitest.config.js
 └── README.md
 ```
 
 ## 🧪 Testing
 
-Run the test suite:
 ```bash
-# Run tests
-npm test
-
-# Run tests in watch mode
-npm test -- --watch
-
-# Run tests with coverage
-npm test:coverage
+npm test              # run the suite
+npm test -- --watch   # watch mode
+npm run test:coverage # coverage report
 ```
 
-Current test coverage:
-- ✅ Button component: 45+ test cases
-- 🔄 Card component: Coming soon
-- 🔄 StatCard component: Coming soon
+Current coverage: **112 tests across 15 suites** — Button, DataTable, Pagination, Select, Modal, Toast, Alert, Spinner, Progress, Textarea, Avatar, Accordion, Breadcrumbs, Menu, and Skeleton.
 
 ## 🛠️ Built With
 
 - **Framework:** React 18 + Vite
 - **Routing:** React Router DOM
-- **Styling:** Tailwind CSS
+- **Styling:** Tailwind CSS (class-based dark mode)
+- **Data table:** TanStack Table v8
 - **Icons:** Lucide React
 - **Testing:** Vitest + React Testing Library
 - **Deployment:** Vercel
-- **Version Control:** Git + GitHub
-
-## 🚀 Deployment
-
-The project is configured for automatic deployment on Vercel. Any push to the `main` branch will trigger a new deployment.
-
-### Manual Deployment
-```bash
-npm run build
-# Deploy the dist/ folder to your hosting provider
-```
 
 ## 💡 About This Project
 
-This is a test project created to explore how AI can be leveraged to speed up design system workflows and improve collaboration between designers and developers. Through this experiment, I'm learning how AI tools can help:
-
-- Translate design concepts into production-ready components
-- Generate comprehensive documentation
-- Maintain consistency across a component library
-- Create unit tests for reliability
-- Build interactive documentation sites
-
-The goal is to understand the practical applications of AI in design systems work—from initial component creation to testing and documentation—and to identify where AI assistance adds the most value in the design-to-development pipeline.
-
-## 🤝 Contributing
-
-This is a personal portfolio project, but suggestions and feedback are welcome! Feel free to open an issue or submit a pull request.
-
-## 📝 License
-
-MIT License - feel free to use this in your own projects!
+Groove is an exploration of how AI can be leveraged across the design-to-development pipeline — from initial component creation to testing, documentation, and theming. The goal is to identify where AI assistance adds the most value when building and maintaining a real component library.
 
 ## 👤 Author
 
@@ -198,18 +125,9 @@ MIT License - feel free to use this in your own projects!
 - GitHub: [@RobMohan](https://github.com/RobMohan)
 - Portfolio: [robertmohandesign.com](https://robertmohandesign.com)
 
-## 🎯 Roadmap
+## 📝 License
 
-Future components planned:
-- [ ] Input/TextField components
-- [ ] Modal/Dialog components
-- [ ] Dropdown/Select components
-- [ ] Table component
-- [ ] Navigation components
-- [ ] Form components
-- [ ] Toast/Notification system
-- [ ] Badge component
-- [ ] Tooltip component
+MIT License — feel free to use this in your own projects!
 
 ---
 

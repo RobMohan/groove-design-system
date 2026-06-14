@@ -7,17 +7,17 @@ const CodeBlock = ({ code }) => (
 );
 
 const TypeSpecimen = ({ label, variants }) => (
-  <div className="border-b border-gray-200 pb-8 mb-8">
+  <div className="border-b border-line pb-8 mb-8">
     <div className="grid grid-cols-4 gap-4 items-center">
-      <div className="text-sm font-semibold text-gray-500 uppercase tracking-wider">
+      <div className="text-sm font-semibold text-ink-muted uppercase tracking-wider">
         {label}
       </div>
       {variants.map((variant, index) => (
-        <div key={index} className="bg-white p-4 rounded-lg border border-gray-200">
+        <div key={index} className="bg-surface-raised p-4 rounded-lg border border-line">
           <p className={variant.className} style={variant.style}>
             {variant.text}
           </p>
-          <p className="text-xs text-gray-500 mt-2 font-mono">{variant.label}</p>
+          <p className="text-xs text-ink-muted mt-2 font-mono">{variant.label}</p>
         </div>
       ))}
     </div>
@@ -106,7 +106,7 @@ export default function TypographyPage() {
         {/* Header */}
         <div className="mb-12">
           <h1 className="text-5xl font-bold mb-4">Typography</h1>
-          <p className="text-xl text-gray-600">
+          <p className="text-xl text-ink-muted">
             A comprehensive type system designed for hierarchy, readability, and consistency across all interfaces.
           </p>
         </div>
@@ -114,7 +114,7 @@ export default function TypographyPage() {
         {/* Introduction */}
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-4">Overview</h2>
-          <p className="text-gray-600 mb-4">
+          <p className="text-ink-muted mb-4">
             Our typography system uses a modular scale with 9 distinct text styles, each available in multiple weights.
             This creates clear visual hierarchy and ensures consistency across all content types.
           </p>
@@ -133,11 +133,11 @@ export default function TypographyPage() {
         {/* Type Scale */}
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-6">Type Scale</h2>
-          <p className="text-gray-600 mb-8">
+          <p className="text-ink-muted mb-8">
             Each text style is available in three weights: Bold, Regular, and Light (except Footnote).
           </p>
 
-          <div className="bg-gray-50 p-8 rounded-lg">
+          <div className="bg-surface-muted p-8 rounded-lg">
             {typeStyles.map((style, index) => (
               <TypeSpecimen key={index} {...style} />
             ))}
@@ -148,9 +148,9 @@ export default function TypographyPage() {
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-4">Usage Guidelines</h2>
           <div className="grid gap-6">
-            <div className="bg-white rounded-lg border border-gray-200 p-6">
+            <div className="bg-surface-raised rounded-lg border border-line p-6">
               <h3 className="text-xl font-bold mb-3">Headings (H1-H4)</h3>
-              <ul className="space-y-2 text-gray-600">
+              <ul className="space-y-2 text-ink-muted">
                 <li><span className="font-semibold">H1:</span> Main page titles and hero sections (48px / 3rem)</li>
                 <li><span className="font-semibold">H2:</span> Major section headings (36px / 2.25rem)</li>
                 <li><span className="font-semibold">H3:</span> Subsection headings (30px / 1.875rem)</li>
@@ -158,9 +158,9 @@ export default function TypographyPage() {
               </ul>
             </div>
 
-            <div className="bg-white rounded-lg border border-gray-200 p-6">
+            <div className="bg-surface-raised rounded-lg border border-line p-6">
               <h3 className="text-xl font-bold mb-3">Body Text</h3>
-              <ul className="space-y-2 text-gray-600">
+              <ul className="space-y-2 text-ink-muted">
                 <li><span className="font-semibold">Headline:</span> Emphasized paragraphs and lead text (20px / 1.25rem)</li>
                 <li><span className="font-semibold">Body:</span> Standard body text and content (16px / 1rem)</li>
                 <li><span className="font-semibold">Subtitle:</span> Secondary information and labels (14px / 0.875rem)</li>
@@ -169,9 +169,9 @@ export default function TypographyPage() {
               </ul>
             </div>
 
-            <div className="bg-white rounded-lg border border-gray-200 p-6">
+            <div className="bg-surface-raised rounded-lg border border-line p-6">
               <h3 className="text-xl font-bold mb-3">Font Weights</h3>
-              <ul className="space-y-2 text-gray-600">
+              <ul className="space-y-2 text-ink-muted">
                 <li><span className="font-semibold">Bold (700):</span> Use for emphasis, headings, and important UI elements</li>
                 <li><span className="font-semibold">Regular (400):</span> Default weight for most text content</li>
                 <li><span className="font-semibold">Light (300):</span> Use sparingly for de-emphasized text or elegant headings</li>
@@ -183,7 +183,7 @@ export default function TypographyPage() {
         {/* Implementation Examples */}
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-4">Implementation</h2>
-          <p className="text-gray-600 mb-6">
+          <p className="text-ink-muted mb-6">
             Use Tailwind's utility classes to apply typography styles consistently.
           </p>
 
@@ -223,25 +223,25 @@ export default function TypographyPage() {
         {/* Real-World Example */}
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-4">Example in Context</h2>
-          <p className="text-gray-600 mb-6">
+          <p className="text-ink-muted mb-6">
             Here's how different text styles work together in a card component.
           </p>
 
-          <div className="bg-white rounded-lg border border-gray-200 p-8 max-w-2xl">
+          <div className="bg-surface-raised rounded-lg border border-line p-8 max-w-2xl">
             <h3 className="text-2xl font-bold mb-2">Product Launch Announcement</h3>
-            <p className="text-sm text-gray-500 mb-4">Posted on January 11, 2026</p>
-            <p className="text-xl font-normal mb-4 text-gray-700">
+            <p className="text-sm text-ink-muted mb-4">Posted on January 11, 2026</p>
+            <p className="text-xl font-normal mb-4 text-ink-muted">
               We're excited to introduce our latest feature update, bringing powerful new capabilities to your workflow.
             </p>
-            <p className="text-base font-normal text-gray-600 mb-6">
+            <p className="text-base font-normal text-ink-muted mb-6">
               This update includes enhanced collaboration tools, improved performance, and a redesigned interface
               that makes it easier than ever to get your work done. Our team has been working hard to deliver
               these improvements based on your feedback.
             </p>
-            <div className="flex items-center gap-4 pt-4 border-t border-gray-200">
-              <p className="text-xs text-gray-500">Updated 2 hours ago</p>
-              <p className="text-xs text-gray-400">•</p>
-              <p className="text-xs text-gray-500">5 min read</p>
+            <div className="flex items-center gap-4 pt-4 border-t border-line">
+              <p className="text-xs text-ink-muted">Updated 2 hours ago</p>
+              <p className="text-xs text-ink-subtle">•</p>
+              <p className="text-xs text-ink-muted">5 min read</p>
             </div>
           </div>
 

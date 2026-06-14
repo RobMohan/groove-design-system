@@ -37,17 +37,17 @@ const Checkbox = ({
             transition-all duration-200
             ${
               disabled
-                ? 'bg-gray-300 border-gray-300 cursor-not-allowed'
+                ? 'bg-surface-muted border-line cursor-not-allowed'
                 : checked
-                ? 'bg-blue-500 border-blue-500'
-                : 'bg-white border-gray-600 hover:border-blue-500'
+                ? 'bg-primary border-primary'
+                : 'bg-surface-raised border-line-strong hover:border-primary'
             }
           `}
         >
           {checked && (
             <Check
               size={14}
-              className={disabled ? 'text-gray-400' : 'text-white'}
+              className={disabled ? 'text-ink-subtle' : 'text-white'}
               strokeWidth={3}
             />
           )}
@@ -58,7 +58,7 @@ const Checkbox = ({
           htmlFor={checkboxId}
           className={`
             text-base leading-6
-            ${disabled ? 'text-gray-400 cursor-not-allowed' : 'text-gray-900 cursor-pointer'}
+            ${disabled ? 'text-ink-subtle cursor-not-allowed' : 'text-ink cursor-pointer'}
           `}
         >
           {label}
