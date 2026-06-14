@@ -26,6 +26,11 @@ import ModalPage from './pages/ModalPage';
 import ToastPage from './pages/ToastPage';
 import SpinnerPage from './pages/SpinnerPage';
 import ProgressPage from './pages/ProgressPage';
+import AvatarPage from './pages/AvatarPage';
+import SkeletonPage from './pages/SkeletonPage';
+import AccordionPage from './pages/AccordionPage';
+import BreadcrumbsPage from './pages/BreadcrumbsPage';
+import MenuPage from './pages/MenuPage';
 import { ToastProvider } from './components/Toast';
 import './styles/global.css';
 
@@ -59,6 +64,11 @@ ReactDOM.createRoot(document.getElementById('root')).render(
             <Route path="/toast" element={<ToastPage />} />
             <Route path="/spinner" element={<SpinnerPage />} />
             <Route path="/progress" element={<ProgressPage />} />
+            <Route path="/avatar" element={<AvatarPage />} />
+            <Route path="/skeleton" element={<SkeletonPage />} />
+            <Route path="/accordion" element={<AccordionPage />} />
+            <Route path="/breadcrumbs" element={<BreadcrumbsPage />} />
+            <Route path="/menu" element={<MenuPage />} />
           </Routes>
         </DocsLayout>
       </BrowserRouter>
