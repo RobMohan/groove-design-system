@@ -1,6 +1,6 @@
 # Groove Design System
 
-A comprehensive, accessible component library built with React and Tailwind CSS. Groove ships **24 components** and **5 design foundations**, with a token-driven **light & dark theme**, a **TanStack-powered data table**, and interactive documentation for every piece. This project explores how AI can accelerate design system workflows and improve design-to-development collaboration.
+A comprehensive, accessible component library built with React and Tailwind CSS. Groove ships **44 components** and **12 design foundations**, with a token-driven **light & dark theme**, a **TanStack-powered data table**, full **keyboard accessibility** (WCAG 2.2 AA), and interactive documentation for every piece. This project explores how AI can accelerate design system workflows and improve design-to-development collaboration.
 
 ## 🚀 Live Demo
 
@@ -9,11 +9,11 @@ A comprehensive, accessible component library built with React and Tailwind CSS.
 ## ✨ Features
 
 - 🎨 **Token-driven theming** — semantic color/typography/spacing/elevation/radius tokens power a built-in light & dark mode (toggle from the sidebar)
-- 🧩 **24 components** — from buttons and inputs to modals, toasts, menus, and a full data table
+- 🧩 **44 components** — from buttons, inputs, and overlays to comboboxes, sliders, date pickers, a command palette, and a full data table
 - 📊 **TanStack data table** — headless sorting, filtering, global search, row selection, column visibility, and pagination, wrapped in the Groove visual style
 - 📚 **Interactive documentation** — a dedicated page with live examples and props tables for every component and foundation
-- ♿ **Accessible** — keyboard navigation, ARIA roles, focus states, and semantic HTML throughout
-- 🧪 **Tested** — 112 unit tests across 15 suites (Vitest + React Testing Library)
+- ♿ **Accessible** — WCAG 2.2 AA target: focus traps, portaled overlays with a named z-index scale, ARIA roles/keyboard nav, and a semantic focus ring
+- 🧪 **Tested** — 203 unit tests across 36 suites (Vitest + React Testing Library)
 - 📱 **Responsive** — works across screen sizes with a collapsible sidebar
 
 ## 📦 Installation
@@ -41,17 +41,25 @@ npm test
 | Foundation | Description |
 |---|---|
 | **Color Tokens** | Brand scales + semantic surface/ink/line tokens (theme-aware) |
+| **Color Usage** | When to reach for each color role, with contrast guidance |
 | **Typography** | Type scale, weights, and usage |
+| **Iconography** | Lucide sizing, stroke, and decorative-vs-meaningful guidance |
 | **Spacing** | 4px-based spacing scale |
+| **Sizing** | Control heights, density, and 44px touch targets |
+| **Layout** | Breakpoints, containers, grids, and page scaffolds |
 | **Elevation** | Five-step shadow scale (`shadow-elevation-1…5`) |
 | **Radius** | Semantic radius tokens (`rounded-control` / `card` / `modal` / `pill`) |
+| **Motion** | Duration/easing tokens and enter/exit animation utilities |
+| **Layering** | Named z-index scale (`z-dropdown` … `z-tooltip`) |
+| **Accessibility** | WCAG target, keyboard model, contrast, and per-component notes |
 
 ## 🧩 Components
 
-**Forms & inputs:** Button, Checkbox, Radio, Toggle, Text Input, Textarea, Select
-**Data display:** Badge, Avatar, Card, Stat Card, Data Table, Skeleton
-**Feedback:** Alert, Toast, Spinner, Progress, Tooltip
-**Navigation & overlays:** Tabs, Accordion, Breadcrumbs, Menu, Modal
+**Actions:** Button, Icon Button, Button Group, Link
+**Forms & inputs:** Field, Text Input, Textarea, Number Input, Select, Combobox, Multi-Select, Checkbox, Radio, Toggle, Segmented Control, Slider, Date Picker, File Upload
+**Data display:** Badge, Chip, Avatar, Card, Stat Card, List, Data Table, Pagination, Divider, Skeleton, Empty State
+**Feedback:** Alert, Banner, Toast, Spinner, Progress, Tooltip
+**Navigation & overlays:** Tabs, Accordion, Breadcrumbs, Stepper, Menu, Popover, Modal, Drawer, Command Palette
 
 Each component has its own documentation page with live examples, a props table, and copy-paste code snippets.
 
@@ -62,7 +70,8 @@ Groove uses CSS-variable-backed semantic tokens so components adapt to light/dar
 - **Surfaces:** `bg-surface` (page), `bg-surface-raised` (cards/menus), `bg-surface-muted` (insets/hovers)
 - **Text:** `text-ink`, `text-ink-muted`, `text-ink-subtle`, `text-ink-inverse`
 - **Borders:** `border-line`, `border-line-strong`
-- **Brand:** `primary`, `secondary`, `destructive`, `positive` (each with `-hover` / `-pressed` / `-disabled`)
+- **Brand:** `primary`, `secondary`, `destructive`, `positive`, `warning` (each with `-hover` / `-pressed` / `-disabled`)
+- **Focus:** `ring-focus` — a semantic, theme-aware focus ring for every interactive control
 
 Dark mode is class-based (`darkMode: 'class'`); the docs toggle persists the choice to `localStorage`.
 
@@ -101,7 +110,7 @@ npm test -- --watch   # watch mode
 npm run test:coverage # coverage report
 ```
 
-Current coverage: **112 tests across 15 suites** — Button, DataTable, Pagination, Select, Modal, Toast, Alert, Spinner, Progress, Textarea, Avatar, Accordion, Breadcrumbs, Menu, and Skeleton.
+Current coverage: **203 tests across 36 suites** — covering every component including the overlays (Popover, Drawer, Command Palette), form controls (Combobox, Multi-Select, Field, Number Input, Slider), and data widgets (Date Picker, File Upload, Stepper, List), plus the accessibility remediation of the original set.
 
 ## 🛠️ Built With
 

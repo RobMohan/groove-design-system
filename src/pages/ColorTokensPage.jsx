@@ -6,6 +6,37 @@ const CodeBlock = ({ code }) => (
   </pre>
 );
 
+const DosDonts = ({ dos, donts }) => (
+  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <div className="bg-positive/5 border border-positive rounded-lg p-6">
+      <h3 className="font-semibold text-lg mb-4 flex items-center gap-2 text-ink">
+        <span className="text-positive text-xl leading-none">✓</span> Do
+      </h3>
+      <ul className="space-y-3 text-ink-muted">
+        {dos.map((item, index) => (
+          <li key={index} className="flex gap-2">
+            <span className="text-positive flex-shrink-0" aria-hidden="true">✓</span>
+            <span>{item}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+    <div className="bg-destructive/5 border border-destructive rounded-lg p-6">
+      <h3 className="font-semibold text-lg mb-4 flex items-center gap-2 text-ink">
+        <span className="text-destructive text-xl leading-none">✗</span> Don't
+      </h3>
+      <ul className="space-y-3 text-ink-muted">
+        {donts.map((item, index) => (
+          <li key={index} className="flex gap-2">
+            <span className="text-destructive flex-shrink-0" aria-hidden="true">✗</span>
+            <span>{item}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+);
+
 const ColorSwatch = ({ name, color, description }) => (
   <div className="flex items-center gap-4 p-4 bg-surface-raised rounded-lg border border-line">
     <div
@@ -121,9 +152,16 @@ export default function ColorTokensPage() {
             Each color category (Primary, Secondary, Error, Warning, Success, Grayscale) contains
             tokens for different use cases: surfaces, borders, and text.
           </p>
-          <p className="text-ink-muted">
+          <p className="text-ink-muted mb-4">
             This approach allows for consistent theming and makes it easy to maintain design consistency
             across components.
+          </p>
+          <p className="text-ink-muted">
+            Color in Groove is functional, not decorative. Every token is chosen to communicate meaning —
+            hierarchy, status, or interactivity — so reach for a color because of what it <span className="italic">means</span>,
+            not because of how it looks. In UI, prefer the theme-aware semantic tokens (<span className="font-mono text-sm">bg-surface</span>,
+            <span className="font-mono text-sm"> text-ink</span>, <span className="font-mono text-sm">border-line</span>) over the raw
+            palette values documented below, so light and dark themes resolve automatically.
           </p>
         </section>
 
@@ -263,15 +301,44 @@ module.exports = {
 }`} />
         </section>
 
+        {/* Do's and Don'ts */}
+        <section className="mb-12">
+          <h2 className="text-2xl font-bold mb-4">Do's &amp; Don'ts</h2>
+          <p className="text-ink-muted mb-6">
+            Keep color meaningful and accessible by following these practices.
+          </p>
+          <DosDonts
+            dos={[
+              'Use the semantic tokens (bg-surface, text-ink, border-line) in components so they adapt to light and dark themes automatically.',
+              'Reserve destructive red for irreversible or dangerous actions, and positive green for success and confirmations.',
+              'Pair every color-coded status with a label, icon, or text so meaning survives for color-blind users.',
+              'Verify body text meets 4.5:1 contrast and large text or UI elements meet 3:1 against their actual background.',
+            ]}
+            donts={[
+              'Hard-code raw palette values like bg-gray-100 or #588ae0 in components — they break theming.',
+              'Use color as the only signal for errors, required fields, or selected state.',
+              'Place bright Surface / Default brand colors behind small body text; use the darker Text / Label shades instead.',
+              'Repurpose a category color — like using success green for a primary action — which dilutes its meaning.',
+            ]}
+          />
+        </section>
+
         {/* Accessibility Note */}
         <section className="mb-12">
+          <h2 className="text-2xl font-bold mb-4">Accessibility</h2>
           <div className="bg-blue-50 border border-blue-200 rounded-lg p-6">
-            <h3 className="font-semibold text-lg mb-2 text-blue-900">Accessibility</h3>
-            <p className="text-blue-800">
+            <h3 className="font-semibold text-lg mb-2 text-blue-900">Contrast &amp; color independence</h3>
+            <p className="text-blue-800 mb-3">
               All color combinations have been tested to meet WCAG 2.1 AA standards for contrast ratios.
               Ensure text colors maintain at least 4.5:1 contrast ratio against their backgrounds for body text,
               and 3:1 for large text (18pt+ or 14pt+ bold).
             </p>
+            <ul className="space-y-2 text-blue-800">
+              <li>• Meet a 3:1 non-text contrast ratio for interactive UI elements, icons, and focus indicators.</li>
+              <li>• Never rely on color alone to convey meaning — reinforce it with text, icons, or patterns.</li>
+              <li>• Aim for AAA (7:1) on critical, long-form, or small text where you can.</li>
+              <li>• Re-check contrast in both light and dark themes, since the semantic tokens resolve to different values.</li>
+            </ul>
           </div>
         </section>
       </div>

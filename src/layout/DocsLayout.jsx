@@ -2,6 +2,80 @@ import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, Moon, Sun } from 'lucide-react';
 
+const gettingStartedItems = [
+  { path: '/overview', label: 'Overview' },
+  { path: '/installation', label: 'Installation' },
+  { path: '/theming', label: 'Theming' },
+];
+
+const foundationItems = [
+  { path: '/color-tokens', label: 'Color Tokens' },
+  { path: '/color-usage', label: 'Color Usage' },
+  { path: '/typography', label: 'Typography' },
+  { path: '/iconography', label: 'Iconography' },
+  { path: '/spacing', label: 'Spacing' },
+  { path: '/sizing', label: 'Sizing' },
+  { path: '/layout', label: 'Layout' },
+  { path: '/elevation', label: 'Elevation' },
+  { path: '/radius', label: 'Radius' },
+  { path: '/motion', label: 'Motion' },
+  { path: '/layering', label: 'Layering' },
+  { path: '/accessibility', label: 'Accessibility' },
+];
+
+const componentItems = [
+  { path: '/accordion', label: 'Accordion' },
+  { path: '/alert', label: 'Alert' },
+  { path: '/avatar', label: 'Avatar' },
+  { path: '/badge', label: 'Badge' },
+  { path: '/banner', label: 'Banner' },
+  { path: '/breadcrumbs', label: 'Breadcrumbs' },
+  { path: '/button', label: 'Button' },
+  { path: '/button-group', label: 'Button Group' },
+  { path: '/card', label: 'Card' },
+  { path: '/checkbox', label: 'Checkbox' },
+  { path: '/chip', label: 'Chip' },
+  { path: '/combobox', label: 'Combobox' },
+  { path: '/command-palette', label: 'Command Palette' },
+  { path: '/data-table', label: 'Data Table' },
+  { path: '/date-picker', label: 'Date Picker' },
+  { path: '/divider', label: 'Divider' },
+  { path: '/drawer', label: 'Drawer' },
+  { path: '/empty-state', label: 'Empty State' },
+  { path: '/field', label: 'Field' },
+  { path: '/file-upload', label: 'File Upload' },
+  { path: '/icon-button', label: 'Icon Button' },
+  { path: '/link', label: 'Link' },
+  { path: '/list', label: 'List' },
+  { path: '/menu', label: 'Menu' },
+  { path: '/modal', label: 'Modal' },
+  { path: '/multi-select', label: 'Multi-Select' },
+  { path: '/number-input', label: 'Number Input' },
+  { path: '/pagination', label: 'Pagination' },
+  { path: '/popover', label: 'Popover' },
+  { path: '/progress', label: 'Progress' },
+  { path: '/radio', label: 'Radio' },
+  { path: '/segmented-control', label: 'Segmented Control' },
+  { path: '/select', label: 'Select' },
+  { path: '/skeleton', label: 'Skeleton' },
+  { path: '/slider', label: 'Slider' },
+  { path: '/spinner', label: 'Spinner' },
+  { path: '/stat-card', label: 'Stat Card' },
+  { path: '/stepper', label: 'Stepper' },
+  { path: '/tabs', label: 'Tabs' },
+  { path: '/text-input', label: 'Text Input' },
+  { path: '/textarea', label: 'Textarea' },
+  { path: '/toast', label: 'Toast' },
+  { path: '/toggle', label: 'Toggle' },
+  { path: '/tooltip', label: 'Tooltip' },
+];
+
+const resourceItems = [
+  { path: '/status', label: 'Component Status' },
+  { path: '/contributing', label: 'Contributing' },
+  { path: '/changelog', label: 'Changelog' },
+];
+
 export default function DocsLayout({ children }) {
   const location = useLocation();
   const [isOpen, setIsOpen] = useState(true);
@@ -18,47 +92,36 @@ export default function DocsLayout({ children }) {
 
   const toggleTheme = () => setTheme((t) => (t === 'dark' ? 'light' : 'dark'));
 
-  const foundationItems = [
-    { path: '/color-tokens', label: 'Color Tokens' },
-    { path: '/typography', label: 'Typography' },
-    { path: '/spacing', label: 'Spacing' },
-    { path: '/elevation', label: 'Elevation' },
-    { path: '/radius', label: 'Radius' },
-  ];
-
-  const componentItems = [
-    { path: '/accordion', label: 'Accordion' },
-    { path: '/alert', label: 'Alert' },
-    { path: '/avatar', label: 'Avatar' },
-    { path: '/badge', label: 'Badge' },
-    { path: '/breadcrumbs', label: 'Breadcrumbs' },
-    { path: '/button', label: 'Button' },
-    { path: '/card', label: 'Card' },
-    { path: '/checkbox', label: 'Checkbox' },
-    { path: '/data-table', label: 'Data Table' },
-    { path: '/menu', label: 'Menu' },
-    { path: '/modal', label: 'Modal' },
-    { path: '/progress', label: 'Progress' },
-    { path: '/radio', label: 'Radio' },
-    { path: '/select', label: 'Select' },
-    { path: '/skeleton', label: 'Skeleton' },
-    { path: '/spinner', label: 'Spinner' },
-    { path: '/stat-card', label: 'Stat Card' },
-    { path: '/tabs', label: 'Tabs' },
-    { path: '/toast', label: 'Toast' },
-    { path: '/toggle', label: 'Toggle' },
-    { path: '/text-input', label: 'Text Input' },
-    { path: '/textarea', label: 'Textarea' },
-    { path: '/tooltip', label: 'Tooltip' },
-  ];
-  
   const isActive = (path) => {
-    if (path === '/') {
-      return location.pathname === '/';
-    }
+    if (path === '/') return location.pathname === '/';
     return location.pathname.startsWith(path);
   };
-  
+
+  const closeOnMobile = () => window.innerWidth < 1024 && setIsOpen(false);
+
+  const NavLink = ({ path, label }) => (
+    <Link
+      to={path}
+      onClick={closeOnMobile}
+      className={`flex items-center justify-start w-full px-4 py-2.5 rounded-lg transition-colors ${
+        isActive(path) ? 'bg-primary text-white' : 'text-ink-muted hover:bg-surface-muted'
+      }`}
+    >
+      <span className="font-medium">{label}</span>
+    </Link>
+  );
+
+  const NavSection = ({ title, items }) => (
+    <div>
+      <div className="text-xs font-semibold text-ink-subtle uppercase tracking-wider mb-2 px-4">
+        {title}
+      </div>
+      {items.map((item) => (
+        <NavLink key={item.path} path={item.path} label={item.label} />
+      ))}
+    </div>
+  );
+
   return (
     <div className="min-h-screen bg-surface">
       {/* Hamburger Button - Shows when sidebar is closed */}
@@ -74,7 +137,7 @@ export default function DocsLayout({ children }) {
 
       {/* Sidebar Overlay for mobile */}
       {isOpen && (
-        <div 
+        <div
           className="fixed inset-0 bg-black bg-opacity-50 z-30 lg:hidden"
           onClick={() => setIsOpen(false)}
         />
@@ -89,7 +152,7 @@ export default function DocsLayout({ children }) {
         <div className="p-6">
           {/* Header with theme toggle + Close Button */}
           <div className="flex items-start justify-between gap-2 mb-8">
-            <Link to="/" className="flex-1" onClick={() => window.innerWidth < 1024 && setIsOpen(false)}>
+            <Link to="/" className="flex-1" onClick={closeOnMobile}>
               <h1 className="text-2xl font-bold mb-1 text-ink">Groove Design System</h1>
               <p className="text-sm text-ink-muted">Component Documentation</p>
             </Link>
@@ -115,64 +178,21 @@ export default function DocsLayout({ children }) {
               </button>
             </div>
           </div>
-          
+
           <nav className="space-y-6">
             <div>
               <div className="text-xs font-semibold text-ink-subtle uppercase tracking-wider mb-2 px-4">
                 Getting Started
               </div>
-              <Link
-                to="/"
-                onClick={() => window.innerWidth < 1024 && setIsOpen(false)}
-                className={`flex items-center justify-start w-full px-4 py-2.5 rounded-lg transition-colors ${
-                  isActive('/')
-                    ? 'bg-primary text-white'
-                    : 'text-ink-muted hover:bg-surface-muted'
-                }`}
-              >
-                <span className="font-medium">Home</span>
-              </Link>
-            </div>
-
-            <div>
-              <div className="text-xs font-semibold text-ink-subtle uppercase tracking-wider mb-2 px-4">
-                Design Foundations
-              </div>
-              {foundationItems.map((item) => (
-                <Link
-                  key={item.path}
-                  to={item.path}
-                  onClick={() => window.innerWidth < 1024 && setIsOpen(false)}
-                  className={`flex items-center justify-start w-full px-4 py-2.5 rounded-lg transition-colors ${
-                    isActive(item.path)
-                      ? 'bg-primary text-white'
-                      : 'text-ink-muted hover:bg-surface-muted'
-                  }`}
-                >
-                  <span className="font-medium">{item.label}</span>
-                </Link>
+              <NavLink path="/" label="Home" />
+              {gettingStartedItems.map((item) => (
+                <NavLink key={item.path} path={item.path} label={item.label} />
               ))}
             </div>
 
-            <div>
-              <div className="text-xs font-semibold text-ink-subtle uppercase tracking-wider mb-2 px-4">
-                Components
-              </div>
-              {componentItems.map((item) => (
-                <Link
-                  key={item.path}
-                  to={item.path}
-                  onClick={() => window.innerWidth < 1024 && setIsOpen(false)}
-                  className={`flex items-center justify-start w-full px-4 py-2.5 rounded-lg transition-colors ${
-                    isActive(item.path)
-                      ? 'bg-primary text-white'
-                      : 'text-ink-muted hover:bg-surface-muted'
-                  }`}
-                >
-                  <span className="font-medium">{item.label}</span>
-                </Link>
-              ))}
-            </div>
+            <NavSection title="Design Foundations" items={foundationItems} />
+            <NavSection title="Components" items={componentItems} />
+            <NavSection title="Resources" items={resourceItems} />
           </nav>
 
           <div className="mt-8 pt-8 border-t border-line space-y-3">
@@ -185,8 +205,8 @@ export default function DocsLayout({ children }) {
               <span>GitHub</span>
               <span>→</span>
             </a>
-            <a 
-              href="https://www.linkedin.com/in/robertmohan" 
+            <a
+              href="https://www.linkedin.com/in/robertmohan"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2 text-sm text-ink-muted hover:text-ink px-4 transition-colors"
@@ -194,7 +214,7 @@ export default function DocsLayout({ children }) {
               <span>LinkedIn</span>
               <span>→</span>
             </a>
-            <a 
+            <a
               href="mailto:rob@robertmohandesign.com"
               className="flex items-center gap-2 text-sm text-ink-muted hover:text-ink px-4 transition-colors"
             >

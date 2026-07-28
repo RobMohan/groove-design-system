@@ -32,6 +32,12 @@ module.exports = {
             pressed: '#15803d', // Green 700
             disabled: '#86efac',
           },
+          warning: {
+            DEFAULT: '#d97706', // Amber 600
+            hover: '#f59e0b', // Amber 500
+            pressed: '#b45309', // Amber 700
+            disabled: '#fcd34d', // Amber 300
+          },
           // ---- Semantic tokens (theme-aware via CSS variables) ----
           // Surfaces (use with bg-*)
           surface: {
@@ -52,6 +58,8 @@ module.exports = {
             DEFAULT: 'rgb(var(--color-line) / <alpha-value>)',
             strong: 'rgb(var(--color-line-strong) / <alpha-value>)',
           },
+          // Focus ring (use with ring-focus / focus:ring-focus) — semantic, theme-aware
+          focus: 'rgb(var(--color-focus) / <alpha-value>)',
         },
         // ---- Elevation scale (shadow-elevation-*) ----
         boxShadow: {
@@ -86,12 +94,48 @@ module.exports = {
             from: { opacity: '0', transform: 'translateX(1rem)' },
             to: { opacity: '1', transform: 'translateX(0)' },
           },
+          // Full-edge slides for Drawer / Sheet / Command palette
+          'slide-in-from-right': {
+            from: { transform: 'translateX(100%)' },
+            to: { transform: 'translateX(0)' },
+          },
+          'slide-in-from-left': {
+            from: { transform: 'translateX(-100%)' },
+            to: { transform: 'translateX(0)' },
+          },
+          'slide-in-from-top': {
+            from: { transform: 'translateY(-100%)' },
+            to: { transform: 'translateY(0)' },
+          },
+          'slide-in-from-bottom': {
+            from: { transform: 'translateY(100%)' },
+            to: { transform: 'translateY(0)' },
+          },
         },
         animation: {
           'progress-indeterminate': 'progress-indeterminate 1.2s ease-in-out infinite',
           'fade-in': 'fade-in 0.15s ease-out',
           'scale-in': 'scale-in 0.15s ease-out',
           'slide-in-right': 'slide-in-right 0.2s ease-out',
+          'slide-in-from-right': 'slide-in-from-right 0.25s ease-out',
+          'slide-in-from-left': 'slide-in-from-left 0.25s ease-out',
+          'slide-in-from-top': 'slide-in-from-top 0.25s ease-out',
+          'slide-in-from-bottom': 'slide-in-from-bottom 0.25s ease-out',
+        },
+        // ---- Z-index layering scale (z-*) — resolves overlay stacking collisions ----
+        // Rising order: base < dropdown < sticky < overlay(scrim) < drawer < modal < popover < toast < tooltip.
+        // Floating poppers (Select/Combobox/Menu/Popover/Tooltip) portal to popover+ so they clear an open Modal.
+        zIndex: {
+          'hide': '-1',
+          'base': '0',
+          'dropdown': '1000',
+          'sticky': '1100',
+          'overlay': '1300',
+          'drawer': '1350',
+          'modal': '1400',
+          'popover': '1500',
+          'toast': '1600',
+          'tooltip': '1700',
         },
       },
     },

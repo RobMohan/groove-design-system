@@ -6,6 +6,37 @@ const CodeBlock = ({ code }) => (
   </pre>
 );
 
+const DosDonts = ({ dos, donts }) => (
+  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <div className="bg-positive/5 border border-positive rounded-lg p-6">
+      <h3 className="font-semibold text-lg mb-4 flex items-center gap-2 text-ink">
+        <span className="text-positive text-xl leading-none">✓</span> Do
+      </h3>
+      <ul className="space-y-3 text-ink-muted">
+        {dos.map((item, index) => (
+          <li key={index} className="flex gap-2">
+            <span className="text-positive flex-shrink-0" aria-hidden="true">✓</span>
+            <span>{item}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+    <div className="bg-destructive/5 border border-destructive rounded-lg p-6">
+      <h3 className="font-semibold text-lg mb-4 flex items-center gap-2 text-ink">
+        <span className="text-destructive text-xl leading-none">✗</span> Don't
+      </h3>
+      <ul className="space-y-3 text-ink-muted">
+        {donts.map((item, index) => (
+          <li key={index} className="flex gap-2">
+            <span className="text-destructive flex-shrink-0" aria-hidden="true">✗</span>
+            <span>{item}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+);
+
 const SpacingRow = ({ token, rem, px }) => (
   <div className="flex items-center gap-4 p-4 bg-surface-raised rounded-lg border border-line">
     <div className="w-24 flex-shrink-0">
@@ -55,6 +86,12 @@ export default function SpacingPage() {
             which keeps layouts rhythmic and predictable. Use these tokens for padding (<span className="font-mono text-sm">p-*</span>),
             margin (<span className="font-mono text-sm">m-*</span>), and fl/grid gaps (<span className="font-mono text-sm">gap-*</span>).
           </p>
+          <p className="text-ink-muted mb-4">
+            Consistent spacing is what makes an interface feel calm and intentional. Because every value is a
+            multiple of the same base unit, elements line up on an invisible grid and relationships read clearly:
+            tightly grouped items belong together, generously separated blocks are distinct. Use space deliberately
+            to group and separate content — proximity is one of the strongest signals of what relates to what.
+          </p>
           <CodeBlock code={`<div className="p-4 gap-2">   {/* 16px padding, 8px gap */}
 <div className="mt-6 mb-8">    {/* 24px top, 32px bottom */}`} />
         </section>
@@ -85,6 +122,42 @@ export default function SpacingPage() {
               <h3 className="font-semibold text-lg mb-2">Stay on the scale</h3>
               <p className="text-ink-muted">Avoid arbitrary values like <span className="font-mono text-sm">p-[13px]</span>. Round to the nearest scale step to preserve vertical rhythm.</p>
             </div>
+          </div>
+        </section>
+
+        {/* Do's and Don'ts */}
+        <section className="mb-12">
+          <h2 className="text-2xl font-bold mb-4">Do's &amp; Don'ts</h2>
+          <p className="text-ink-muted mb-6">
+            Apply spacing consistently to keep layouts rhythmic and scannable.
+          </p>
+          <DosDonts
+            dos={[
+              'Pull every margin, padding, and gap from the scale so spacing stays on the 4px grid.',
+              'Use tighter spacing within a group and looser spacing between groups to show what belongs together.',
+              'Increase space as you move up the hierarchy — more room around sections than around individual items.',
+              'Give interactive targets at least 44×44px of tappable area, padding the hit region if the visual is smaller.',
+            ]}
+            donts={[
+              'Reach for arbitrary values like m-[7px] or p-[13px] that fall between scale steps.',
+              'Apply equal spacing everywhere — uniform gaps flatten hierarchy and hide relationships.',
+              'Crowd tappable controls together, which causes mis-taps on touch devices.',
+              'Fix a cramped layout by shrinking text or targets instead of adjusting the surrounding space.',
+            ]}
+          />
+        </section>
+
+        {/* Accessibility */}
+        <section className="mb-12">
+          <h2 className="text-2xl font-bold mb-4">Accessibility</h2>
+          <div className="bg-blue-50 border border-blue-200 rounded-lg p-6">
+            <h3 className="font-semibold text-lg mb-2 text-blue-900">Touch targets &amp; rhythm</h3>
+            <ul className="space-y-2 text-blue-800">
+              <li>• Make interactive elements at least 44×44px (WCAG 2.5.5) — extend padding rather than the visible icon or label to get there.</li>
+              <li>• Keep adequate space between adjacent controls so people with motor impairments don't trigger the wrong one.</li>
+              <li>• Maintain consistent spacing rhythm so screen magnifier users can scan predictably.</li>
+              <li>• Preserve the vertical rhythm as text scales up to 200%; content should reflow without overlap or clipping.</li>
+            </ul>
           </div>
         </section>
       </div>

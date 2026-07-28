@@ -6,6 +6,37 @@ const CodeBlock = ({ code }) => (
   </pre>
 );
 
+const DosDonts = ({ dos, donts }) => (
+  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <div className="bg-positive/5 border border-positive rounded-lg p-6">
+      <h3 className="font-semibold text-lg mb-4 flex items-center gap-2 text-ink">
+        <span className="text-positive text-xl leading-none">✓</span> Do
+      </h3>
+      <ul className="space-y-3 text-ink-muted">
+        {dos.map((item, index) => (
+          <li key={index} className="flex gap-2">
+            <span className="text-positive flex-shrink-0" aria-hidden="true">✓</span>
+            <span>{item}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+    <div className="bg-destructive/5 border border-destructive rounded-lg p-6">
+      <h3 className="font-semibold text-lg mb-4 flex items-center gap-2 text-ink">
+        <span className="text-destructive text-xl leading-none">✗</span> Don't
+      </h3>
+      <ul className="space-y-3 text-ink-muted">
+        {donts.map((item, index) => (
+          <li key={index} className="flex gap-2">
+            <span className="text-destructive flex-shrink-0" aria-hidden="true">✗</span>
+            <span>{item}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+);
+
 const TypeSpecimen = ({ label, variants }) => (
   <div className="border-b border-line pb-8 mb-8">
     <div className="grid grid-cols-4 gap-4 items-center">
@@ -118,6 +149,12 @@ export default function TypographyPage() {
             Our typography system uses a modular scale with 9 distinct text styles, each available in multiple weights.
             This creates clear visual hierarchy and ensures consistency across all content types.
           </p>
+          <p className="text-ink-muted mb-4">
+            Good type is invisible: it lets people read without noticing the styling. Groove's scale gives you a
+            small, deliberate set of steps so you can build hierarchy through size and weight rather than inventing
+            one-off values. Pick a style by its role in the content — a page title, a section heading, a paragraph,
+            a caption — and let the scale keep sizes, rhythm, and emphasis consistent everywhere.
+          </p>
           <div className="bg-blue-50 border border-blue-200 rounded-lg p-6">
             <h3 className="font-semibold text-lg mb-2 text-blue-900">Font Family</h3>
             <p className="text-blue-800 mb-2">
@@ -178,6 +215,28 @@ export default function TypographyPage() {
               </ul>
             </div>
           </div>
+        </section>
+
+        {/* Do's and Don'ts */}
+        <section className="mb-12">
+          <h2 className="text-2xl font-bold mb-4">Do's &amp; Don'ts</h2>
+          <p className="text-ink-muted mb-6">
+            Keep text legible and hierarchy clear with these practices.
+          </p>
+          <DosDonts
+            dos={[
+              'Use one H1 per page and step down through headings in order (H1 to H2 to H3) so the document outline stays logical.',
+              'Keep body copy at 16px or larger and constrain long paragraphs to roughly 45–75 characters per line.',
+              'Build emphasis with size and weight from the scale rather than color alone.',
+              'Give body text a line-height of at least 1.5 so lines are easy to track.',
+            ]}
+            donts={[
+              'Skip heading levels or pick a heading purely for its size — use the right semantic tag and restyle if needed.',
+              'Set long passages in Light (300) or in all caps; reserve those for short labels and the Footnote style.',
+              'Introduce arbitrary font sizes like text-[17px] that fall outside the defined scale.',
+              'Pack full-width paragraphs edge to edge — overly long lines make it hard to find the next line.',
+            ]}
+          />
         </section>
 
         {/* Implementation Examples */}
@@ -287,6 +346,8 @@ export default function TypographyPage() {
               <li>• Use font-weight and size to create hierarchy instead of relying solely on color</li>
               <li>• Avoid using all caps for long passages of text (except for Footnote style)</li>
               <li>• Line height should be at least 1.5x the font size for body text</li>
+              <li>• Keep measure (line length) to roughly 45–75 characters so readers can comfortably find the next line</li>
+              <li>• Prefer left-aligned text for long-form content; avoid justified text, which creates uneven spacing</li>
             </ul>
           </div>
         </section>
