@@ -9,7 +9,7 @@ const Badge = ({
 
   const types = {
     default: 'bg-primary/15 text-primary',
-    warning: 'bg-yellow-400 text-black',
+    warning: 'bg-warning text-white',
     positive: 'bg-positive text-white',
     negative: 'bg-destructive text-white'
   };

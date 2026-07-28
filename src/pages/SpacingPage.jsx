@@ -150,9 +150,9 @@ export default function SpacingPage() {
         {/* Accessibility */}
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-4">Accessibility</h2>
-          <div className="bg-blue-50 border border-blue-200 rounded-lg p-6">
-            <h3 className="font-semibold text-lg mb-2 text-blue-900">Touch targets &amp; rhythm</h3>
-            <ul className="space-y-2 text-blue-800">
+          <div className="bg-primary/10 border border-primary/20 rounded-lg p-6">
+            <h3 className="font-semibold text-lg mb-2 text-ink">Touch targets &amp; rhythm</h3>
+            <ul className="space-y-2 text-ink-muted">
               <li>• Make interactive elements at least 44×44px (WCAG 2.5.5) — extend padding rather than the visible icon or label to get there.</li>
               <li>• Keep adequate space between adjacent controls so people with motor impairments don't trigger the wrong one.</li>
               <li>• Maintain consistent spacing rhythm so screen magnifier users can scan predictably.</li>

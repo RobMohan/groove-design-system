@@ -141,9 +141,9 @@ export default function ElevationPage() {
         {/* Accessibility */}
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-4">Accessibility</h2>
-          <div className="bg-blue-50 border border-blue-200 rounded-lg p-6">
-            <h3 className="font-semibold text-lg mb-2 text-blue-900">Depth beyond shadow</h3>
-            <ul className="space-y-2 text-blue-800">
+          <div className="bg-primary/10 border border-primary/20 rounded-lg p-6">
+            <h3 className="font-semibold text-lg mb-2 text-ink">Depth beyond shadow</h3>
+            <ul className="space-y-2 text-ink-muted">
               <li>• Don't rely on shadow alone to separate content — reinforce boundaries with a border or a change in surface color.</li>
               <li>• Shadows can be nearly invisible in dark themes and Windows High Contrast Mode; ensure layout still reads without them.</li>
               <li>• Keep z-layering purposeful so keyboard focus and reading order follow the visible stacking order.</li>

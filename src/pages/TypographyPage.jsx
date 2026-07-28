@@ -155,13 +155,13 @@ export default function TypographyPage() {
             one-off values. Pick a style by its role in the content — a page title, a section heading, a paragraph,
             a caption — and let the scale keep sizes, rhythm, and emphasis consistent everywhere.
           </p>
-          <div className="bg-blue-50 border border-blue-200 rounded-lg p-6">
-            <h3 className="font-semibold text-lg mb-2 text-blue-900">Font Family</h3>
-            <p className="text-blue-800 mb-2">
+          <div className="bg-primary/10 border border-primary/20 rounded-lg p-6">
+            <h3 className="font-semibold text-lg mb-2 text-ink">Font Family</h3>
+            <p className="text-ink-muted mb-2">
               The design system uses <span className="font-mono font-semibold">Inter</span> as the primary typeface,
               providing excellent readability and a modern, professional appearance.
             </p>
-            <p className="text-sm text-blue-700 font-mono">
+            <p className="text-sm text-ink-muted font-mono">
               font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif
             </p>
           </div>
@@ -337,9 +337,9 @@ export default function TypographyPage() {
 
         {/* Accessibility */}
         <section className="mb-12">
-          <div className="bg-blue-50 border border-blue-200 rounded-lg p-6">
-            <h3 className="font-semibold text-lg mb-2 text-blue-900">Accessibility Best Practices</h3>
-            <ul className="space-y-2 text-blue-800">
+          <div className="bg-primary/10 border border-primary/20 rounded-lg p-6">
+            <h3 className="font-semibold text-lg mb-2 text-ink">Accessibility Best Practices</h3>
+            <ul className="space-y-2 text-ink-muted">
               <li>• Maintain a minimum font size of 16px (1rem) for body text</li>
               <li>• Use semantic HTML headings (h1-h6) to create proper document structure</li>
               <li>• Ensure sufficient color contrast between text and backgrounds (WCAG AA: 4.5:1 for normal text)</li>

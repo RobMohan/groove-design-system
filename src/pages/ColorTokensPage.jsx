@@ -173,12 +173,12 @@ export default function ColorTokensPage() {
               Color tokens follow a three-part naming convention:
             </p>
             <div className="font-mono text-sm bg-surface-muted p-4 rounded border border-line">
-              <span className="text-blue-600">Category</span> / <span className="text-purple-600">Purpose</span> / <span className="text-green-600">Variant</span>
+              <span className="text-primary">Category</span> / <span className="text-secondary">Purpose</span> / <span className="text-positive">Variant</span>
             </div>
             <div className="mt-4 space-y-2 text-sm text-ink-muted">
-              <p><span className="font-semibold text-blue-600">Category:</span> Primary, Secondary, Error, Warning, Success, Grayscale</p>
-              <p><span className="font-semibold text-purple-600">Purpose:</span> Surface, Border, Text/Icon</p>
-              <p><span className="font-semibold text-green-600">Variant:</span> Subtle, Lighter, Default, Darker, Disabled</p>
+              <p><span className="font-semibold text-primary">Category:</span> Primary, Secondary, Error, Warning, Success, Grayscale</p>
+              <p><span className="font-semibold text-secondary">Purpose:</span> Surface, Border, Text/Icon</p>
+              <p><span className="font-semibold text-positive">Variant:</span> Subtle, Lighter, Default, Darker, Disabled</p>
             </div>
           </div>
         </section>
@@ -326,14 +326,14 @@ module.exports = {
         {/* Accessibility Note */}
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-4">Accessibility</h2>
-          <div className="bg-blue-50 border border-blue-200 rounded-lg p-6">
-            <h3 className="font-semibold text-lg mb-2 text-blue-900">Contrast &amp; color independence</h3>
-            <p className="text-blue-800 mb-3">
+          <div className="bg-primary/10 border border-primary/20 rounded-lg p-6">
+            <h3 className="font-semibold text-lg mb-2 text-ink">Contrast &amp; color independence</h3>
+            <p className="text-ink-muted mb-3">
               All color combinations have been tested to meet WCAG 2.1 AA standards for contrast ratios.
               Ensure text colors maintain at least 4.5:1 contrast ratio against their backgrounds for body text,
               and 3:1 for large text (18pt+ or 14pt+ bold).
             </p>
-            <ul className="space-y-2 text-blue-800">
+            <ul className="space-y-2 text-ink-muted">
               <li>• Meet a 3:1 non-text contrast ratio for interactive UI elements, icons, and focus indicators.</li>
               <li>• Never rely on color alone to convey meaning — reinforce it with text, icons, or patterns.</li>
               <li>• Aim for AAA (7:1) on critical, long-form, or small text where you can.</li>

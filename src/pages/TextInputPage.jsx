@@ -264,12 +264,12 @@ export default function TextInputPage() {
               />
               <button
                 type="submit"
-                className="h-10 px-4 bg-blue-600 text-white text-sm font-medium rounded hover:bg-blue-700 transition-colors"
+                className="h-10 px-4 bg-primary text-white text-sm font-medium rounded hover:bg-primary-hover transition-colors"
               >
                 Submit
               </button>
               {formSubmitted && !emailError && (
-                <p className="text-sm text-green-600">Form submitted successfully!</p>
+                <p className="text-sm text-positive">Form submitted successfully!</p>
               )}
             </form>
           </div>

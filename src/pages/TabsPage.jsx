@@ -144,7 +144,7 @@ export default function TabsPage() {
           <div className="border-b pb-4">
             <div className="flex items-center gap-2 mb-2">
               <span className="font-semibold text-ink">John D.</span>
-              <span className="text-yellow-500">★★★★★</span>
+              <span className="text-warning">★★★★★</span>
             </div>
             <p className="text-ink-muted">
               Excellent product! Exceeded my expectations in every way.
@@ -153,7 +153,7 @@ export default function TabsPage() {
           <div className="border-b pb-4">
             <div className="flex items-center gap-2 mb-2">
               <span className="font-semibold text-ink">Sarah M.</span>
-              <span className="text-yellow-500">★★★★☆</span>
+              <span className="text-warning">★★★★☆</span>
             </div>
             <p className="text-ink-muted">
               Great quality, but wish it came in more color options.

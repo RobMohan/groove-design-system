@@ -22,11 +22,11 @@ export default function InstallationPage() {
 
         {/* Status callout */}
         <section className="mb-12">
-          <div className="bg-blue-50 border border-blue-200 rounded-lg p-6 flex items-start gap-3">
-            <Info size={20} className="text-blue-700 shrink-0 mt-0.5" />
+          <div className="bg-primary/10 border border-primary/20 rounded-lg p-6 flex items-start gap-3">
+            <Info size={20} className="text-primary shrink-0 mt-0.5" />
             <div>
-              <h3 className="font-semibold text-lg mb-1 text-blue-900">Not yet on npm</h3>
-              <p className="text-blue-800">
+              <h3 className="font-semibold text-lg mb-1 text-ink">Not yet on npm</h3>
+              <p className="text-ink-muted">
                 Groove is currently consumed by cloning or vendoring the repository into your app — it is not yet
                 published to a registry. An npm release under the name <span className="font-mono font-semibold">groove-design-system</span> is
                 planned. Snippets below use that intended package name; until it ships, import from your local copy

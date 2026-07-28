@@ -80,7 +80,7 @@ export default function TooltipPage() {
           <div className="bg-surface-raised rounded-lg border border-line p-8 mb-4">
             <div className="flex items-center justify-center gap-8">
               <Tooltip content="This is a tooltip">
-                <button className="px-4 py-2 bg-gray-200 rounded hover:bg-gray-300">
+                <button className="px-4 py-2 bg-surface-muted text-ink rounded hover:opacity-80">
                   Hover me
                 </button>
               </Tooltip>
@@ -100,27 +100,27 @@ export default function TooltipPage() {
           <div className="bg-surface-raised rounded-lg border border-line p-12 mb-4">
             <div className="flex flex-col items-center gap-12">
               <Tooltip content="Tooltip on top" position="top">
-                <button className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
+                <button className="px-4 py-2 bg-primary text-white rounded hover:bg-primary-hover">
                   Top
                 </button>
               </Tooltip>
 
               <div className="flex items-center gap-12">
                 <Tooltip content="Tooltip on left" position="left">
-                  <button className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
+                  <button className="px-4 py-2 bg-primary text-white rounded hover:bg-primary-hover">
                     Left
                   </button>
                 </Tooltip>
 
                 <Tooltip content="Tooltip on right" position="right">
-                  <button className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
+                  <button className="px-4 py-2 bg-primary text-white rounded hover:bg-primary-hover">
                     Right
                   </button>
                 </Tooltip>
               </div>
 
               <Tooltip content="Tooltip on bottom" position="bottom">
-                <button className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
+                <button className="px-4 py-2 bg-primary text-white rounded hover:bg-primary-hover">
                   Bottom
                 </button>
               </Tooltip>
@@ -153,13 +153,13 @@ export default function TooltipPage() {
             <div className="flex items-center justify-center gap-6">
               <Tooltip content="More information">
                 <button className="p-2 rounded hover:bg-surface-muted">
-                  <Info size={24} className="text-blue-500" />
+                  <Info size={24} className="text-primary" />
                 </button>
               </Tooltip>
 
               <Tooltip content="Get help">
                 <button className="p-2 rounded hover:bg-surface-muted">
-                  <HelpCircle size={24} className="text-green-500" />
+                  <HelpCircle size={24} className="text-positive" />
                 </button>
               </Tooltip>
 
@@ -171,7 +171,7 @@ export default function TooltipPage() {
 
               <Tooltip content="Warning: This action cannot be undone">
                 <button className="p-2 rounded hover:bg-surface-muted">
-                  <AlertCircle size={24} className="text-red-500" />
+                  <AlertCircle size={24} className="text-destructive" />
                 </button>
               </Tooltip>
             </div>
@@ -245,7 +245,7 @@ export default function TooltipPage() {
 
               <div className="flex items-center gap-3">
                 <Tooltip content="Hover over any underlined text for more info" position="right">
-                  <span className="text-blue-600 underline cursor-help">
+                  <span className="text-primary underline cursor-help">
                     Technical term
                   </span>
                 </Tooltip>

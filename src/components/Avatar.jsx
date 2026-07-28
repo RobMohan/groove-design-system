@@ -10,7 +10,7 @@ const sizeMap = {
 
 const statusColors = {
   online: 'bg-positive',
-  away: 'bg-yellow-500',
+  away: 'bg-warning',
   busy: 'bg-destructive',
   offline: 'bg-ink-subtle',
 };

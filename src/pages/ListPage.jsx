@@ -78,7 +78,7 @@ export default function ListPage() {
 
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-4">With metadata</h2>
-          <div className="bg-surface-raised rounded-lg border border-line p-4 mb-4">
+          <div className="bg-surface-raised rounded-lg border border-line p-8 mb-4">
             <List dividers className="rounded-card overflow-hidden">
               <ListItem leading={<Folder className="text-ink-muted" />} primary="Projects" secondary="12 items" trailing={<Badge>Team</Badge>} />
               <ListItem leading={<FileText className="text-ink-muted" />} primary="Design spec.pdf" secondary="2.4 MB · Updated today" trailing={<span className="text-sm text-ink-muted">PDF</span>} />
@@ -92,7 +92,7 @@ export default function ListPage() {
 
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-4">Interactive &amp; selectable</h2>
-          <div className="bg-surface-raised rounded-lg border border-line p-4 mb-4">
+          <div className="bg-surface-raised rounded-lg border border-line p-8 mb-4">
             <List dividers className="rounded-card overflow-hidden">
               {[
                 { id: 'docs', primary: 'Documents', secondary: 'Shared with you' },

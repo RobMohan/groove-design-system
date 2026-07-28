@@ -157,9 +157,9 @@ export default function RadiusPage() {
         {/* Accessibility */}
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-4">Accessibility</h2>
-          <div className="bg-blue-50 border border-blue-200 rounded-lg p-6">
-            <h3 className="font-semibold text-lg mb-2 text-blue-900">Consistency &amp; clarity</h3>
-            <ul className="space-y-2 text-blue-800">
+          <div className="bg-primary/10 border border-primary/20 rounded-lg p-6">
+            <h3 className="font-semibold text-lg mb-2 text-ink">Consistency &amp; clarity</h3>
+            <ul className="space-y-2 text-ink-muted">
               <li>• Keep radius consistent across a control family so components are easy to recognize and predict.</li>
               <li>• Ensure focus outlines follow the corner shape and stay fully visible — rounded corners shouldn't clip the focus ring.</li>
               <li>• Don't let rounding eat into a control's hit area; preserve the minimum 44×44px touch target.</li>

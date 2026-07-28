@@ -527,7 +527,7 @@ function TicketList() {
           </button>
           <button
             onClick={() => refreshTicket(row.id)}
-            className="text-gray-500 hover:text-gray-700"
+            className="text-ink-subtle hover:text-ink"
           >
             <RefreshCw size={20} />
           </button>
