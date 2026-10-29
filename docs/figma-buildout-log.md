@@ -324,14 +324,33 @@ Reused as-is: `Select Group Label`, the token set, elevation 4, the focus-ring c
 
 **Not done:** Combobox (the only remaining member of the family; shares this menu); a focused-but-closed state; the intrinsic-width quirk (a browser `input` has a ~150px default basis, so pills may wrap earlier in code than in Figma at 320px); Code Connect.
 
+### Round 9: Combobox (2026-10-29)
+**Autonomy note:** from this round Rob handed over sequencing ("keep rolling... stop when out of tokens"). Rule I set for myself: pick the next component by dependency and reuse, skip anything that needs a product decision from Rob (the token contrast pass, brand blue), commit after every component.
+
+**Why this one:** last member of the select family; it can reuse `Select Option` and `Select Group Label` outright, so it is the cheapest honest test of the reuse the earlier split promised.
+
+**Built** (new `Combobox` section, 22 variants): `Combobox` control (18): Size 3 x State 3 (Default, Open, Disabled) x Content 2 (Placeholder, Value); 8 properties (Label, Show Label, Placeholder, Value, Show Icon, Icon, Show Clear, Show Loading). `Combobox Menu` (4): Options, Grouped, Loading, Empty, made entirely of `Select Option` and `Select Group Label` instances (the Select family's row style, with the check at the end, unlike Multi Select's checkbox rows). Light and Dark panels.
+
+**Reuse result:** zero new row components, zero new text styles, zero new tokens. The only construction work was the control (a single-line variant of the Multi Select control without pills) and the menu shell. Build was 2 `use_figma` calls plus panels, versus ~6 for Multi Select. This is the case for splitting the Select family by composition.
+
+**Choices:** single fixed-height control (the code's `min-h` never grows because there is nothing to wrap); `clearable` defaults off as in code (Multi Select defaults on); no error state because the React component has none; the typed query and the chosen value look identical, so they are one `Value` content.
+
+**Process:** no throwaway prototype (low layout risk: single row, same construction as Select). It paid off: no repair pass needed. Verified 78 paints / 0 unbound, 36 text layers / 0 unstyled, 0 unbound radii, property wiring 0 issues, heights 32 / 40 / 48, descriptions clean, Light and Dark screenshots reviewed.
+
+**Doc site:** `ComboboxPage.jsx` documented 8 props; added `defaultValue`, `label`, `placeholder`, `disabled`, `id`, `className`.
+
+**Findings:** no new contrast failures (same tokens as Rounds 6-8; the control border again fails 3:1). Code inconsistency: `clearable` defaults to true in MultiSelect and false in Combobox; and the whole select family now has one component (Select) with an error state and two without.
+
+**Not done:** error state (absent in code); Code Connect.
+
 ## Running tally
 
 | Metric | Value |
 | --- | --- |
 | Components audited | inventory-level only (~17 present / ~27 missing of ~44) |
-| Components built in Figma | 11 UI components / 5 families (IconButton 126 variants, Textarea 24, TextInput 24, Select 30 + Option 6 + Group Label 1 + Menu 4, Multi Select 27 + Pill 1 + Option 6 + Menu 4) + 200 Lucide icon components |
+| Components built in Figma | 13 UI components / 6 families (IconButton 126 variants, Textarea 24, TextInput 24, Select 30 + Option 6 + Group Label 1 + Menu 4, Multi Select 27 + Pill 1 + Option 6 + Menu 4, Combobox 18 + Menu 4) + 200 Lucide icon components |
 | Components retired | 2 (legacy `Text` and `Dropdown` sets: migrated, deprecated, then deleted with a zero-reference guard) |
-| Doc pages updated | 3 (TextInput, Select, MultiSelect) |
+| Doc pages updated | 4 (TextInput, Select, MultiSelect, Combobox) |
 | Token/contrast issues found | 5 failing pairs (see Round 1) + invisible dark-mode elevation + counter text (Round 5) + default field border 1.47 / 1.94 (Round 6) + group heading 2.54 / 3.04 and dark search placeholder 4.06 (Round 7) + unchecked checkbox border 1.47 / 1.94 (Round 8) |
 | Self-corrections | 7 (IconButton stroke scaling, escaped descriptions, Textarea padding double-counting stroke, "Dropdown nests Text" mis-attribution, review-panel row clipping, Multi Select orphaned buttons, Multi Select tail minimum) |
 | Figma variables added | 38 (11 Cool Gray primitives + 11 Theme tokens x Light/Dark + 16 Brand) |

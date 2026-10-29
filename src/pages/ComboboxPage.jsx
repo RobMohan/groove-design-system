@@ -18,13 +18,19 @@ const grouped = [
 
 const rows = [
   ['options', 'Array<string | Option>', '[]', 'Option is { value, label, icon?, group?, disabled? }.'],
-  ['value', 'any', 'undefined', 'Controlled selected value.'],
+  ['value', 'any', 'undefined', 'Controlled selected value. Omit it to let the component manage its own selection.'],
+  ['defaultValue', 'any', 'undefined', 'Initial selection when uncontrolled.'],
   ['onChange', 'function', '—', 'Called with the selected value.'],
-  ['clearable', 'boolean', 'false', 'Show a clear button when a value is set.'],
-  ['loading', 'boolean', 'false', 'Show a spinner and "Loading…" state.'],
+  ['label', 'string', '—', 'Field label, associated with the input.'],
+  ['placeholder', 'string', "'Search…'", 'Shown in the empty input.'],
+  ['clearable', 'boolean', 'false', 'Show a clear button when a value is set. Hidden while loading.'],
+  ['loading', 'boolean', 'false', 'Show a spinner in the control and a "Loading…" row in the menu.'],
   ['emptyMessage', 'string', "'No results found'", 'Shown when the filter matches nothing.'],
   ['filterFn', '(option, query) => boolean', 'substring', 'Custom typeahead matcher.'],
-  ['size', "'sm' | 'md' | 'lg'", "'md'", 'Control height.'],
+  ['size', "'sm' | 'md' | 'lg'", "'md'", 'Minimum control height: 32px / 40px / 48px.'],
+  ['disabled', 'boolean', 'false', 'Disable the control. It renders at 60% opacity.'],
+  ['id', 'string', 'auto-generated', 'HTML id for the input, used to associate the label.'],
+  ['className', 'string', "''", 'Additional CSS classes for the outer wrapper.'],
 ];
 
 const PropsTable = () => (
