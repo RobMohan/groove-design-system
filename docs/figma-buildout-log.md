@@ -284,16 +284,56 @@ Plus one new text style, `Field / Group Label` (Semi Bold 12/16, uppercase, 2.5%
 
 **Not done:** MultiSelect and Combobox (same family, separate components, probably share Select Option); the deprecated sets' deletion; the menu's scroll behaviour past 240px is described but not drawn; Code Connect.
 
+### Round 8: Multi Select (2026-10-29)
+**Why this one:** it was the stated payoff of splitting Select into trigger / option / menu. It reuses `Select Group Label`, the menu chrome and the Select tokens, so this round tests whether that split actually made the next component cheaper.
+
+**Process change (cost):** Rob asked what these rounds cost, so this round skipped the separate throwaway prototype and built the full set directly, verifying by numbers and a screenshot and rebuilding only on failure. Trade-off: it needed two follow-up fixes (below) instead of zero, but avoided re-sending the generator script. Net: fewer tokens on the simple parts, one extra repair pass on the layout-sensitive part. For wrap layouts the prototype is still worth it.
+
+**Source read:** `MultiSelect.jsx` and its doc page. The control is `flex flex-wrap` with removable pills, an input, optional spinner and clear button, and a chevron; the listbox has checkbox options, groups, a loading row and an empty row. There is **no error state** in the React component (Select and TextInput have one), so none was invented in Figma.
+
+**Built** (new `Multi Select` section, 4 components, 38 variants):
+- `Multi Select` (27): Size 3 x State 3 (Default, Open, Disabled) x Content 3 (Empty, Few = 2 pills, Many = 6 pills that wrap). 5 properties: Label, Show Label, Placeholder, Show Clear, Show Loading. Wired only where the code can render the state (placeholder on Empty only; clear on non-empty, enabled variants).
+- `Multi Select Pill` (1): label, optional icon, remove X; 24px high.
+- `Multi Select Option` (6): State x Selected, with a leading checkbox.
+- `Multi Select Menu` (4): Options, Grouped, Loading, Empty.
+Reused as-is: `Select Group Label`, the token set, elevation 4, the focus-ring construction.
+
+**Where the code's behavior needed a Figma decision**
+- Open state = a 1px primary border plus the focus ring (code uses `focus-within`, and focusing opens the menu), not Select's 2px border. Mirrored exactly. A "focused but closed" state exists in code only after Escape; not modeled.
+- Disabled = the whole control at 60% opacity (code: `opacity-60`), not individual subtle tokens like Select. Mirrored.
+- Heights are minimums: SM with pills is 34px, not 32 (24px pill + padding + border exceeds `min-h-8`), which the Figma control reproduces; Many wraps to 64 / 96 / 102.
+- Checkbox radius: the code's `rounded` is Tailwind's default 4px, which is **not on the documented radius scale** (control 8 / card 12 / modal 16 / pill) and Figma's `Radius/XS` is 6px. Code wins: literal 4px, deliberately unbound (the only 6 unbound radii in the audit), logged as a finding.
+
+**Two defects found by looking, both fixed.** (1) Many variants orphaned the clear and chevron buttons on their own left-aligned row. Cause: I'd made input, spinner, clear and chevron separate wrap items. In the browser they share the last row with the input. Fix: group them into a `Tail` frame that wraps as one unit. (2) The first Tail minimum reserved space for the hidden spinner and pushed "Few" onto a second row (66px instead of 40px); resized for what's visible by default. Numeric checks had passed before (1) because no height or binding was wrong; only the screenshot showed the buttons on the wrong side.
+
+**Verified:** 171 paints / 0 unbound in the trigger set; 0 unbound anywhere else; 0 unstyled text; property wiring checked per variant (0 issues); empty-control heights 32 / 40 / 48; descriptions read back with no escaped characters; Light and Dark panels screenshot-checked. Doc page build and the existing MultiSelect tests (4) pass.
+
+**Doc site:** `MultiSelectPage.jsx` documented 7 props; added `defaultValue`, `label`, `placeholder`, `emptyMessage`, `filterFn`, `id`, `className` and sharpened the descriptions (uncontrolled use, clear hidden while loading, disabled opacity, minimum height).
+
+**Findings (accessibility, measured)**
+| Item | Ratio | Result |
+| --- | --- | --- |
+| Pill text (`ink`) on `surface-muted`, light / dark | 16.12 / 9.37 | Pass |
+| Pill remove X (`ink-muted`) on `surface-muted`, light / dark | 6.87 / 4.06 | Pass (3:1 non-text) |
+| **Unchecked checkbox border** (`line-strong`) on raised, light / dark | **1.47 / 1.94** | **Fails 3:1**: the border is the only thing that marks the box |
+| Checked box (primary) on raised; white check on primary | 3.43 (both) | Pass (3:1 non-text) |
+| Open border (primary) on raised, light / dark | 3.43 / 4.28 | Pass |
+| Control border (`line-strong`) | 1.47 / 1.94 | Fails 3:1 (same token as Rounds 6-7) |
+- The `line-strong` token now fails in five places (TextInput, Textarea, Select, Multi Select control, Multi Select checkbox). The "one contrast pass" is no longer a nice-to-have.
+- Code inconsistencies (not changed): no error state, 1px open border vs Select's 2px, whole-control 60% opacity vs Select's per-token disabled, 18px chevron off the icon scale. The form family has three different disabled treatments.
+
+**Not done:** Combobox (the only remaining member of the family; shares this menu); a focused-but-closed state; the intrinsic-width quirk (a browser `input` has a ~150px default basis, so pills may wrap earlier in code than in Figma at 320px); Code Connect.
+
 ## Running tally
 
 | Metric | Value |
 | --- | --- |
 | Components audited | inventory-level only (~17 present / ~27 missing of ~44) |
-| Components built in Figma | 7 UI components / 4 families (IconButton 126 variants, Textarea 24, TextInput 24, Select 30 + Select Option 6 + Select Group Label 1 + Select Menu 4) + 200 Lucide icon components |
+| Components built in Figma | 11 UI components / 5 families (IconButton 126 variants, Textarea 24, TextInput 24, Select 30 + Option 6 + Group Label 1 + Menu 4, Multi Select 27 + Pill 1 + Option 6 + Menu 4) + 200 Lucide icon components |
 | Components retired | 2 (legacy `Text` and `Dropdown` sets: migrated, deprecated, then deleted with a zero-reference guard) |
-| Doc pages updated | 2 (TextInput, Select) |
-| Token/contrast issues found | 5 failing pairs (see Round 1) + invisible dark-mode elevation + counter text (Round 5) + default field border 1.47 / 1.94 (Round 6) + group heading 2.54 / 3.04 and dark search placeholder 4.06 (Round 7) |
-| Self-corrections | 5 (IconButton stroke scaling, escaped descriptions, Textarea padding double-counting stroke, "Dropdown nests Text" mis-attribution, review-panel row clipping) |
+| Doc pages updated | 3 (TextInput, Select, MultiSelect) |
+| Token/contrast issues found | 5 failing pairs (see Round 1) + invisible dark-mode elevation + counter text (Round 5) + default field border 1.47 / 1.94 (Round 6) + group heading 2.54 / 3.04 and dark search placeholder 4.06 (Round 7) + unchecked checkbox border 1.47 / 1.94 (Round 8) |
+| Self-corrections | 7 (IconButton stroke scaling, escaped descriptions, Textarea padding double-counting stroke, "Dropdown nests Text" mis-attribution, review-panel row clipping, Multi Select orphaned buttons, Multi Select tail minimum) |
 | Figma variables added | 38 (11 Cool Gray primitives + 11 Theme tokens x Light/Dark + 16 Brand) |
 | Figma styles added | 5 effect styles (Elevation / 1-5) + 8 text styles (Field / Text SM, Text LG, Label SM / MD / LG, Message, Counter, Group Label) |
 

@@ -18,12 +18,19 @@ const skills = [
 
 const rows = [
   ['options', 'Array<string | Option>', '[]', 'Option is { value, label, icon?, group?, disabled? }.'],
-  ['value', 'any[]', 'undefined', 'Controlled array of selected values.'],
+  ['value', 'any[]', 'undefined', 'Controlled array of selected values. Omit it to let the component manage its own selection.'],
+  ['defaultValue', 'any[]', '[]', 'Initial selection when uncontrolled.'],
   ['onChange', 'function', '—', 'Called with the next array of values.'],
-  ['clearable', 'boolean', 'true', 'Show a clear-all button.'],
-  ['loading', 'boolean', 'false', 'Show a spinner and "Loading…" state.'],
-  ['size', "'sm' | 'md' | 'lg'", "'md'", 'Control height.'],
-  ['disabled', 'boolean', 'false', 'Disable the control.'],
+  ['label', 'string', '—', 'Field label, associated with the input.'],
+  ['placeholder', 'string', "'Select…'", 'Shown while nothing is selected.'],
+  ['clearable', 'boolean', 'true', 'Show a clear-all button once something is selected. Hidden while loading.'],
+  ['loading', 'boolean', 'false', 'Show a spinner in the control and a "Loading…" row in the menu.'],
+  ['emptyMessage', 'string', "'No results found'", 'Shown in the menu when no option matches the typed text.'],
+  ['filterFn', '(option, query) => boolean', 'label substring match', 'Custom filter for the typeahead. Receives the normalized option.'],
+  ['size', "'sm' | 'md' | 'lg'", "'md'", 'Minimum control height: 32px / 40px / 48px. The control grows when pills wrap onto more rows.'],
+  ['disabled', 'boolean', 'false', 'Disable the control. It renders at 60% opacity.'],
+  ['id', 'string', 'auto-generated', 'HTML id for the input, used to associate the label.'],
+  ['className', 'string', "''", 'Additional CSS classes for the outer wrapper.'],
 ];
 
 const PropsTable = () => (
