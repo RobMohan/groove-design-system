@@ -343,18 +343,51 @@ Reused as-is: `Select Group Label`, the token set, elevation 4, the focus-ring c
 
 **Not done:** error state (absent in code); Code Connect.
 
+### Round 10: Chip + Warning tokens (2026-10-29)
+**Why this one:** chosen by gap analysis. Compared the code's component list with the Figma component sets: missing are Accordion, Avatar, Banner, ButtonGroup, Chip, CommandPalette, DataTable, DatePicker, Divider, Drawer, EmptyState, Field, FileUpload, Link, List, Logo, Menu, Modal, NumberInput, Popover, SegmentedControl, Skeleton, Slider, Spinner, StatCard, Stepper, Toast. Chip first: small, high fan-out (tags, filters, tables, Multi Select's pill is its cousin), and it forces a token gap into the open.
+
+**Foundations first: Warning was missing.** The code has a `warning` brand role (amber `#d97706` / `#f59e0b` / `#b45309` / `#fcd34d`) but Figma's Brand collection had only Primary, Secondary, Destructive and Positive. Added `Warning/Default|Hover|Pressed|Disabled` (4 variables, scopes copied from the Destructive set). Code syntax is not set on any Brand variable (the collection predates a code-syntax pass), so the new ones match. Added 2 text styles: `Chip / SM` (Medium 12/16) and `Chip / MD` (Medium 14/20); Large reuses `Field / Label MD` (Medium 16/24).
+
+**Built** (new `Chip` section, 50 variants): `Chip` (30): Size 3 x Color 5 (Neutral, Primary, Positive, Warning, Destructive) x Selected 2; properties Label, Show Icon, Icon (swap), Show Remove. `Chip State` (20): State (Focus, Disabled) x Color 5 x Selected 2 at MD only. Reason for the split: adding State to the main set would be 90 variants, over the 30 guideline; focus ring and 50% opacity behave identically at every size, so one size documents them. Sizes verified: 22 / 30 / 38px, matching the CSS box model. Unselected colored chips use the brand token at 15% fill and 30% border opacity, exactly as `bg-primary/15 border-primary/30`.
+
+**Known deviation:** the remove X sits about 2px further from the edge than in code (the code uses `-mr-1`; Figma auto layout has no negative margin). Documented in the description.
+
+**Three defects, all caught by looking or by distrusting a check**
+1. **Paint opacity silently reset.** First pass set `opacity` on a paint, bound the color variable, assigned it: stored opacity was 1, so every tinted chip rendered solid with a same-colored label (invisible text). A scratch rectangle isolated the cause (opacity set before bind+assign is dropped; clone the paint array, set opacity, reassign works). Fixed on 20 variants.
+2. **A verification false alarm.** My post-fix check flagged all 20 as failed because Figma stores paint opacity as a 32-bit float (0.15 comes back as 0.15000000596). Strict equality was the bug. Lesson: compare with a tolerance, and read the actual value before concluding the fix didn't work.
+3. **Stale instances.** The component fix did not reach the 26 panel instances created before it (they kept opacity 1). Re-applied the main component's paints to them. Screenshotting the component set itself, not the panel, is what separated "component wrong" from "instances stale".
+
+**Verified:** 160 paints / 0 unbound, 50 text layers / 0 unstyled, 0 unbound radii, property wiring 0 issues, tint opacities correct on all 20 tinted variants, descriptions clean, Light and Dark panels screenshot-checked after the fixes.
+
+**Findings (accessibility, measured). This is the largest contrast failure so far.**
+| Chip variant | Light | Dark | Result |
+| --- | --- | --- | --- |
+| Tinted Primary (text `primary` on `primary/15`) | 2.81 | 4.23 | **Fails AA both modes** |
+| Tinted Positive | 2.68 | 4.43 | **Fails AA both** |
+| Tinted Warning | 2.60 | 4.64 | Light fails, dark passes |
+| Tinted Destructive | 3.66 | 3.35 | **Fails AA both** |
+| Selected: white on Primary | 3.43 | 3.43 | **Fails AA** |
+| Selected: white on Positive | 3.30 | 3.30 | **Fails AA** |
+| Selected: white on Warning | 3.19 | 3.19 | **Fails AA** |
+| Selected: white on Destructive | 4.83 | 4.83 | Passes |
+| Neutral and neutral selected | 17.7 / 16.1 | | Pass |
+- These are 12-16px medium-weight labels, so the 4.5:1 normal-text threshold applies. 7 of 8 colored variants fail in at least one mode. It's the same root cause as the primary button (white on `#588ae0` = 3.43:1) and the same tokens (`positive`, `warning`) will recur in Badge, Alert and Toast. Strongest argument yet for the single token contrast pass, which needs Rob's decision on the brand colors; I haven't made it.
+- Code finding: chip hover uses `bg-black/10 dark:hover:bg-white/20`, a raw color and a Tailwind `dark:` variant in a codebase that otherwise uses semantic tokens for dark mode.
+
+**Not done:** hover/pressed (code has no distinct chip pressed style); Code Connect; doc page needs only a `className` row.
+
 ## Running tally
 
 | Metric | Value |
 | --- | --- |
 | Components audited | inventory-level only (~17 present / ~27 missing of ~44) |
-| Components built in Figma | 13 UI components / 6 families (IconButton 126 variants, Textarea 24, TextInput 24, Select 30 + Option 6 + Group Label 1 + Menu 4, Multi Select 27 + Pill 1 + Option 6 + Menu 4, Combobox 18 + Menu 4) + 200 Lucide icon components |
+| Components built in Figma | 15 UI components / 7 families (IconButton 126 variants, Textarea 24, TextInput 24, Select 30 + Option 6 + Group Label 1 + Menu 4, Multi Select 27 + Pill 1 + Option 6 + Menu 4, Combobox 18 + Menu 4, Chip 30 + Chip State 20) + 200 Lucide icon components |
 | Components retired | 2 (legacy `Text` and `Dropdown` sets: migrated, deprecated, then deleted with a zero-reference guard) |
 | Doc pages updated | 4 (TextInput, Select, MultiSelect, Combobox) |
 | Token/contrast issues found | 5 failing pairs (see Round 1) + invisible dark-mode elevation + counter text (Round 5) + default field border 1.47 / 1.94 (Round 6) + group heading 2.54 / 3.04 and dark search placeholder 4.06 (Round 7) + unchecked checkbox border 1.47 / 1.94 (Round 8) |
-| Self-corrections | 7 (IconButton stroke scaling, escaped descriptions, Textarea padding double-counting stroke, "Dropdown nests Text" mis-attribution, review-panel row clipping, Multi Select orphaned buttons, Multi Select tail minimum) |
-| Figma variables added | 38 (11 Cool Gray primitives + 11 Theme tokens x Light/Dark + 16 Brand) |
-| Figma styles added | 5 effect styles (Elevation / 1-5) + 8 text styles (Field / Text SM, Text LG, Label SM / MD / LG, Message, Counter, Group Label) |
+| Self-corrections | 10 (Chip: paint opacity reset, false-alarm verification, stale instances; earlier: IconButton stroke scaling, escaped descriptions, Textarea padding double-counting stroke, "Dropdown nests Text" mis-attribution, review-panel row clipping, Multi Select orphaned buttons, Multi Select tail minimum) |
+| Figma variables added | 42 (11 Cool Gray primitives + 11 Theme tokens x Light/Dark + 16 Brand + 4 Brand Warning) |
+| Figma styles added | 5 effect styles (Elevation / 1-5) + 10 text styles (Field / Text SM, Text LG, Label SM / MD / LG, Message, Counter, Group Label; Chip / SM, MD) |
 
 ## Story notes (for the final write-up)
 
