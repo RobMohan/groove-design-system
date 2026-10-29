@@ -58,8 +58,68 @@ const PropsTable = () => (
         <tr className="border-b border-line">
           <td className="py-3 px-4 font-mono text-sm">showIcon</td>
           <td className="py-3 px-4 font-mono text-xs text-ink-muted">boolean</td>
-          <td className="py-3 px-4 font-mono text-xs">true</td>
-          <td className="py-3 px-4">Shows the search icon inside the input. Hidden when error is present.</td>
+          <td className="py-3 px-4 font-mono text-xs">false</td>
+          <td className="py-3 px-4">Opt-in search icon at the end of the input. The error icon replaces it when error is set, and suffix replaces both.</td>
+        </tr>
+        <tr className="border-b border-line">
+          <td className="py-3 px-4 font-mono text-sm">size</td>
+          <td className="py-3 px-4 font-mono text-xs text-ink-muted">'sm' | 'md' | 'lg'</td>
+          <td className="py-3 px-4 font-mono text-xs">'md'</td>
+          <td className="py-3 px-4">Field height and text size: 32px / 40px / 48px with 14 / 16 / 18px text</td>
+        </tr>
+        <tr className="border-b border-line">
+          <td className="py-3 px-4 font-mono text-sm">type</td>
+          <td className="py-3 px-4 font-mono text-xs text-ink-muted">string</td>
+          <td className="py-3 px-4 font-mono text-xs">'text'</td>
+          <td className="py-3 px-4">Native input type (text, email, password, number, and so on)</td>
+        </tr>
+        <tr className="border-b border-line">
+          <td className="py-3 px-4 font-mono text-sm">helperText</td>
+          <td className="py-3 px-4 font-mono text-xs text-ink-muted">string</td>
+          <td className="py-3 px-4 font-mono text-xs">''</td>
+          <td className="py-3 px-4">Hint shown below the input and linked with aria-describedby. Replaced by the error message when one is set.</td>
+        </tr>
+        <tr className="border-b border-line">
+          <td className="py-3 px-4 font-mono text-sm">required</td>
+          <td className="py-3 px-4 font-mono text-xs text-ink-muted">boolean</td>
+          <td className="py-3 px-4 font-mono text-xs">false</td>
+          <td className="py-3 px-4">Adds a red asterisk to the label (hidden from screen readers) and sets the native required attribute</td>
+        </tr>
+        <tr className="border-b border-line">
+          <td className="py-3 px-4 font-mono text-sm">maxLength</td>
+          <td className="py-3 px-4 font-mono text-xs text-ink-muted">number</td>
+          <td className="py-3 px-4 font-mono text-xs">—</td>
+          <td className="py-3 px-4">Maximum number of characters. Combine with showCount to display a counter.</td>
+        </tr>
+        <tr className="border-b border-line">
+          <td className="py-3 px-4 font-mono text-sm">showCount</td>
+          <td className="py-3 px-4 font-mono text-xs text-ink-muted">boolean</td>
+          <td className="py-3 px-4 font-mono text-xs">false</td>
+          <td className="py-3 px-4">Shows an inline character counter. Needs maxLength.</td>
+        </tr>
+        <tr className="border-b border-line">
+          <td className="py-3 px-4 font-mono text-sm">prefix</td>
+          <td className="py-3 px-4 font-mono text-xs text-ink-muted">ReactNode</td>
+          <td className="py-3 px-4 font-mono text-xs">—</td>
+          <td className="py-3 px-4">Inline content before the text, inside the border (for example a currency symbol)</td>
+        </tr>
+        <tr className="border-b border-line">
+          <td className="py-3 px-4 font-mono text-sm">suffix</td>
+          <td className="py-3 px-4 font-mono text-xs text-ink-muted">ReactNode</td>
+          <td className="py-3 px-4 font-mono text-xs">—</td>
+          <td className="py-3 px-4">Inline content after the text, inside the border. Replaces the trailing icon.</td>
+        </tr>
+        <tr className="border-b border-line">
+          <td className="py-3 px-4 font-mono text-sm">addonBefore</td>
+          <td className="py-3 px-4 font-mono text-xs text-ink-muted">ReactNode</td>
+          <td className="py-3 px-4 font-mono text-xs">—</td>
+          <td className="py-3 px-4">Attached block before the field, outside its border (for example https://)</td>
+        </tr>
+        <tr className="border-b border-line">
+          <td className="py-3 px-4 font-mono text-sm">addonAfter</td>
+          <td className="py-3 px-4 font-mono text-xs text-ink-muted">ReactNode</td>
+          <td className="py-3 px-4 font-mono text-xs">—</td>
+          <td className="py-3 px-4">Attached block after the field, outside its border (for example .com)</td>
         </tr>
         <tr className="border-b border-line">
           <td className="py-3 px-4 font-mono text-sm">id</td>
@@ -96,7 +156,7 @@ export default function TextInputPage() {
         <div className="mb-12">
           <h1 className="text-5xl font-bold mb-4">Text Input</h1>
           <p className="text-xl text-ink-muted">
-            A text input component for collecting user-entered data, with support for labels, icons, disabled, and error states.
+            A single-line text field with three sizes, label, helper text, required marker, character counter, prefix, suffix and attached addons, plus disabled and error states.
           </p>
         </div>
 
@@ -110,7 +170,7 @@ export default function TextInputPage() {
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-4">Basic Usage</h2>
           <p className="text-ink-muted mb-6">
-            A labeled input with a search icon. Click into the field to see the active (focused) state.
+            A labeled input. Click into the field to see the active (focused) state.
           </p>
           <div className="bg-surface-raised rounded-lg border border-line p-8 mb-4">
             <div className="max-w-xs">
@@ -190,30 +250,97 @@ export default function TextInputPage() {
 <TextInput label="Label" value="Invalid" onChange={...} error />`} />
         </section>
 
-        {/* Without Icon */}
+        {/* Sizes */}
         <section className="mb-12">
-          <h2 className="text-2xl font-bold mb-4">Without Icon</h2>
+          <h2 className="text-2xl font-bold mb-4">Sizes</h2>
           <p className="text-ink-muted mb-6">
-            The search icon can be hidden with <code className="text-sm bg-surface-muted px-1 rounded">showIcon=&#123;false&#125;</code>.
+            Three sizes. Medium is the default; use small in dense toolbars and tables, large for prominent forms.
+          </p>
+          <div className="bg-surface-raised rounded-lg border border-line p-8 mb-4">
+            <div className="flex flex-col gap-6 max-w-xs">
+              <TextInput size="sm" label="Small" placeholder="Placeholder" value="" onChange={() => {}} />
+              <TextInput size="md" label="Medium" placeholder="Placeholder" value="" onChange={() => {}} />
+              <TextInput size="lg" label="Large" placeholder="Placeholder" value="" onChange={() => {}} />
+            </div>
+          </div>
+          <CodeBlock code={`<TextInput size="sm" label="Small" ... />
+<TextInput size="md" label="Medium" ... />
+<TextInput size="lg" label="Large" ... />`} />
+        </section>
+
+        {/* Helper, required, counter */}
+        <section className="mb-12">
+          <h2 className="text-2xl font-bold mb-4">Helper Text, Required and Counter</h2>
+          <p className="text-ink-muted mb-6">
+            <code className="text-sm bg-surface-muted px-1 rounded">helperText</code> adds a hint below the field. <code className="text-sm bg-surface-muted px-1 rounded">required</code> adds a marker to the label. <code className="text-sm bg-surface-muted px-1 rounded">maxLength</code> with <code className="text-sm bg-surface-muted px-1 rounded">showCount</code> adds an inline counter.
           </p>
           <div className="bg-surface-raised rounded-lg border border-line p-8 mb-4">
             <div className="max-w-xs">
               <TextInput
-                label="First Name"
-                placeholder="Enter your name"
-                value=""
-                onChange={() => {}}
-                showIcon={false}
+                label="Username"
+                placeholder="Choose a username"
+                value={basicValue}
+                onChange={(e) => setBasicValue(e.target.value)}
+                helperText="Letters and numbers only"
+                required
+                maxLength={20}
+                showCount
               />
             </div>
           </div>
           <CodeBlock code={`<TextInput
-  label="First Name"
-  placeholder="Enter your name"
+  label="Username"
+  placeholder="Choose a username"
   value={value}
   onChange={(e) => setValue(e.target.value)}
-  showIcon={false}
+  helperText="Letters and numbers only"
+  required
+  maxLength={20}
+  showCount
 />`} />
+        </section>
+
+        {/* Icon */}
+        <section className="mb-12">
+          <h2 className="text-2xl font-bold mb-4">With Icon</h2>
+          <p className="text-ink-muted mb-6">
+            The search icon is opt-in: turn it on with <code className="text-sm bg-surface-muted px-1 rounded">showIcon</code>. The error icon replaces it when the field is in error.
+          </p>
+          <div className="bg-surface-raised rounded-lg border border-line p-8 mb-4">
+            <div className="max-w-xs">
+              <TextInput
+                label="Search"
+                placeholder="Search components"
+                value=""
+                onChange={() => {}}
+                showIcon
+              />
+            </div>
+          </div>
+          <CodeBlock code={`<TextInput
+  label="Search"
+  placeholder="Search components"
+  value={value}
+  onChange={(e) => setValue(e.target.value)}
+  showIcon
+/>`} />
+        </section>
+
+        {/* Prefix, suffix, addons */}
+        <section className="mb-12">
+          <h2 className="text-2xl font-bold mb-4">Prefix, Suffix and Addons</h2>
+          <p className="text-ink-muted mb-6">
+            <code className="text-sm bg-surface-muted px-1 rounded">prefix</code> and <code className="text-sm bg-surface-muted px-1 rounded">suffix</code> sit inside the border. <code className="text-sm bg-surface-muted px-1 rounded">addonBefore</code> and <code className="text-sm bg-surface-muted px-1 rounded">addonAfter</code> are attached blocks outside it, and the field corners square off on the attached side.
+          </p>
+          <div className="bg-surface-raised rounded-lg border border-line p-8 mb-4">
+            <div className="flex flex-col gap-6 max-w-xs">
+              <TextInput label="Amount" placeholder="0.00" value="" onChange={() => {}} prefix="$" suffix="USD" />
+              <TextInput label="Website" placeholder="example" value="" onChange={() => {}} addonBefore="https://" addonAfter=".com" />
+            </div>
+          </div>
+          <CodeBlock code={`<TextInput label="Amount" prefix="$" suffix="USD" ... />
+
+<TextInput label="Website" addonBefore="https://" addonAfter=".com" ... />`} />
         </section>
 
         {/* Without Label */}
