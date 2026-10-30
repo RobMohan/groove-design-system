@@ -7,6 +7,18 @@ const CodeBlock = ({ code }) => (
   </pre>
 );
 
+const rows = [
+  ['checked', 'boolean', 'false', 'Whether the toggle is on (sets aria-checked on the switch)'],
+  ['disabled', 'boolean', 'false', 'Whether the toggle is disabled'],
+  ['label', 'string', "''", 'Label text next to the switch; clicking it toggles'],
+  ['description', 'string', "''", 'Help text under the label; linked with aria-describedby'],
+  ['size', "'sm' | 'md' | 'lg'", "'md'", 'Track size: 36x20 / 52x28 / 64x36'],
+  ['labelPosition', "'left' | 'right'", "'right'", 'Which side of the switch the label sits on'],
+  ['onChange', 'function', 'undefined', 'Called with the next checked boolean'],
+  ['id', 'string', 'auto-generated', 'Custom ID for the switch button'],
+  ['className', 'string', "''", 'Additional CSS classes'],
+];
+
 const PropsTable = () => (
   <div className="overflow-x-auto">
     <table className="w-full text-left border-collapse">
@@ -19,42 +31,14 @@ const PropsTable = () => (
         </tr>
       </thead>
       <tbody className="text-sm">
-        <tr className="border-b border-line">
-          <td className="py-3 px-4 font-mono text-sm">checked</td>
-          <td className="py-3 px-4 font-mono text-xs text-ink-muted">boolean</td>
-          <td className="py-3 px-4 font-mono text-xs">false</td>
-          <td className="py-3 px-4">Whether the toggle is on</td>
-        </tr>
-        <tr className="border-b border-line">
-          <td className="py-3 px-4 font-mono text-sm">disabled</td>
-          <td className="py-3 px-4 font-mono text-xs text-ink-muted">boolean</td>
-          <td className="py-3 px-4 font-mono text-xs">false</td>
-          <td className="py-3 px-4">Whether the toggle is disabled</td>
-        </tr>
-        <tr className="border-b border-line">
-          <td className="py-3 px-4 font-mono text-sm">label</td>
-          <td className="py-3 px-4 font-mono text-xs text-ink-muted">string</td>
-          <td className="py-3 px-4 font-mono text-xs">''</td>
-          <td className="py-3 px-4">Label text to display next to the toggle</td>
-        </tr>
-        <tr className="border-b border-line">
-          <td className="py-3 px-4 font-mono text-sm">onChange</td>
-          <td className="py-3 px-4 font-mono text-xs text-ink-muted">function</td>
-          <td className="py-3 px-4 font-mono text-xs">undefined</td>
-          <td className="py-3 px-4">Callback when toggle state changes</td>
-        </tr>
-        <tr className="border-b border-line">
-          <td className="py-3 px-4 font-mono text-sm">id</td>
-          <td className="py-3 px-4 font-mono text-xs text-ink-muted">string</td>
-          <td className="py-3 px-4 font-mono text-xs">auto-generated</td>
-          <td className="py-3 px-4">Custom ID for the toggle input</td>
-        </tr>
-        <tr className="border-b border-line">
-          <td className="py-3 px-4 font-mono text-sm">className</td>
-          <td className="py-3 px-4 font-mono text-xs text-ink-muted">string</td>
-          <td className="py-3 px-4 font-mono text-xs">''</td>
-          <td className="py-3 px-4">Additional CSS classes</td>
-        </tr>
+        {rows.map(([prop, type, def, desc]) => (
+          <tr key={prop} className="border-b border-line">
+            <td className="py-3 px-4 font-mono text-sm">{prop}</td>
+            <td className="py-3 px-4 font-mono text-xs text-ink-muted">{type}</td>
+            <td className="py-3 px-4 font-mono text-xs">{def}</td>
+            <td className="py-3 px-4">{desc}</td>
+          </tr>
+        ))}
       </tbody>
     </table>
   </div>
@@ -91,7 +75,7 @@ export default function TogglePage() {
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-4">States</h2>
           <p className="text-ink-muted mb-6">
-            The Toggle component has three states: off (default), on, and inactive (disabled).
+            Off (default), on, and disabled, with a visible focus ring.
           </p>
           <div className="bg-surface-raised rounded-lg border border-line p-8 mb-4">
             <div className="flex flex-col gap-4">
@@ -266,6 +250,33 @@ export default function TogglePage() {
               </div>
             </div>
           </div>
+        </section>
+
+        {/* Sizes, description, label position */}
+        <section className="mb-12">
+          <h2 className="text-2xl font-bold mb-4">Sizes, description &amp; label position</h2>
+          <p className="text-ink-muted mb-6">
+            Three sizes, optional help text, and the label can sit on either side of the switch.
+          </p>
+          <div className="bg-surface-raised rounded-lg border border-line p-8 mb-4">
+            <div className="flex flex-col gap-4">
+              <div className="flex flex-wrap items-center gap-6">
+                <Toggle size="sm" label="Small" checked onChange={() => {}} />
+                <Toggle size="md" label="Medium" checked onChange={() => {}} />
+                <Toggle size="lg" label="Large" checked onChange={() => {}} />
+              </div>
+              <Toggle
+                label="Marketing emails"
+                description="Product news, at most once a month."
+                checked={notifications}
+                onChange={setNotifications}
+              />
+              <Toggle label="Label on the left" labelPosition="left" checked onChange={() => {}} />
+            </div>
+          </div>
+          <CodeBlock code={`<Toggle size="lg" label="Large" checked onChange={handleChange} />
+<Toggle label="Marketing emails" description="Product news, at most once a month." ... />
+<Toggle label="Label on the left" labelPosition="left" ... />`} />
         </section>
 
         {/* Props Table */}
