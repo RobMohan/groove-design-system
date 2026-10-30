@@ -476,12 +476,37 @@ All pass, narrowly for positive (light) and secondary (dark). The label text is 
 
 **Not done:** deleting `Button (deprecated)` (needs Rob's OK); `Pagination Button` is a separate legacy set, left as is; Code Connect.
 
+### Round 16: Toast (2026-10-29)
+**Why this one:** next on the gap list, a pure composition of existing parts (icons, tokens, elevation, text styles) and the visual counterpart of Alert.
+
+**Built** (new `Toast` section, 4 variants): `Toast` set, Variant = Info, Success, Warning, Error (accent icon and color: primary, positive, warning, destructive; glyphs Info, CheckCircle, AlertTriangle, AlertCircle). 6 properties: Title, Show Title, Description, Show Description, Action, Show Action. 320px wide (`w-80`), 16px padding plus the 1px border, 12px gap, `Radius/S`, `Elevation / 4`, line border. The icon, title, description and action rows reproduce the code's spacing exactly using wrapper frames (2px under the title, 8px above the action) so hiding the title also removes its 2px, as the code does. One new text style, `Toast / Action` (Semi Bold 14/20); title reuses `Body / Bold`, description `Field / Message`. Light and Dark panels.
+
+**Honest scope notes:** the six placements, the 12px stack gap, 4s auto-dismiss with pause on hover, and the alert-versus-status role belong to `ToastProvider`, not to one toast, so they are described, not drawn.
+
+**Process:** component and panels in one call; one screenshot per mode; no defects, no repair pass. Construction-time checks: all paints variable-bound, all text styled, radius bound, 6 properties wired.
+
+**Doc site:** `ToastPage.jsx` documented four options but not `action`; added it, and noted the pause-on-hover behavior on `duration`.
+
+**Findings (accessibility, measured)**
+| Item | Light | Dark | Result |
+| --- | --- | --- | --- |
+| **Action link** (`primary`, 14px semibold) on raised | **3.43** | **4.28** | **Fails AA both modes** |
+| Info icon (primary) vs raised | 3.43 | 4.28 | Pass (3:1 non-text) |
+| Success icon (positive) | 3.30 | 4.45 | Pass |
+| Warning icon | 3.19 | 4.61 | Pass (narrow) |
+| Error icon (destructive) | 4.83 | **3.04** | Pass (narrow in dark) |
+| Description (`ink-muted`) | 7.56 | 5.78 | Pass |
+- The action link is the same primary-on-surface failure as the Link button (Round 15), a third instance of one token problem.
+- Code finding: the toast is color-coded by icon and glyph only; the variant name is never in the accessible text, but `role=alert/status` is set, so screen readers get the message. The dismiss button has an `aria-label`. Good.
+
+**Not done:** Code Connect.
+
 ## Running tally
 
 | Metric | Value |
 | --- | --- |
 | Components audited | inventory-level only (~17 present / ~27 missing of ~44) |
-| Components built in Figma | 15 UI components / 7 families (IconButton 126 variants, Textarea 24, TextInput 24, Select 30 + Option 6 + Group Label 1 + Menu 4, Multi Select 27 + Pill 1 + Option 6 + Menu 4, Combobox 18 + Menu 4, Chip 30 + Chip State 20, Avatar 20 + Avatar Status 20, Divider 10, Spinner 20, Modal 4, Button rebuilt 126) + 200 Lucide icon components |
+| Components built in Figma | 15 UI components / 7 families (IconButton 126 variants, Textarea 24, TextInput 24, Select 30 + Option 6 + Group Label 1 + Menu 4, Multi Select 27 + Pill 1 + Option 6 + Menu 4, Combobox 18 + Menu 4, Chip 30 + Chip State 20, Avatar 20 + Avatar Status 20, Divider 10, Spinner 20, Modal 4, Button rebuilt 126, Toast 4) + 200 Lucide icon components |
 | Components retired | 2 deleted (legacy `Text` and `Dropdown`, after migration with a zero-reference guard) + 1 deprecated awaiting Rob's OK (legacy `Button`, 10 instances migrated) |
 | Doc pages updated | 7 (TextInput, Select, MultiSelect, Combobox, Modal, Button; Chip, Avatar, Divider, Spinner were already accurate) |
 | Token/contrast issues found | 5 failing pairs (see Round 1) + invisible dark-mode elevation + counter text (Round 5) + default field border 1.47 / 1.94 (Round 6) + group heading 2.54 / 3.04 and dark search placeholder 4.06 (Round 7) + unchecked checkbox border 1.47 / 1.94 (Round 8) |

@@ -90,7 +90,8 @@ toast({ title: 'Sticky', description: 'Stays until dismissed.', duration: Infini
                 <PropRow name="title" type="string" def="''" desc="Bold heading line" />
                 <PropRow name="description" type="string" def="''" desc="Body text (also the value of the string shorthand)" />
                 <PropRow name="variant" type="string" def="'info'" desc="info, success, warning, error" />
-                <PropRow name="duration" type="number" def="4000" desc="Auto-dismiss delay in ms; use Infinity to persist" />
+                <PropRow name="duration" type="number" def="4000" desc="Auto-dismiss delay in ms; use Infinity to persist. The timer pauses while the pointer is over the toast." />
+                <PropRow name="action" type="{ label, onClick }" def="—" desc="Adds a text link under the message; clicking it runs onClick and dismisses the toast" />
               </tbody>
             </table>
           </div>
