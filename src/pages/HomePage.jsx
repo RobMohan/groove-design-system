@@ -190,12 +190,12 @@ npm run dev`}
             <div className="flex items-center gap-3">
               <span className="font-semibold text-ink-muted">LinkedIn:</span>
               <a
-                href="https://www.linkedin.com/in/robertmohan"
+                href="https://www.linkedin.com/in/robmohan/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-primary hover:underline"
               >
-                linkedin.com/in/robertmohan
+                linkedin.com/in/robmohan
               </a>
             </div>
           </div>

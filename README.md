@@ -130,7 +130,7 @@ Groove is an exploration of how AI can be leveraged across the design-to-develop
 
 **Rob Mohan**
 - Email: [rob@robertmohandesign.com](mailto:rob@robertmohandesign.com)
-- LinkedIn: [linkedin.com/in/robertmohan](https://www.linkedin.com/in/robertmohan)
+- LinkedIn: [linkedin.com/in/robmohan](https://www.linkedin.com/in/robmohan/)
 - GitHub: [@RobMohan](https://github.com/RobMohan)
 - Portfolio: [robertmohandesign.com](https://robertmohandesign.com)
 
