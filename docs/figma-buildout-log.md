@@ -374,6 +374,8 @@ Reused as-is: `Select Group Label`, the token set, elevation 4, the focus-ring c
 - These are 12-16px medium-weight labels, so the 4.5:1 normal-text threshold applies. 7 of 8 colored variants fail in at least one mode. It's the same root cause as the primary button (white on `#588ae0` = 3.43:1) and the same tokens (`positive`, `warning`) will recur in Badge, Alert and Toast. Strongest argument yet for the single token contrast pass, which needs Rob's decision on the brand colors; I haven't made it.
 - Code finding: chip hover uses `bg-black/10 dark:hover:bg-white/20`, a raw color and a Tailwind `dark:` variant in a codebase that otherwise uses semantic tokens for dark mode.
 
+**Correction (Round 17):** the paint-opacity tint described above looked right on the main components and my panels, but fresh instances rendered solid (instances do not inherit opacity from a variable-bound paint). The "stale instances" explanation in defect 3 was wrong. Chip and Chip State were rebuilt at layer level in Round 17.
+
 **Not done:** hover/pressed (code has no distinct chip pressed style); Code Connect; doc page needs only a `className` row.
 
 ### Round 11: Avatar (2026-10-29)
@@ -501,16 +503,42 @@ All pass, narrowly for positive (light) and secondary (dark). The label text is 
 
 **Not done:** Code Connect.
 
+### Round 17: Banner, and a repair to Round 10's Chip (2026-10-29)
+**Why this one:** Banner is the page-level sibling of Alert and Toast, and it reuses the tint technique from Chip plus the rebuilt Button as its action slot.
+
+**Built** (new `Banner` section, 4 variants): `Banner` set, Tone = Info, Positive, Warning, Destructive; 5 properties (Title, Show Title, Description, Show Actions, Show Dismiss). Full-width band (960px in the set, resize the instance), 16 / 12px padding, 12px gap, a 10% tint with a 30% top and bottom border only (no side borders: it runs edge to edge), tone icon at 20px, dismiss at 18px, and an Actions slot holding small Outline and Primary Button instances (from Round 15). Title reuses `Body / Bold`, description `Field / Message`. Light and Dark panels.
+
+**The big finding of the session, found while building Banner:** my tint-by-paint-opacity technique, used in Round 10 for Chip, is broken for anyone using the library. A paint that is bound to a color variable and has partial opacity renders and reads correctly on the *main component*, but **every instance of it comes out at opacity 1**, so fresh instances of the tinted Chip variants (and of the Banner I had just built the same way) rendered as solid color with an unreadable same-colored label. Round 10 only looked right in the set itself and in panels that I had patched by hand. A fresh-instance test (create an instance, read the paint, screenshot it) proved it. Previous "fixes" had only treated the symptom on the specific panel instances I'd made, and I'd described the cause as stale instances; that was wrong. The actual cause is that instances don't inherit variable-bound paint opacity at all.
+**Fix, applied to Chip (12 variants), Chip State (8) and Banner (4):** move the transparency to layer level. Each tinted variant now has a `Tint` rectangle (fill bound to the brand variable, layer opacity 15% for Chip, 10% for Banner) and a `Border` rectangle (stroke bound to the same variable, layer opacity 30%), absolute, stretched to the variant, rounded where needed, behind the content; the root has no fill or stroke. Layer opacity is inherited by instances. This also keeps one source for each color (no duplicated alpha tokens). Verified on fresh instances (opacity 0.15 / 0.3 on Chip, 0.1 / 0.3 on Banner, no root fill), and by screenshot. Cleared the stale paint overrides I had applied to 26 panel instances.
+- Two more mistakes en route, both mine: the first repair script read the stroke weight as `figma.mixed` and threw after creating stray layers (I added cleanup), and its Chip pass copied opacity 1 into the new layers for reasons I did not fully establish (a read of the old paint at conversion time), so I set the known specs (15% and 30%) explicitly and re-verified on fresh instances. Lesson: the only trustworthy test of a component is a fresh instance, rendered.
+- Audit gap: Round 10's audit read `opacity` on the main component, which was correct, so it passed. A component audit that never instantiates the component cannot see instance-inheritance bugs.
+
+**Process note:** component and panels in one call, then the repair in four calls. The review panels are what exposed it (the Banner was solid in the first screenshot), which argues for always building panels from instances in the same call as the component.
+
+**Doc site:** the Banner page already covers all props; no change.
+
+**Findings (accessibility, measured; text and icons on the 10% tinted band)**
+| Tone | Description text light / dark | Icon light / dark |
+| --- | --- | --- |
+| Info | 6.54 / 6.17 | **2.97** / 4.57 |
+| Positive | 6.48 / 6.19 | **2.82** / 4.77 |
+| Warning | 6.52 / 6.21 | **2.75** / 4.95 |
+| Destructive | 6.21 / 6.63 | 3.97 / 3.49 |
+- Text passes everywhere. Status icons fail the 3:1 non-text minimum in light mode for three tones (the title text carries the meaning, so impact is modest, but the icon is the only color-independent tone cue).
+- Code: no dark-mode problem (the same brand colors work on both), and the role and aria-live split between destructive (alert) and others (status) is sound.
+
+**Not done:** the `icon` prop's custom glyph is described, not drawn; Code Connect.
+
 ## Running tally
 
 | Metric | Value |
 | --- | --- |
 | Components audited | inventory-level only (~17 present / ~27 missing of ~44) |
-| Components built in Figma | 15 UI components / 7 families (IconButton 126 variants, Textarea 24, TextInput 24, Select 30 + Option 6 + Group Label 1 + Menu 4, Multi Select 27 + Pill 1 + Option 6 + Menu 4, Combobox 18 + Menu 4, Chip 30 + Chip State 20, Avatar 20 + Avatar Status 20, Divider 10, Spinner 20, Modal 4, Button rebuilt 126, Toast 4) + 200 Lucide icon components |
+| Components built in Figma | 15 UI components / 7 families (IconButton 126 variants, Textarea 24, TextInput 24, Select 30 + Option 6 + Group Label 1 + Menu 4, Multi Select 27 + Pill 1 + Option 6 + Menu 4, Combobox 18 + Menu 4, Chip 30 + Chip State 20, Avatar 20 + Avatar Status 20, Divider 10, Spinner 20, Modal 4, Button rebuilt 126, Toast 4, Banner 4) + 200 Lucide icon components |
 | Components retired | 2 deleted (legacy `Text` and `Dropdown`, after migration with a zero-reference guard) + 1 deprecated awaiting Rob's OK (legacy `Button`, 10 instances migrated) |
 | Doc pages updated | 7 (TextInput, Select, MultiSelect, Combobox, Modal, Button; Chip, Avatar, Divider, Spinner were already accurate) |
 | Token/contrast issues found | 5 failing pairs (see Round 1) + invisible dark-mode elevation + counter text (Round 5) + default field border 1.47 / 1.94 (Round 6) + group heading 2.54 / 3.04 and dark search placeholder 4.06 (Round 7) + unchecked checkbox border 1.47 / 1.94 (Round 8) |
-| Self-corrections | 10 (Chip: paint opacity reset, false-alarm verification, stale instances; earlier: IconButton stroke scaling, escaped descriptions, Textarea padding double-counting stroke, "Dropdown nests Text" mis-attribution, review-panel row clipping, Multi Select orphaned buttons, Multi Select tail minimum) |
+| Self-corrections | 12 (Round 17: variable-bound paint opacity not inherited by instances, which invalidated Chip's Round 10 fix and was re-done at layer level; failed first repair attempt; earlier: Chip: paint opacity reset, false-alarm verification, stale instances; earlier still: IconButton stroke scaling, escaped descriptions, Textarea padding double-counting stroke, "Dropdown nests Text" mis-attribution, review-panel row clipping, Multi Select orphaned buttons, Multi Select tail minimum) |
 | Figma variables added | 42 (11 Cool Gray primitives + 11 Theme tokens x Light/Dark + 16 Brand + 4 Brand Warning) |
 | Figma styles added | 5 effect styles (Elevation / 1-5) + 10 text styles (Field / Text SM, Text LG, Label SM / MD / LG, Message, Counter, Group Label; Chip / SM, MD) |
 
