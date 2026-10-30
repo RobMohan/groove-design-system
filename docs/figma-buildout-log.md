@@ -376,12 +376,33 @@ Reused as-is: `Select Group Label`, the token set, elevation 4, the focus-ring c
 
 **Not done:** hover/pressed (code has no distinct chip pressed style); Code Connect; doc page needs only a `className` row.
 
+### Round 11: Avatar (2026-10-29)
+**Why this one:** next on the gap list and a dependency of menus, tables, comments and the Top Bar. Small API, but the status dot forced a composition decision.
+
+**Built** (new `Avatar` section, 40 variants): `Avatar` (20): Size 5 (XS 24, SM 32, MD 40, LG 56, XL 80) x Shape 2 (Circle, Square) x Content 2 (Initials, Icon). `Avatar Status` (20): Size 5 x Status 4 (Online, Away, Busy, Offline), dot sizes 6 / 8 / 10 / 12 / 16 with a 2px outside ring in the raised surface color (the code's `ring-2 ring-surface-raised`). Properties: Initials (TEXT), Show Status (BOOLEAN) and the nested dot's own Status property **exposed** on the avatar (`isExposedInstance`), so a designer picks Online / Away / Busy / Offline from the avatar's panel. One new text style, `Avatar / XL` (Medium 24/32); the other four sizes reuse existing Medium styles (`Chip / SM`, `Chip / MD`, `Field / Label MD`, `Field / Label LG`), same sizes and weights, only the names are borrowed.
+
+**Decision: why the dot is its own set.** Folding Status (5 values) into Avatar would be 5 x 2 x 2 x 5 = 100 variants. A nested, exposed instance keeps Avatar at 20 and gives the dot one source of truth. This is the first use of exposed nested instances in the file.
+
+**Not modeled (and why):** photo avatars (the React component swaps the initials for an `img`; a variant with a fake photo would be misleading, so the description says to fill the Surface layer with an image); `AvatarGroup` (overlapping cluster with a +N chip; reasonable next small component).
+
+**Process:** built directly (no throwaway prototype), screenshot-checked once per mode. No defects this round; the first-pass build was clean. Verified: 120 paints / 0 unbound, 10 text layers / 0 unstyled, 0 unbound radii, property wiring and exposed-instance flag on all 20, descriptions clean. The Avatar doc page already covered every prop and AvatarGroup, so no page change.
+
+**Findings (accessibility, measured)**
+| Item | Light | Dark | Result |
+| --- | --- | --- | --- |
+| Initials / icon (`ink-muted`) on `surface-muted` | 6.87 | 4.06 | Dark fails 4.5 for XS to LG text (XL is 24px, large-text 3:1, passes) |
+| Offline dot (`ink-subtle`) vs raised ring | 2.54 | 3.04 | Light fails the 3:1 non-text minimum |
+| Online / away dots vs ring | 3.30 / 3.19 | | Pass 3:1 narrowly |
+- Code finding: status is conveyed by color only (the dot is a bare `span` with an `aria-label` but no role, which most screen readers ignore); sighted users with color-vision differences get no non-color cue (no icon, shape or text). Worth a shape or label treatment.
+
+**Not done:** AvatarGroup; photo variant; Code Connect.
+
 ## Running tally
 
 | Metric | Value |
 | --- | --- |
 | Components audited | inventory-level only (~17 present / ~27 missing of ~44) |
-| Components built in Figma | 15 UI components / 7 families (IconButton 126 variants, Textarea 24, TextInput 24, Select 30 + Option 6 + Group Label 1 + Menu 4, Multi Select 27 + Pill 1 + Option 6 + Menu 4, Combobox 18 + Menu 4, Chip 30 + Chip State 20) + 200 Lucide icon components |
+| Components built in Figma | 15 UI components / 7 families (IconButton 126 variants, Textarea 24, TextInput 24, Select 30 + Option 6 + Group Label 1 + Menu 4, Multi Select 27 + Pill 1 + Option 6 + Menu 4, Combobox 18 + Menu 4, Chip 30 + Chip State 20, Avatar 20 + Avatar Status 20) + 200 Lucide icon components |
 | Components retired | 2 (legacy `Text` and `Dropdown` sets: migrated, deprecated, then deleted with a zero-reference guard) |
 | Doc pages updated | 4 (TextInput, Select, MultiSelect, Combobox) |
 | Token/contrast issues found | 5 failing pairs (see Round 1) + invisible dark-mode elevation + counter text (Round 5) + default field border 1.47 / 1.94 (Round 6) + group heading 2.54 / 3.04 and dark search placeholder 4.06 (Round 7) + unchecked checkbox border 1.47 / 1.94 (Round 8) |
