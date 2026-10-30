@@ -8,16 +8,21 @@ const CodeBlock = ({ code }) => (
 );
 
 const rows = [
+  ['label', 'string', '—', 'Field label, associated with the input.'],
   ['value', "number | ''", "''", 'Controlled value.'],
   ['onChange', 'function', '—', 'Called with the next numeric value (or "").'],
   ['min', 'number', 'undefined', 'Lower bound (clamped, disables decrement).'],
   ['max', 'number', 'undefined', 'Upper bound (clamped, disables increment).'],
   ['step', 'number', '1', 'Increment/decrement amount.'],
   ['precision', 'number', 'undefined', 'Fixed decimal places.'],
-  ['size', "'sm' | 'md' | 'lg'", "'md'", 'Control height.'],
-  ['error', 'string', "''", 'Error message; sets aria-invalid.'],
-  ['helperText', 'string', "''", 'Help text below the field.'],
+  ['size', "'sm' | 'md' | 'lg'", "'md'", 'Control height: 32px / 40px / 48px.'],
+  ['placeholder', 'string', "'0'", 'Shown when the field is empty.'],
+  ['required', 'boolean', 'false', 'Adds a red asterisk to the label (hidden from screen readers) and sets the native required attribute.'],
+  ['error', 'string', "''", 'Error message; sets aria-invalid and shows the alert icon.'],
+  ['helperText', 'string', "''", 'Help text below the field; replaced by the error message when one is set.'],
   ['disabled', 'boolean', 'false', 'Disable the control.'],
+  ['id', 'string', 'auto-generated', 'HTML id for the input, used to associate the label.'],
+  ['className', 'string', "''", 'Additional CSS classes for the outer wrapper.'],
 ];
 
 const PropsTable = () => (

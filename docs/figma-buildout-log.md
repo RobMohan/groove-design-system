@@ -736,14 +736,32 @@ All pass, narrowly for positive (light) and secondary (dark). The label text is 
 
 **Not done:** custom icon node (the code also accepts a React element); Code Connect.
 
+### Round 29: NumberInput (2026-10-29)
+**Why this one:** the last member of the text-field family (TextInput, Textarea, Select, Combobox, Multi Select), reusing the TextInput construction (label, message, border tokens, per-variant field text) with a new stepper column.
+
+**Built** (new `Number Input` section, 24 variants): `NumberInput` set, Size 3 x State 4 (Default, Focus, Error, Disabled) x Content 2 (Placeholder, Value); 5 properties (Label, Show Label, Required, Message, Show Message). Field heights 32 / 40 / 48 (fixed), 1px or 2px border by state, clipped to the rounded corners (`overflow-hidden` in code). The stepper is a column with a 1px left border and a 1px divider between the increase and decrease buttons, chevrons at 12 / 14 / 16px; the error state adds the alert icon before the stepper; Disabled drops the stepper buttons to 40% opacity (`disabled:opacity-40`). Value padding is 8 / 12 / 12px by size, applying the Round 6 lesson (the stroke adds itself, so padding is the code's value, not value plus border). Light and Dark panels.
+
+**Build note:** one failed attempt (Figma has no `STRETCH` value for counter-axis alignment: stretching a child is a per-child fill setting). Nothing persisted; the corrected script ran clean and needed no repair pass.
+
+**Honest scope notes:** min and max disable one stepper at a time in code; that isn't a variant (it would add four more states to 24), so the description says to reduce one button's opacity. `precision`, `step` and clamping are behavior.
+
+**Doc site:** `NumberInputPage.jsx` was missing `label`, `placeholder`, `required`, `id` and `className`, and the descriptions for `size`, `error` and `helperText` were thin. Added the five rows and sharpened three descriptions; site build passes.
+
+**Findings (accessibility, measured)**
+- Value text (`ink`) and placeholder (`ink-muted`) pass (17+ / 7.56 light; 13+ / 5.78 dark). The border (`line-strong`) is the same 1.47 / 1.94 failure as the rest of the field family (now **six** components: TextInput, Textarea, Select, Combobox, Multi Select, NumberInput, plus the Outline button, ButtonGroup and Multi Select checkbox).
+- The stepper chevrons (`ink-muted`) pass the 3:1 graphic minimum (6.87 / 4.06 on raised). Stepper buttons have `tabIndex={-1}` by design (keyboard users use Arrow Up and Down on the input, the WAI-ARIA spinbutton pattern), so they are mouse-only affordances: correct, and noted.
+- The error state pairs destructive text and border with the alert icon (not color alone): good.
+
+**Not done:** stepper hover (muted fill and ink icon: the code has it; not drawn, same trade-off as other hover states in this file); Code Connect.
+
 ## Running tally
 
 | Metric | Value |
 | --- | --- |
 | Components audited | inventory-level only (~17 present / ~27 missing of ~44) |
-| Components built in Figma | 15 UI components / 7 families (IconButton 126 variants, Textarea 24, TextInput 24, Select 30 + Option 6 + Group Label 1 + Menu 4, Multi Select 27 + Pill 1 + Option 6 + Menu 4, Combobox 18 + Menu 4, Chip 30 + Chip State 20, Avatar 20 + Avatar Status 20, Divider 10, Spinner 20, Modal 4, Button rebuilt 126, Toast 4, Banner 4, Link 18 + Link State 6, Menu Item 6 + Divider 1 + Menu 1, Segment 15 + Segmented Control 18, Skeleton 3 + Skeleton Text 3, Accordion Item 6 + Accordion 1, Step Indicator 4 + Stepper 8, Popover 8, Slider 18, StatCard 3, Button Group 4, EmptyState 3) + 200 Lucide icon components |
+| Components built in Figma | 15 UI components / 7 families (IconButton 126 variants, Textarea 24, TextInput 24, Select 30 + Option 6 + Group Label 1 + Menu 4, Multi Select 27 + Pill 1 + Option 6 + Menu 4, Combobox 18 + Menu 4, Chip 30 + Chip State 20, Avatar 20 + Avatar Status 20, Divider 10, Spinner 20, Modal 4, Button rebuilt 126, Toast 4, Banner 4, Link 18 + Link State 6, Menu Item 6 + Divider 1 + Menu 1, Segment 15 + Segmented Control 18, Skeleton 3 + Skeleton Text 3, Accordion Item 6 + Accordion 1, Step Indicator 4 + Stepper 8, Popover 8, Slider 18, StatCard 3, Button Group 4, EmptyState 3, NumberInput 24) + 200 Lucide icon components |
 | Components retired | 2 deleted (legacy `Text` and `Dropdown`, after migration with a zero-reference guard) + 1 deprecated awaiting Rob's OK (legacy `Button`, 10 instances migrated) |
-| Doc pages updated | 7 (TextInput, Select, MultiSelect, Combobox, Modal, Button; Chip, Avatar, Divider, Spinner were already accurate) |
+| Doc pages updated | 10 (TextInput, Select, MultiSelect, Combobox, Modal, Button, Toast, NumberInput, ButtonPage; the rest were already accurate) |
 | Token/contrast issues found | 5 failing pairs (see Round 1) + invisible dark-mode elevation + counter text (Round 5) + default field border 1.47 / 1.94 (Round 6) + group heading 2.54 / 3.04 and dark search placeholder 4.06 (Round 7) + unchecked checkbox border 1.47 / 1.94 (Round 8) |
 | Self-corrections | 14 (Round 18: underline leaked to 147 shared-style labels, reset and rebuilt as dedicated underline styles, which also fixed Round 15's never-rendered Link underline; Round 17: variable-bound paint opacity not inherited by instances, which invalidated Chip's Round 10 fix and was re-done at layer level; failed first repair attempt; earlier: Chip: paint opacity reset, false-alarm verification, stale instances; earlier still: IconButton stroke scaling, escaped descriptions, Textarea padding double-counting stroke, "Dropdown nests Text" mis-attribution, review-panel row clipping, Multi Select orphaned buttons, Multi Select tail minimum) |
 | Figma variables added | 43 (11 Cool Gray primitives + 11 Theme tokens x Light/Dark + 16 Brand + 4 Brand Warning + 1 Destructive/Tint 10 alpha) |
