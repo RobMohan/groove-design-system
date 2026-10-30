@@ -769,12 +769,29 @@ All pass, narrowly for positive (light) and secondary (dark). The label text is 
 
 **Not done:** Code Connect.
 
+### Round 31: Drawer (2026-10-29)
+**Why this one:** the overlay family's last panel type (Modal, Popover, Menu, Toast are done), and it reuses the Modal's header, footer, backdrop scene and the rebuilt Button directly.
+
+**Built** (new `Drawer` section, 12 variants plus 4 scenes): `Drawer` set, Side 4 (Right, Left, Top, Bottom) x Size 3 (SM, MD, LG). Side drawers are 288 / 384 / 512px wide and top or bottom drawers are 160 / 288 / 512px high; the other dimension is the viewport (shown at 640px high and 960px wide: resize the instance). A 1px line border sits on the inner edge only, raised surface, `Elevation / 5`, no radius. 5 properties: Title, Show Title, Show Close, Body, Show Footer. Header, body (fills the remaining space, clipped) and footer (Outline Cancel and Primary Save) follow the Modal exactly (20px padding, 1px dividers). Four review scenes put the drawer on a dimmed page (the code's black at 50%): Light right, Dark right, Light bottom, Dark left.
+
+**Finding by rendering (a code geometry issue, mirrored on purpose):** at Size = SM, a top or bottom drawer is 160px high but the header (about 69px) and the footer (about 81px) take about 150, leaving roughly 10px for the body, so the body is effectively clipped (it scrolls in the product, but nothing is visible). Small top and bottom drawers are only usable without a footer. Either the size should be larger or the footer should be optional by default.
+
+**Process:** one build call, one screenshot call on three of the four scenes; no repair pass. Applied the Round 19 lessons: no absolute layers inside stacked auto layouts, no partial-opacity paints; the scrim is a plain rectangle in a plain frame.
+
+**Doc site:** `DrawerPage.jsx` covers `open`, `onClose`, `side`, `size`, `title`, `footer`, `closeOnOverlayClick`, `closeOnEsc` and `showClose`; no change.
+
+**Findings (accessibility)**
+- The same Modal pairs (close icon and title, description) pass; no new failures. The panel edge against a dimmed page relies on the scrim and the shadow (invisible in dark mode, Round 2), so in dark mode a left or right drawer is separated from the scrim mostly by the border and the raised fill (about 1.4:1): visible, but low-contrast.
+- Code: `role=dialog` with `aria-modal`, a focus trap and scroll lock are present, as for the Modal; the drawer's `max-w-[90vw]` cap means a large drawer on a small screen leaves a 10% sliver of scrim, which is the intended affordance for dismissal.
+
+**Not done:** slide-in animations; the 90% viewport caps (behavior); Code Connect.
+
 ## Running tally
 
 | Metric | Value |
 | --- | --- |
 | Components audited | inventory-level only (~17 present / ~27 missing of ~44) |
-| Components built in Figma | 15 UI components / 7 families (IconButton 126 variants, Textarea 24, TextInput 24, Select 30 + Option 6 + Group Label 1 + Menu 4, Multi Select 27 + Pill 1 + Option 6 + Menu 4, Combobox 18 + Menu 4, Chip 30 + Chip State 20, Avatar 20 + Avatar Status 20, Divider 10, Spinner 20, Modal 4, Button rebuilt 126, Toast 4, Banner 4, Link 18 + Link State 6, Menu Item 6 + Divider 1 + Menu 1, Segment 15 + Segmented Control 18, Skeleton 3 + Skeleton Text 3, Accordion Item 6 + Accordion 1, Step Indicator 4 + Stepper 8, Popover 8, Slider 18, StatCard 3, Button Group 4, EmptyState 3, NumberInput 24, Avatar Group 10) + 200 Lucide icon components |
+| Components built in Figma | 15 UI components / 7 families (IconButton 126 variants, Textarea 24, TextInput 24, Select 30 + Option 6 + Group Label 1 + Menu 4, Multi Select 27 + Pill 1 + Option 6 + Menu 4, Combobox 18 + Menu 4, Chip 30 + Chip State 20, Avatar 20 + Avatar Status 20, Divider 10, Spinner 20, Modal 4, Button rebuilt 126, Toast 4, Banner 4, Link 18 + Link State 6, Menu Item 6 + Divider 1 + Menu 1, Segment 15 + Segmented Control 18, Skeleton 3 + Skeleton Text 3, Accordion Item 6 + Accordion 1, Step Indicator 4 + Stepper 8, Popover 8, Slider 18, StatCard 3, Button Group 4, EmptyState 3, NumberInput 24, Avatar Group 10, Drawer 12) + 200 Lucide icon components |
 | Components retired | 2 deleted (legacy `Text` and `Dropdown`, after migration with a zero-reference guard) + 1 deprecated awaiting Rob's OK (legacy `Button`, 10 instances migrated) |
 | Doc pages updated | 10 (TextInput, Select, MultiSelect, Combobox, Modal, Button, Toast, NumberInput, ButtonPage; the rest were already accurate) |
 | Token/contrast issues found | 5 failing pairs (see Round 1) + invisible dark-mode elevation + counter text (Round 5) + default field border 1.47 / 1.94 (Round 6) + group heading 2.54 / 3.04 and dark search placeholder 4.06 (Round 7) + unchecked checkbox border 1.47 / 1.94 (Round 8) |
