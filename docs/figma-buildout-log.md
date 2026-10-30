@@ -721,12 +721,27 @@ All pass, narrowly for positive (light) and secondary (dark). The label text is 
 
 **Not done:** IconButton-in-group example (works the same; the IconButton set is in Figma); Code Connect.
 
+### Round 28: EmptyState (2026-10-29)
+**Why this one:** a common zero-data pattern that composes the rebuilt Button, icons, tokens and the badge shape from Avatar.
+
+**Built** (new `Empty State` section, 3 variants): `EmptyState` set, Size = SM (32px vertical padding, 40px badge, 16px title), MD (48 / 56 / 18px), LG (64 / 80 / 20px, with a 16px description). 5 properties: Title, Description, Show Icon, Show Description, Show Actions. Everything centered with 24px side padding; the description is capped at 384px (`max-w-sm`); the gap above the actions is 12 / 16 / 24px by size; actions are Primary and Outline Button instances (replaceable). Heights check against the CSS (MD 240px with a two-line description). One new text style, `Empty / Title LG` (Semi Bold 20/28); SM and MD reuse `Body / Bold` and `Modal / Title`. Light and Dark panels.
+
+**Process:** one build call with panels; one screenshot per mode; no defects, no repair (a fifth clean round in this batch). The wrapper-frame technique from Toast (spacing owned by a wrapper that hides with its content) keeps toggled content from leaving stray gaps.
+
+**Doc site:** `EmptyStatePage.jsx` already covers `icon`, `title`, `description`, `primaryAction`, `secondaryAction`, `size`, `className`; no change.
+
+**Findings (accessibility)**
+- No new color failures: title `ink`, description `ink-muted` (7.56 / 5.78), icon `ink-muted` on the muted badge (6.87 / 4.06, passes the 3:1 graphic minimum).
+- Code: the title is a hard-coded `h3`, so a page can't choose a heading level that fits its outline, and an `h3` under a page with no `h2` is an accessibility smell. An `as` or `headingLevel` prop would fix it.
+
+**Not done:** custom icon node (the code also accepts a React element); Code Connect.
+
 ## Running tally
 
 | Metric | Value |
 | --- | --- |
 | Components audited | inventory-level only (~17 present / ~27 missing of ~44) |
-| Components built in Figma | 15 UI components / 7 families (IconButton 126 variants, Textarea 24, TextInput 24, Select 30 + Option 6 + Group Label 1 + Menu 4, Multi Select 27 + Pill 1 + Option 6 + Menu 4, Combobox 18 + Menu 4, Chip 30 + Chip State 20, Avatar 20 + Avatar Status 20, Divider 10, Spinner 20, Modal 4, Button rebuilt 126, Toast 4, Banner 4, Link 18 + Link State 6, Menu Item 6 + Divider 1 + Menu 1, Segment 15 + Segmented Control 18, Skeleton 3 + Skeleton Text 3, Accordion Item 6 + Accordion 1, Step Indicator 4 + Stepper 8, Popover 8, Slider 18, StatCard 3, Button Group 4) + 200 Lucide icon components |
+| Components built in Figma | 15 UI components / 7 families (IconButton 126 variants, Textarea 24, TextInput 24, Select 30 + Option 6 + Group Label 1 + Menu 4, Multi Select 27 + Pill 1 + Option 6 + Menu 4, Combobox 18 + Menu 4, Chip 30 + Chip State 20, Avatar 20 + Avatar Status 20, Divider 10, Spinner 20, Modal 4, Button rebuilt 126, Toast 4, Banner 4, Link 18 + Link State 6, Menu Item 6 + Divider 1 + Menu 1, Segment 15 + Segmented Control 18, Skeleton 3 + Skeleton Text 3, Accordion Item 6 + Accordion 1, Step Indicator 4 + Stepper 8, Popover 8, Slider 18, StatCard 3, Button Group 4, EmptyState 3) + 200 Lucide icon components |
 | Components retired | 2 deleted (legacy `Text` and `Dropdown`, after migration with a zero-reference guard) + 1 deprecated awaiting Rob's OK (legacy `Button`, 10 instances migrated) |
 | Doc pages updated | 7 (TextInput, Select, MultiSelect, Combobox, Modal, Button; Chip, Avatar, Divider, Spinner were already accurate) |
 | Token/contrast issues found | 5 failing pairs (see Round 1) + invisible dark-mode elevation + counter text (Round 5) + default field border 1.47 / 1.94 (Round 6) + group heading 2.54 / 3.04 and dark search placeholder 4.06 (Round 7) + unchecked checkbox border 1.47 / 1.94 (Round 8) |
