@@ -803,17 +803,39 @@ All pass, narrowly for positive (light) and secondary (dark). The label text is 
 
 **Not done:** Disabled; Code Connect.
 
+### Round 33: List (2026-10-29)
+**Why this one:** the standard row pattern behind settings screens, people lists and navigation, and the first component to need two *tint* levels (10% and 15%), which made it the right moment to apply the Round 19 lesson properly.
+
+**Tokens first:** added two Brand variables with real alpha, `Primary/Tint 10` and `Primary/Tint 15` (the code's `bg-primary/10` and `hover:bg-primary/15` for selected rows), alongside Round 19's `Destructive/Tint 10`. Alpha lives in the color value, so instances inherit it (verified by the stacked render). Trade-off recorded in the variable descriptions: they duplicate the primary hex, so a change to the brand blue needs a three-place update (Primary/Default, and the tints). A candidate cleanup is to move Chip and Banner (Rounds 10 and 17, which use layer opacity) onto the same pattern for consistency.
+
+**Built** (new `List` section, 8 variants): `List Item` (6): State = Default, Hover (muted), Selected (10% primary tint, primary medium text), Selected Hover (15% tint), Focus (2px focus-color inset ring, drawn as the row's own inside stroke, no absolute layer) and Disabled (50% opacity); properties Primary, Secondary, Show Secondary, Show Leading (an Avatar SM instance), Show Trailing (a chevron). Rows are 16px by 12px padding, 12px gap, 68px high with both lines (matches the CSS). `List` (2): Dividers True or False, three exposed List Item instances with 1px dividers between them when True. Light and Dark panels (the list and every row state).
+
+**Process:** one build call with panels, clean render in both modes; no repair pass. The stacked-rows case was exactly where Round 19's absolute-layer bug lived; building state fills as the row's own fill avoided it.
+
+**Doc site:** `ListPage.jsx` covers `dividers`, `leading`, `primary`, `secondary`, `trailing`, `interactive`, `selected`, `disabled` and `onClick`; no change.
+
+**Findings (accessibility, measured)**
+| Item | Light | Dark | Result |
+| --- | --- | --- | --- |
+| **Selected primary text** (`primary` medium 16px) on the 10% tint | **3.08** | **3.72** | **Fails AA** both modes |
+| Selected primary text on the 15% hover tint | 2.91 | 3.46 | Fails AA |
+| Secondary text (`ink-muted`) on the tint | 6.79 | 5.03 | Pass |
+- The selected row's label is the most prominent text in the list and the one that fails. A selected state conveyed by primary color text and a faint tint, with no icon, check, bar or weight beyond "medium", also falls short of 1.4.11 / 1.4.1 for users who can't see the color change. (`aria-current` is set, which is correct.)
+- Design observation: the leading Avatar's disc is `surface-muted`, the same as the Hover row fill, so the avatar disc disappears into the row on hover (1.00:1); the code does the same.
+
+**Not done:** non-interactive rows with children content; the Logo import (below); Code Connect.
+
 ## Running tally
 
 | Metric | Value |
 | --- | --- |
 | Components audited | inventory-level only (~17 present / ~27 missing of ~44) |
-| Components built in Figma | 15 UI components / 7 families (IconButton 126 variants, Textarea 24, TextInput 24, Select 30 + Option 6 + Group Label 1 + Menu 4, Multi Select 27 + Pill 1 + Option 6 + Menu 4, Combobox 18 + Menu 4, Chip 30 + Chip State 20, Avatar 20 + Avatar Status 20, Divider 10, Spinner 20, Modal 4, Button rebuilt 126, Toast 4, Banner 4, Link 18 + Link State 6, Menu Item 6 + Divider 1 + Menu 1, Segment 15 + Segmented Control 18, Skeleton 3 + Skeleton Text 3, Accordion Item 6 + Accordion 1, Step Indicator 4 + Stepper 8, Popover 8, Slider 18, StatCard 3, Button Group 4, EmptyState 3, NumberInput 24, Avatar Group 10, Drawer 12, Input Group 27) + 200 Lucide icon components |
+| Components built in Figma | 15 UI components / 7 families (IconButton 126 variants, Textarea 24, TextInput 24, Select 30 + Option 6 + Group Label 1 + Menu 4, Multi Select 27 + Pill 1 + Option 6 + Menu 4, Combobox 18 + Menu 4, Chip 30 + Chip State 20, Avatar 20 + Avatar Status 20, Divider 10, Spinner 20, Modal 4, Button rebuilt 126, Toast 4, Banner 4, Link 18 + Link State 6, Menu Item 6 + Divider 1 + Menu 1, Segment 15 + Segmented Control 18, Skeleton 3 + Skeleton Text 3, Accordion Item 6 + Accordion 1, Step Indicator 4 + Stepper 8, Popover 8, Slider 18, StatCard 3, Button Group 4, EmptyState 3, NumberInput 24, Avatar Group 10, Drawer 12, Input Group 27, List Item 6 + List 2) + 200 Lucide icon components |
 | Components retired | 2 deleted (legacy `Text` and `Dropdown`, after migration with a zero-reference guard) + 1 deprecated awaiting Rob's OK (legacy `Button`, 10 instances migrated) |
 | Doc pages updated | 10 (TextInput, Select, MultiSelect, Combobox, Modal, Button, Toast, NumberInput, ButtonPage; the rest were already accurate) |
 | Token/contrast issues found | 5 failing pairs (see Round 1) + invisible dark-mode elevation + counter text (Round 5) + default field border 1.47 / 1.94 (Round 6) + group heading 2.54 / 3.04 and dark search placeholder 4.06 (Round 7) + unchecked checkbox border 1.47 / 1.94 (Round 8) |
 | Self-corrections | 14 (Round 18: underline leaked to 147 shared-style labels, reset and rebuilt as dedicated underline styles, which also fixed Round 15's never-rendered Link underline; Round 17: variable-bound paint opacity not inherited by instances, which invalidated Chip's Round 10 fix and was re-done at layer level; failed first repair attempt; earlier: Chip: paint opacity reset, false-alarm verification, stale instances; earlier still: IconButton stroke scaling, escaped descriptions, Textarea padding double-counting stroke, "Dropdown nests Text" mis-attribution, review-panel row clipping, Multi Select orphaned buttons, Multi Select tail minimum) |
-| Figma variables added | 43 (11 Cool Gray primitives + 11 Theme tokens x Light/Dark + 16 Brand + 4 Brand Warning + 1 Destructive/Tint 10 alpha) |
+| Figma variables added | 45 (11 Cool Gray primitives + 11 Theme tokens x Light/Dark + 16 Brand + 4 Brand Warning + 3 alpha tints: Destructive/Tint 10, Primary/Tint 10, Primary/Tint 15) |
 | Figma styles added | 5 effect styles (Elevation / 1-5) + 19 text styles (Field / Text SM, Text LG, Label SM / MD / LG, Message, Counter, Group Label; Chip / SM, MD; Avatar / XL; Modal / Title; Button / LG; Toast / Action; Underline / Label MD, Chip MD, Button LG) |
 
 ## Story notes (for the final write-up)
