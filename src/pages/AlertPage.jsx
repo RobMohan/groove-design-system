@@ -94,7 +94,9 @@ export default function AlertPage() {
                 <PropRow name="title" type="string" def="—" desc="Bold heading line" />
                 <PropRow name="children" type="node" def="—" desc="Body content" />
                 <PropRow name="icon" type="Component" def="—" desc="Override the default variant icon" />
-                <PropRow name="onClose" type="function" def="—" desc="When provided, renders a dismiss button" />
+                <PropRow name="actions" type="node" def="—" desc="Buttons shown under the message (wrap, 8px gap)" />
+                <PropRow name="onClose" type="function" def="—" desc="When provided, renders a dismiss button and lets the parent own removal" />
+                <PropRow name="dismissible" type="boolean" def="false" desc="Renders a dismiss button that fades the alert out and unmounts it (use onClose to control removal instead)" />
                 <PropRow name="className" type="string" def="''" desc="Additional CSS classes" />
               </tbody>
             </table>
