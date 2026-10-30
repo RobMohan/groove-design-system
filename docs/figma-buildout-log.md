@@ -215,7 +215,7 @@ _Entries are added newest-last. Each records: goal, decisions + rationale, what 
 
 **Audit first.** The legacy field was not called Input: the frame was "Input", the component set inside it was `Text` (5 variants: Default/Active/Filled/Inactive/Error, 40px fixed height, 4px radius, raw white fill, a bound stroke, no sizes, no helper text, no counter). Its search glyph was a raw iconstack frame, not an icon instance, so Round 4b's migration had never touched it. Dependents: one instance in the Playground "Input Test" frame, and two nested instances that I first attributed to the Dropdown. **That attribution was wrong** (caught at the start of Round 7): they were the search field inside the Top Bar composition. I wrote the claim from an instance ID without walking its parent chain. The doc page for TextInput was also stale: it said the basic example shows a search icon (the code made the icon opt-in), listed `showIcon` as defaulting to true, and documented 8 of ~20 props.
 
-**Scope decision (mine, flagged):** the matrix is Size x State x Content, the same 24 variants as Textarea, because that is the family's shared API. `addonBefore` and `addonAfter` are **not** modeled. They change the field's corner rounding, and Figma can't bind radius to a boolean property, so modeling them means a fourth variant axis (96 variants, over the 30-variant guideline) or a separate Input Group component. Recommendation: build the group as its own component later. `type` is documented only (no visual difference).
+**Scope decision (mine, flagged):** the matrix is Size x State x Content, the same 24 variants as Textarea, because that is the family's shared API. `addonBefore` and `addonAfter` are **not** modeled. They change the field's corner rounding, and Figma can't bind radius to a boolean property, so modeling them means a fourth variant axis (96 variants, over the 30-variant guideline) or a separate Input Group component. Recommendation: build the group as its own component later (done in Round 32: the `Input Group` set). `type` is documented only (no visual difference).
 
 **Built:** component set `TextInput` (24 variants, default MD / Default / Placeholder) in the `Text Fields` section, beside Textarea. 13 properties: Label, Show Label, Required, Message, Show Message, Count, Show Count, Prefix, Show Prefix, Suffix, Show Suffix, Show Icon, Icon (instance swap, default `lucide/search`). Sizes match the code box model: field heights 32 / 40 / 48, padding 8 / 8 / 12, icons 16 / 20 / 22. Error variants always show the alert icon with the property intentionally unwired, because code gives the error icon priority over `showIcon`. Added one text style (`Field / Counter`, 12/16) because the inline counter is `text-xs`. Light and Dark review panels built from instances (dark needed no extra work: it's the Theme mode on the panel).
 
@@ -786,12 +786,29 @@ All pass, narrowly for positive (light) and secondary (dark). The label text is 
 
 **Not done:** slide-in animations; the 90% viewport caps (behavior); Code Connect.
 
+### Round 32: Input Group (2026-10-29)
+**Why this one:** it closes the open scope decision from Round 6, where `addonBefore` and `addonAfter` were deliberately left out of TextInput because Figma can't bind a radius to a boolean (the recommendation then: build the group as its own component).
+
+**Built** (new `Input Group` section, 27 variants): `Input Group` set, Size 3 x Addons 3 (Before, After, Both) x State 3 (Default, Focus, Error). Each variant is a label row, a group row (addon block or blocks plus the field) and a message. Addon blocks are `Surface/Muted` with muted text, 12px side padding, a strong line border that omits the joined edge, and rounded outer corners only; the field takes the opposite corner rounding (squared on every side that has an addon), bound per corner to `Radius/S` with the squared corners set to 0. Focus and error apply to the field only, as in code (the addon borders do not change). Same label, required and message properties as TextInput. Heights 32 / 40 / 48, matching the code, and the field padding uses the Round 6 correction (the stroke adds itself).
+
+**Scope notes:** the no-addon case is the plain TextInput, so it isn't repeated; Disabled isn't drawn (it adds 9 variants, 36 total) and the description says so; prefix and suffix live inside the border and stay on TextInput.
+
+**Process:** one build call, a clean render in both modes, no repair pass. Verified heights numerically and the corner logic visually (Before: addon left, field's right corners rounded; After: the reverse; Both: field fully squared).
+
+**Doc site:** the TextInput page already documents `addonBefore` and `addonAfter` (added in Round 6); no change.
+
+**Findings (accessibility)**
+- Addon text (`ink-muted` on `surface-muted`): 6.87 light / **4.06 dark** (fails AA in dark mode, the same pair as Rounds 7, 11, 20, 30). The field border and the addon border are `line-strong`: the same 1.47 / 1.94 failure as the rest of the family.
+- Code: an addon is plain text in a `span` with no association to the input (`aria-describedby` or a visually hidden label would give a screen reader "https://" and ".com" as context). Today a screen reader user may never hear the addons.
+
+**Not done:** Disabled; Code Connect.
+
 ## Running tally
 
 | Metric | Value |
 | --- | --- |
 | Components audited | inventory-level only (~17 present / ~27 missing of ~44) |
-| Components built in Figma | 15 UI components / 7 families (IconButton 126 variants, Textarea 24, TextInput 24, Select 30 + Option 6 + Group Label 1 + Menu 4, Multi Select 27 + Pill 1 + Option 6 + Menu 4, Combobox 18 + Menu 4, Chip 30 + Chip State 20, Avatar 20 + Avatar Status 20, Divider 10, Spinner 20, Modal 4, Button rebuilt 126, Toast 4, Banner 4, Link 18 + Link State 6, Menu Item 6 + Divider 1 + Menu 1, Segment 15 + Segmented Control 18, Skeleton 3 + Skeleton Text 3, Accordion Item 6 + Accordion 1, Step Indicator 4 + Stepper 8, Popover 8, Slider 18, StatCard 3, Button Group 4, EmptyState 3, NumberInput 24, Avatar Group 10, Drawer 12) + 200 Lucide icon components |
+| Components built in Figma | 15 UI components / 7 families (IconButton 126 variants, Textarea 24, TextInput 24, Select 30 + Option 6 + Group Label 1 + Menu 4, Multi Select 27 + Pill 1 + Option 6 + Menu 4, Combobox 18 + Menu 4, Chip 30 + Chip State 20, Avatar 20 + Avatar Status 20, Divider 10, Spinner 20, Modal 4, Button rebuilt 126, Toast 4, Banner 4, Link 18 + Link State 6, Menu Item 6 + Divider 1 + Menu 1, Segment 15 + Segmented Control 18, Skeleton 3 + Skeleton Text 3, Accordion Item 6 + Accordion 1, Step Indicator 4 + Stepper 8, Popover 8, Slider 18, StatCard 3, Button Group 4, EmptyState 3, NumberInput 24, Avatar Group 10, Drawer 12, Input Group 27) + 200 Lucide icon components |
 | Components retired | 2 deleted (legacy `Text` and `Dropdown`, after migration with a zero-reference guard) + 1 deprecated awaiting Rob's OK (legacy `Button`, 10 instances migrated) |
 | Doc pages updated | 10 (TextInput, Select, MultiSelect, Combobox, Modal, Button, Toast, NumberInput, ButtonPage; the rest were already accurate) |
 | Token/contrast issues found | 5 failing pairs (see Round 1) + invisible dark-mode elevation + counter text (Round 5) + default field border 1.47 / 1.94 (Round 6) + group heading 2.54 / 3.04 and dark search placeholder 4.06 (Round 7) + unchecked checkbox border 1.47 / 1.94 (Round 8) |
