@@ -619,12 +619,37 @@ All pass, narrowly for positive (light) and secondary (dark). The label text is 
 
 **Not done:** `allowMultiple` and `defaultOpen` (behavior); the chevron rotation animation; Code Connect.
 
+### Round 23: Stepper (2026-10-29)
+**Why this one:** a multi-part composition (indicator, label, description, connector) that reuses Check and X glyphs, tokens and the exposed-instance pattern, and it covers a pattern the product uses for onboarding and checkout.
+
+**Built** (new `Stepper` section, 12 variants): `Step Indicator` (4): Status = Complete (primary fill, white check), Current (raised fill, primary border and number), Upcoming (raised, strong line border, subtle number), Error (destructive fill, white X); 32px circle, 2px border; property Number. `Stepper` (8): Orientation (Horizontal with 2px connectors, Vertical with a rail and 32px of spacing) x Active step 1 to 4 (steps before it Complete, the active Current, the rest Upcoming; connectors before the active step in primary, the rest in the line color). All indicators are exposed, so a designer sets any step to Error (or changes the number) from the stepper, as the code allows with an explicit `status`. Property `Show Descriptions`. Labels reuse `Toast / Action` (Semi Bold 14/20) for the current step and `Field / Message` for the others; descriptions reuse `Field / Counter` (12/16). Light and Dark panels, including a step set to Error.
+
+**Process:** one failed attempt (the exposed flag can only be set once the instance sits inside a component, and I set it before attaching), then a clean build; Figma had rolled the failed script back, so there was nothing to clean (the retry still guards for a partial section). Heights check against the CSS: horizontal 38px (32 indicator vs 38 text column), vertical 248px for four steps with the 32px gaps. No repair pass after rendering.
+
+**Known limitation, stated in the description:** an indicator switched to Error does not recolor its own label (code colors the label destructive and semibold); a designer must restyle it. Making that automatic needs the label inside the indicator component, which would make the indicator itself too coupled to the stepper. Trade-off recorded, not hidden.
+
+**Doc site:** `StepperPage.jsx` covers `steps`, `activeStep`, `orientation`, `clickable`, `onStepClick`, per-step `status`, icons and descriptions; no change.
+
+**Findings (accessibility, measured). Several are in-content text, not decoration:**
+| Item | Light | Dark | Result |
+| --- | --- | --- | --- |
+| **Upcoming step label** (`ink-subtle`, 14px regular) on the page | **2.43** | **3.67** (on page `#111827`) | **Fails AA both modes**: real content, not disabled |
+| **Upcoming number in the circle** (`ink-subtle` on raised) | **2.54** | **3.04** | **Fails AA** |
+| **Current number** (`primary` on raised, 14px medium) | **3.43** | 4.28 | **Fails AA** both |
+| Error label (`destructive`, semibold 14px) on the page | 4.62 | **3.67** | Dark fails |
+| Complete check (white on primary) | 3.43 | 3.43 | Passes 3:1 as a graphic |
+| Connector lines | decorative | | n/a |
+- The upcoming state is the first time a *non-disabled content label* uses `ink-subtle`. Combined with the counter (Round 5), group headings (Round 7) and placeholder cases, `ink-subtle` is being used for readable text throughout the system, which it can't meet (its pairs top out below 4.5). Either the token needs a darker value for text use, or those usages need `ink-muted`. This belongs in the contrast-pass decision.
+- Code: state is conveyed by color and the number or glyph; `aria-current="step"` marks the current step, which is correct and good practice.
+
+**Not done:** custom step icons (the glyph layers can be swapped); `clickable` focus ring (a standard ring, no visual change at rest); Code Connect.
+
 ## Running tally
 
 | Metric | Value |
 | --- | --- |
 | Components audited | inventory-level only (~17 present / ~27 missing of ~44) |
-| Components built in Figma | 15 UI components / 7 families (IconButton 126 variants, Textarea 24, TextInput 24, Select 30 + Option 6 + Group Label 1 + Menu 4, Multi Select 27 + Pill 1 + Option 6 + Menu 4, Combobox 18 + Menu 4, Chip 30 + Chip State 20, Avatar 20 + Avatar Status 20, Divider 10, Spinner 20, Modal 4, Button rebuilt 126, Toast 4, Banner 4, Link 18 + Link State 6, Menu Item 6 + Divider 1 + Menu 1, Segment 15 + Segmented Control 18, Skeleton 3 + Skeleton Text 3, Accordion Item 6 + Accordion 1) + 200 Lucide icon components |
+| Components built in Figma | 15 UI components / 7 families (IconButton 126 variants, Textarea 24, TextInput 24, Select 30 + Option 6 + Group Label 1 + Menu 4, Multi Select 27 + Pill 1 + Option 6 + Menu 4, Combobox 18 + Menu 4, Chip 30 + Chip State 20, Avatar 20 + Avatar Status 20, Divider 10, Spinner 20, Modal 4, Button rebuilt 126, Toast 4, Banner 4, Link 18 + Link State 6, Menu Item 6 + Divider 1 + Menu 1, Segment 15 + Segmented Control 18, Skeleton 3 + Skeleton Text 3, Accordion Item 6 + Accordion 1, Step Indicator 4 + Stepper 8) + 200 Lucide icon components |
 | Components retired | 2 deleted (legacy `Text` and `Dropdown`, after migration with a zero-reference guard) + 1 deprecated awaiting Rob's OK (legacy `Button`, 10 instances migrated) |
 | Doc pages updated | 7 (TextInput, Select, MultiSelect, Combobox, Modal, Button; Chip, Avatar, Divider, Spinner were already accurate) |
 | Token/contrast issues found | 5 failing pairs (see Round 1) + invisible dark-mode elevation + counter text (Round 5) + default field border 1.47 / 1.94 (Round 6) + group heading 2.54 / 3.04 and dark search placeholder 4.06 (Round 7) + unchecked checkbox border 1.47 / 1.94 (Round 8) |
