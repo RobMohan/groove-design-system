@@ -40,7 +40,19 @@ const PropsTable = () => (
             'top' | 'bottom' | 'left' | 'right'
           </td>
           <td className="py-3 px-4 font-mono text-xs">'top'</td>
-          <td className="py-3 px-4">Position of the tooltip relative to the trigger element</td>
+          <td className="py-3 px-4">Preferred side, 8px from the trigger. Flips to the opposite side when it would leave the viewport.</td>
+        </tr>
+        <tr className="border-b border-line">
+          <td className="py-3 px-4 font-mono text-sm">openDelay</td>
+          <td className="py-3 px-4 font-mono text-xs text-ink-muted">number</td>
+          <td className="py-3 px-4 font-mono text-xs">150</td>
+          <td className="py-3 px-4">Milliseconds before the tooltip opens on hover or focus</td>
+        </tr>
+        <tr className="border-b border-line">
+          <td className="py-3 px-4 font-mono text-sm">closeDelay</td>
+          <td className="py-3 px-4 font-mono text-xs text-ink-muted">number</td>
+          <td className="py-3 px-4 font-mono text-xs">100</td>
+          <td className="py-3 px-4">Milliseconds before the tooltip closes on leave or blur. Escape closes it immediately.</td>
         </tr>
         <tr className="border-b border-line">
           <td className="py-3 px-4 font-mono text-sm">className</td>
