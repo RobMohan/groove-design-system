@@ -447,14 +447,43 @@ All pass, narrowly for positive (light) and secondary (dark). The label text is 
 
 **Not done:** `full` size; Code Connect.
 
+### Round 15: Button rebuild + migration (2026-10-29)
+**Why this one:** flagged in Round 14 as the highest-value gap. The most-used component in the system was the most out of date in Figma: 5 types (no Outline, Ghost), 3 states, one size, 4px radius vs the code's 8px, no Focus, Disabled or Loading, raw colors. Everything that composed Buttons inherited the drift.
+
+**Scoped as a migration, not a drive-by.** Counted dependents first (13 instances: 1 in a Card, 12 in my own Modal footers, plus 1 in the Playground), then built, then swapped with a guard, then recounted on every page.
+
+**Built** (new `Button` section, 126 variants): Variant 7 (Primary, Outline, Secondary, Destructive, Positive, Ghost, Link) x Size 3 (SM 36px, MD 44px, LG 52px) x State 6 (Default, Hover, Pressed, Focus, Disabled, Loading); same matrix and naming as IconButton. 5 properties: Label, Show Leading Icon, Leading Icon (swap), Show Trailing Icon, Trailing Icon (swap). Radius is `Radius/S` (8px, the code's `rounded-lg`), every fill, stroke and text color is a bound variable (Brand roles, Theme tokens), focus ring is the same absolute stroke layer as IconButton, Link hover and pressed underline the label. Loading follows the code: spinner replaces the icon and the *disabled* colors apply (`isDisabled = disabled || loading`). New text style `Button / LG` (Medium 18/28); SM and MD reuse `Chip / MD` and `Field / Label MD`. Trailing icon is wired on Loading variants so a designer can still add one, though in code loading hides both icons (noted as a minor looseness).
+
+**Mirrored code behavior worth knowing:** the 2px outline border makes Outline buttons 4px taller than every other variant at each size (48 vs 44 at MD), because the code adds `border-2` without compensating padding. Same class of issue as the Textarea focus shift (Round 5). Pressed matches Hover for Outline, Ghost and Link (no `active:` style in code). Disabled Outline gets a muted fill; disabled Ghost and Link only change the text color.
+
+**Migration:** 9 instances on Components (1 Card + 8 Modal footers) and 1 on the Playground swapped to the new set, mapping Cancel from Secondary (a purple stand-in) to Outline, Confirm to Primary; labels and the icon toggle preserved; guarded (skips instances nested inside other instances because they inherit from their main component). Recount after: 0 references on Foundations, Components and Playground. The legacy set is renamed `Button (deprecated)` with a description. **Not deleted**: it's now unreferenced, but the earlier deletion go-ahead was for two specific sets, so this one waits for Rob's OK. Modal's footer now reads correctly (Outline Cancel, Primary Confirm).
+
+**Process:** one 126-variant build call (no prototype; the construction is IconButton's, already proven), migration in 3 calls, panels in 1; screenshot-checked both modes. No defects. Verified: 261 paints / 0 unbound, 126 text layers / 0 unstyled, 0 unbound radii, property wiring 0 issues, 21 focus rings (7 variants x 3 sizes), all Loading variants show the spinner, descriptions clean.
+
+**Doc site:** `ButtonPage.jsx` had no mention of `loading` or `fullWidth` (both real props). Added both to the props table and a "Loading & Full Width" section with live examples.
+
+**Findings (accessibility, measured): white label on the solid fills**
+| Variant | Default | Hover | Pressed |
+| --- | --- | --- | --- |
+| Primary | **3.43** | **1.96** | 7.78 |
+| Secondary | 5.70 | 5.38 | 8.72 |
+| Destructive | 4.83 | **3.76** | 8.31 |
+| Positive | **3.30** | **2.28** | 5.02 |
+- 6 of 12 default/hover cells fail AA for the 14-18px medium labels. Hover is *worse* than default for Primary, Positive and Destructive (the hover token is a lighter shade, so white text loses contrast just as the user targets the button). Disabled states are exempt. This is the Round 1 finding at full scale: it affects every primary action in the product, and it's the same root cause as Chip (Round 10). The fix is a token decision (darken Primary and Positive, or switch their labels to dark ink, and re-pick the hover shades), which I still haven't made without Rob.
+- Link text (`primary` on the page): 3.28 light / 5.18 dark, so light mode fails AA.
+- Outline border (`line-strong`): 1.47 / 1.94, same 3:1 failure as the fields.
+- Code: `secondary.disabled` is still `#DDE4BA` (a pale yellow-green, apparently a copy mistake next to `#B5AAC8` and the others).
+
+**Not done:** deleting `Button (deprecated)` (needs Rob's OK); `Pagination Button` is a separate legacy set, left as is; Code Connect.
+
 ## Running tally
 
 | Metric | Value |
 | --- | --- |
 | Components audited | inventory-level only (~17 present / ~27 missing of ~44) |
-| Components built in Figma | 15 UI components / 7 families (IconButton 126 variants, Textarea 24, TextInput 24, Select 30 + Option 6 + Group Label 1 + Menu 4, Multi Select 27 + Pill 1 + Option 6 + Menu 4, Combobox 18 + Menu 4, Chip 30 + Chip State 20, Avatar 20 + Avatar Status 20, Divider 10, Spinner 20, Modal 4) + 200 Lucide icon components |
-| Components retired | 2 (legacy `Text` and `Dropdown` sets: migrated, deprecated, then deleted with a zero-reference guard) |
-| Doc pages updated | 6 (TextInput, Select, MultiSelect, Combobox, Modal; Chip, Avatar, Divider, Spinner were already accurate) |
+| Components built in Figma | 15 UI components / 7 families (IconButton 126 variants, Textarea 24, TextInput 24, Select 30 + Option 6 + Group Label 1 + Menu 4, Multi Select 27 + Pill 1 + Option 6 + Menu 4, Combobox 18 + Menu 4, Chip 30 + Chip State 20, Avatar 20 + Avatar Status 20, Divider 10, Spinner 20, Modal 4, Button rebuilt 126) + 200 Lucide icon components |
+| Components retired | 2 deleted (legacy `Text` and `Dropdown`, after migration with a zero-reference guard) + 1 deprecated awaiting Rob's OK (legacy `Button`, 10 instances migrated) |
+| Doc pages updated | 7 (TextInput, Select, MultiSelect, Combobox, Modal, Button; Chip, Avatar, Divider, Spinner were already accurate) |
 | Token/contrast issues found | 5 failing pairs (see Round 1) + invisible dark-mode elevation + counter text (Round 5) + default field border 1.47 / 1.94 (Round 6) + group heading 2.54 / 3.04 and dark search placeholder 4.06 (Round 7) + unchecked checkbox border 1.47 / 1.94 (Round 8) |
 | Self-corrections | 10 (Chip: paint opacity reset, false-alarm verification, stale instances; earlier: IconButton stroke scaling, escaped descriptions, Textarea padding double-counting stroke, "Dropdown nests Text" mis-attribution, review-panel row clipping, Multi Select orphaned buttons, Multi Select tail minimum) |
 | Figma variables added | 42 (11 Cool Gray primitives + 11 Theme tokens x Light/Dark + 16 Brand + 4 Brand Warning) |

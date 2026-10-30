@@ -55,6 +55,18 @@ const PropsTable = () => (
           <td className="py-3 px-4">Position of the icon</td>
         </tr>
         <tr className="border-b border-line">
+          <td className="py-3 px-4 font-mono text-sm">loading</td>
+          <td className="py-3 px-4 font-mono text-xs text-ink-muted">boolean</td>
+          <td className="py-3 px-4 font-mono text-xs">false</td>
+          <td className="py-3 px-4">Shows a spinner in place of the icon, sets aria-busy, and disables the button</td>
+        </tr>
+        <tr className="border-b border-line">
+          <td className="py-3 px-4 font-mono text-sm">fullWidth</td>
+          <td className="py-3 px-4 font-mono text-xs text-ink-muted">boolean</td>
+          <td className="py-3 px-4 font-mono text-xs">false</td>
+          <td className="py-3 px-4">Stretches the button to fill its container</td>
+        </tr>
+        <tr className="border-b border-line">
           <td className="py-3 px-4 font-mono text-sm">onClick</td>
           <td className="py-3 px-4 font-mono text-xs text-ink-muted">function</td>
           <td className="py-3 px-4 font-mono text-xs">undefined</td>
@@ -179,6 +191,22 @@ export default function ButtonPage() {
             </div>
           </div>
           <CodeBlock code={`<Button variant="primary" disabled>Disabled</Button>`} />
+        </section>
+
+        {/* Loading & full width */}
+        <section className="mb-12">
+          <h2 className="text-2xl font-bold mb-4">Loading &amp; Full Width</h2>
+          <p className="text-ink-muted mb-6">
+            <code className="text-sm bg-surface-muted px-1 rounded">loading</code> shows a spinner and disables the button while work is in progress. <code className="text-sm bg-surface-muted px-1 rounded">fullWidth</code> stretches it to its container.
+          </p>
+          <div className="bg-surface-raised rounded-lg border border-line p-8 mb-4">
+            <div className="flex flex-col gap-4 max-w-xs">
+              <Button variant="primary" loading>Saving</Button>
+              <Button variant="outline" fullWidth>Full width</Button>
+            </div>
+          </div>
+          <CodeBlock code={`<Button variant="primary" loading>Saving</Button>
+<Button variant="outline" fullWidth>Full width</Button>`} />
         </section>
 
         {/* Props Table */}
