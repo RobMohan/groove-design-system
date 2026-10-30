@@ -548,17 +548,40 @@ All pass, narrowly for positive (light) and secondary (dark). The label text is 
 
 **Not done:** `as` (router component) has no visual form; Code Connect.
 
+### Round 19: Menu (2026-10-29)
+**Why this one:** next composition on the gap list; consumes the Button (as a trigger) and Elevation 4, and is the pattern behind the Popover and Select menus.
+
+**Built** (new `Menu` section, 8 pieces): `Menu Item` (6): State 3 (Default, Active, Disabled) x Danger 2; properties Label, Show Icon, Icon (swap); 36px rows with a 16px icon and 10px gap. `Menu Divider` (1px line, 4px above and below). `Menu` (assembled: Edit, Duplicate (active), Archive (disabled), a divider, Delete (danger)), 192px min width, raised surface, line border, `Radius/S`, `Elevation / 4`. Light and Dark panels showing the trigger with the menu 8px below (the code's offset) and every item state. New token: **`Destructive/Tint 10`** (a Brand variable with real alpha 0.10) for the danger hover row.
+
+**Defect found by rendering, not by any check (the third of this session):** the Active rows' hover fills drew one row *above* their owner, so the first menu row appeared as a blank gray bar with its label hidden, and the danger tint landed on the wrong row. The layer-level opacity approach from Round 17 (an absolutely positioned `Hover Fill` rectangle) renders correctly in horizontal rows (Chip) and single bands (Banner) but, inside auto-layout *instances stacked in a vertical list*, the screenshot placed it a row too high. Reads of the geometry said x=0, y=0, so the numbers were right and the renderer disagreed. Isolated with a four-item stack in a temp frame. Fix: no absolute layers for rows. The Active row's own fill is `Surface/Muted`, and for danger it is the new alpha variable. A variable's alpha is part of its color value, so instances inherit it; verified on a fresh stacked test, then on both panels.
+- Revised guidance from Rounds 10-19, for the write-up: tints via **paint opacity** fail on instances; tints via **absolute layers** are fragile in stacked lists; **variables with alpha** are the one robust approach (and the most token-like). Round 10's Chip and Round 17's Banner still use layers (verified correct on fresh instances in their own contexts), but alpha tint variables are what I'd use for anything stacked, and a candidate cleanup is to move Chip and Banner onto them too.
+
+**Process:** built the whole thing in one call plus 4 repair calls; the render-based verification caught what the numeric audit passed (bindings 0 unbound, all text styled, radius bound).
+
+**Doc site:** `MenuPage.jsx` already covers `trigger`, `items` (with `icon`, `danger`, `disabled`, `divider`), `align` and `className`; no change.
+
+**Findings (accessibility, measured)**
+| Item | Light | Dark | Result |
+| --- | --- | --- | --- |
+| Item text on muted hover | 16.12 | 9.37 | Pass |
+| **Danger text on raised** | 4.83 | **3.04** | **Dark fails AA** |
+| **Danger text on the 10% tint (hover)** | **4.13** | **2.89** | **Fails AA both modes** |
+- Same root cause as the destructive text elsewhere (dark error text in Round 5, destructive icon on dark in Round 7): the destructive token is not tuned for dark mode.
+- Code: `danger` is conveyed by color only (no icon, no label), which fails 1.4.1 for users who can't distinguish the red.
+
+**Not done:** align and viewport flipping (behavior); Code Connect.
+
 ## Running tally
 
 | Metric | Value |
 | --- | --- |
 | Components audited | inventory-level only (~17 present / ~27 missing of ~44) |
-| Components built in Figma | 15 UI components / 7 families (IconButton 126 variants, Textarea 24, TextInput 24, Select 30 + Option 6 + Group Label 1 + Menu 4, Multi Select 27 + Pill 1 + Option 6 + Menu 4, Combobox 18 + Menu 4, Chip 30 + Chip State 20, Avatar 20 + Avatar Status 20, Divider 10, Spinner 20, Modal 4, Button rebuilt 126, Toast 4, Banner 4, Link 18 + Link State 6) + 200 Lucide icon components |
+| Components built in Figma | 15 UI components / 7 families (IconButton 126 variants, Textarea 24, TextInput 24, Select 30 + Option 6 + Group Label 1 + Menu 4, Multi Select 27 + Pill 1 + Option 6 + Menu 4, Combobox 18 + Menu 4, Chip 30 + Chip State 20, Avatar 20 + Avatar Status 20, Divider 10, Spinner 20, Modal 4, Button rebuilt 126, Toast 4, Banner 4, Link 18 + Link State 6, Menu Item 6 + Divider 1 + Menu 1) + 200 Lucide icon components |
 | Components retired | 2 deleted (legacy `Text` and `Dropdown`, after migration with a zero-reference guard) + 1 deprecated awaiting Rob's OK (legacy `Button`, 10 instances migrated) |
 | Doc pages updated | 7 (TextInput, Select, MultiSelect, Combobox, Modal, Button; Chip, Avatar, Divider, Spinner were already accurate) |
 | Token/contrast issues found | 5 failing pairs (see Round 1) + invisible dark-mode elevation + counter text (Round 5) + default field border 1.47 / 1.94 (Round 6) + group heading 2.54 / 3.04 and dark search placeholder 4.06 (Round 7) + unchecked checkbox border 1.47 / 1.94 (Round 8) |
 | Self-corrections | 14 (Round 18: underline leaked to 147 shared-style labels, reset and rebuilt as dedicated underline styles, which also fixed Round 15's never-rendered Link underline; Round 17: variable-bound paint opacity not inherited by instances, which invalidated Chip's Round 10 fix and was re-done at layer level; failed first repair attempt; earlier: Chip: paint opacity reset, false-alarm verification, stale instances; earlier still: IconButton stroke scaling, escaped descriptions, Textarea padding double-counting stroke, "Dropdown nests Text" mis-attribution, review-panel row clipping, Multi Select orphaned buttons, Multi Select tail minimum) |
-| Figma variables added | 42 (11 Cool Gray primitives + 11 Theme tokens x Light/Dark + 16 Brand + 4 Brand Warning) |
+| Figma variables added | 43 (11 Cool Gray primitives + 11 Theme tokens x Light/Dark + 16 Brand + 4 Brand Warning + 1 Destructive/Tint 10 alpha) |
 | Figma styles added | 5 effect styles (Elevation / 1-5) + 19 text styles (Field / Text SM, Text LG, Label SM / MD / LG, Message, Counter, Group Label; Chip / SM, MD; Avatar / XL; Modal / Title; Button / LG; Toast / Action; Underline / Label MD, Chip MD, Button LG) |
 
 ## Story notes (for the final write-up)
