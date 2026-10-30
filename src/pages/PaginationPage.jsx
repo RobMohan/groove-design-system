@@ -12,6 +12,7 @@ const rows = [
   ['totalPages', 'number', '1', 'Total number of pages. Renders nothing when ≤ 1.'],
   ['onPageChange', 'function', '—', 'Called with the next page number.'],
   ['maxButtons', 'number', '7', 'Max page buttons before collapsing with ellipses.'],
+  ['className', 'string', "''", 'Additional CSS classes on the nav element'],
 ];
 
 const PropsTable = () => (
