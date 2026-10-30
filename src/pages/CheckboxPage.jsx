@@ -1,11 +1,26 @@
 import React, { useState } from 'react';
-import Checkbox from '../components/Checkbox';
+import Checkbox, { CheckboxGroup } from '../components/Checkbox';
 
 const CodeBlock = ({ code }) => (
   <pre className="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto text-sm">
     <code>{code}</code>
   </pre>
 );
+
+const rows = [
+  ['checked', 'boolean', 'false', 'Whether the checkbox is checked. Ignored inside a CheckboxGroup, which owns the value.'],
+  ['indeterminate', 'boolean', 'false', 'Shows a minus instead of a check and sets the native indeterminate property. Use for a "select all" parent.'],
+  ['disabled', 'boolean', 'false', 'Whether the checkbox is disabled'],
+  ['label', 'string', "''", 'Label text to display next to the checkbox'],
+  ['description', 'string', "''", 'Help text under the label; linked with aria-describedby'],
+  ['error', 'string', "''", 'Error message; turns the box border red, sets aria-invalid and shows the message below'],
+  ['size', "'sm' | 'md' | 'lg'", "'md'", 'Box size: 20px / 24px / 28px'],
+  ['onChange', 'function', 'undefined', 'Called with the next checked boolean'],
+  ['value', 'string', 'undefined', 'Option value; required when used inside a CheckboxGroup'],
+  ['name', 'string', 'undefined', 'Native input name (inherited from the group when grouped)'],
+  ['id', 'string', 'auto-generated', 'Custom ID for the checkbox input'],
+  ['className', 'string', "''", 'Additional CSS classes'],
+];
 
 const PropsTable = () => (
   <div className="overflow-x-auto">
@@ -19,50 +34,36 @@ const PropsTable = () => (
         </tr>
       </thead>
       <tbody className="text-sm">
-        <tr className="border-b border-line">
-          <td className="py-3 px-4 font-mono text-sm">checked</td>
-          <td className="py-3 px-4 font-mono text-xs text-ink-muted">boolean</td>
-          <td className="py-3 px-4 font-mono text-xs">false</td>
-          <td className="py-3 px-4">Whether the checkbox is checked</td>
-        </tr>
-        <tr className="border-b border-line">
-          <td className="py-3 px-4 font-mono text-sm">disabled</td>
-          <td className="py-3 px-4 font-mono text-xs text-ink-muted">boolean</td>
-          <td className="py-3 px-4 font-mono text-xs">false</td>
-          <td className="py-3 px-4">Whether the checkbox is disabled</td>
-        </tr>
-        <tr className="border-b border-line">
-          <td className="py-3 px-4 font-mono text-sm">label</td>
-          <td className="py-3 px-4 font-mono text-xs text-ink-muted">string</td>
-          <td className="py-3 px-4 font-mono text-xs">''</td>
-          <td className="py-3 px-4">Label text to display next to the checkbox</td>
-        </tr>
-        <tr className="border-b border-line">
-          <td className="py-3 px-4 font-mono text-sm">onChange</td>
-          <td className="py-3 px-4 font-mono text-xs text-ink-muted">function</td>
-          <td className="py-3 px-4 font-mono text-xs">undefined</td>
-          <td className="py-3 px-4">Callback when checkbox state changes</td>
-        </tr>
-        <tr className="border-b border-line">
-          <td className="py-3 px-4 font-mono text-sm">id</td>
-          <td className="py-3 px-4 font-mono text-xs text-ink-muted">string</td>
-          <td className="py-3 px-4 font-mono text-xs">auto-generated</td>
-          <td className="py-3 px-4">Custom ID for the checkbox input</td>
-        </tr>
-        <tr className="border-b border-line">
-          <td className="py-3 px-4 font-mono text-sm">className</td>
-          <td className="py-3 px-4 font-mono text-xs text-ink-muted">string</td>
-          <td className="py-3 px-4 font-mono text-xs">''</td>
-          <td className="py-3 px-4">Additional CSS classes</td>
-        </tr>
+        {rows.map(([prop, type, def, desc]) => (
+          <tr key={prop} className="border-b border-line">
+            <td className="py-3 px-4 font-mono text-sm">{prop}</td>
+            <td className="py-3 px-4 font-mono text-xs text-ink-muted">{type}</td>
+            <td className="py-3 px-4 font-mono text-xs">{def}</td>
+            <td className="py-3 px-4">{desc}</td>
+          </tr>
+        ))}
       </tbody>
     </table>
   </div>
 );
 
+const groupRows = [
+  ['value', 'string[]', '[]', 'Array of the checked option values'],
+  ['onChange', 'function', 'undefined', 'Called with the next array of values'],
+  ['options', '{ value, label, description?, disabled? }[]', 'undefined', 'Render options from data, or nest <Checkbox value="..."> children instead'],
+  ['label', 'string', "''", 'Group label; the group is announced with it'],
+  ['description', 'string', "''", 'Help text under the group label'],
+  ['error', 'string', "''", 'Group error message; marks every checkbox invalid'],
+  ['required', 'boolean', 'false', 'Adds a red asterisk to the label (hidden from screen readers)'],
+  ['size', "'sm' | 'md' | 'lg'", "'md'", 'Size applied to every checkbox in the group'],
+  ['disabled', 'boolean', 'false', 'Disables every checkbox in the group'],
+  ['name', 'string', 'auto-generated', 'Shared native input name'],
+];
+
 export default function CheckboxPage() {
   const [terms, setTerms] = useState(false);
   const [newsletter, setNewsletter] = useState(true);
+  const [plan, setPlan] = useState(['email']);
   const [notifications, setNotifications] = useState({
     email: true,
     sms: false,
@@ -90,7 +91,7 @@ export default function CheckboxPage() {
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-4">States</h2>
           <p className="text-ink-muted mb-6">
-            The Checkbox component has three states: default, checked, and inactive (disabled).
+            Unchecked, checked, indeterminate and disabled, plus an error state.
           </p>
           <div className="bg-surface-raised rounded-lg border border-line p-8 mb-4">
             <div className="flex flex-col gap-4">
@@ -206,6 +207,94 @@ export default function CheckboxPage() {
           </div>
           <CodeBlock code={`<Checkbox checked={false} onChange={handleChange} />
 <Checkbox checked={true} onChange={handleChange} />`} />
+        </section>
+
+        {/* Sizes, indeterminate, description, error */}
+        <section className="mb-12">
+          <h2 className="text-2xl font-bold mb-4">Sizes, indeterminate, description &amp; error</h2>
+          <p className="text-ink-muted mb-6">
+            Three sizes, an indeterminate state for "select all" parents, help text, and an error message.
+          </p>
+          <div className="bg-surface-raised rounded-lg border border-line p-8 mb-4">
+            <div className="flex flex-col gap-4">
+              <div className="flex flex-wrap items-center gap-6">
+                <Checkbox size="sm" label="Small" checked onChange={() => {}} />
+                <Checkbox size="md" label="Medium" checked onChange={() => {}} />
+                <Checkbox size="lg" label="Large" checked onChange={() => {}} />
+              </div>
+              <Checkbox label="Select all" indeterminate onChange={() => {}} />
+              <Checkbox
+                label="Email me product updates"
+                description="At most one email a month."
+                checked={newsletter}
+                onChange={setNewsletter}
+              />
+              <Checkbox
+                label="I agree to the terms"
+                error="You must accept the terms to continue."
+                checked={false}
+                onChange={() => {}}
+              />
+            </div>
+          </div>
+          <CodeBlock code={`<Checkbox size="lg" label="Large" checked onChange={handleChange} />
+<Checkbox label="Select all" indeterminate onChange={handleChange} />
+<Checkbox label="Email me" description="At most one email a month." ... />
+<Checkbox label="I agree" error="You must accept the terms." ... />`} />
+        </section>
+
+        {/* CheckboxGroup component */}
+        <section className="mb-12">
+          <h2 className="text-2xl font-bold mb-4">CheckboxGroup</h2>
+          <p className="text-ink-muted mb-6">
+            <code className="text-sm bg-surface-muted px-1 rounded">CheckboxGroup</code> owns an array value, a shared label, description and error, and passes size and disabled to every checkbox.
+          </p>
+          <div className="bg-surface-raised rounded-lg border border-line p-8 mb-4 max-w-sm">
+            <CheckboxGroup
+              label="Notify me by"
+              description="Choose any that apply."
+              required
+              value={plan}
+              onChange={setPlan}
+              options={[
+                { value: 'email', label: 'Email' },
+                { value: 'sms', label: 'SMS', description: 'Carrier rates may apply.' },
+                { value: 'push', label: 'Push', disabled: true },
+              ]}
+            />
+          </div>
+          <CodeBlock code={`import Checkbox, { CheckboxGroup } from './components/Checkbox';
+
+<CheckboxGroup label="Notify me by" required value={plan} onChange={setPlan}
+  options={[
+    { value: 'email', label: 'Email' },
+    { value: 'sms', label: 'SMS', description: 'Carrier rates may apply.' },
+    { value: 'push', label: 'Push', disabled: true },
+  ]} />`} />
+          <div className="bg-surface-raised rounded-lg border border-line overflow-hidden mt-6">
+            <div className="overflow-x-auto">
+              <table className="w-full text-left border-collapse">
+                <thead>
+                  <tr className="border-b border-line">
+                    <th className="py-3 px-4 font-semibold">Prop</th>
+                    <th className="py-3 px-4 font-semibold">Type</th>
+                    <th className="py-3 px-4 font-semibold">Default</th>
+                    <th className="py-3 px-4 font-semibold">Description</th>
+                  </tr>
+                </thead>
+                <tbody className="text-sm">
+                  {groupRows.map(([prop, type, def, desc]) => (
+                    <tr key={prop} className="border-b border-line">
+                      <td className="py-3 px-4 font-mono text-sm">{prop}</td>
+                      <td className="py-3 px-4 font-mono text-xs text-ink-muted">{type}</td>
+                      <td className="py-3 px-4 font-mono text-xs">{def}</td>
+                      <td className="py-3 px-4">{desc}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
         </section>
 
         {/* Props Table */}
