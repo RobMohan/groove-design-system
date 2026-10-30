@@ -683,12 +683,31 @@ All pass, narrowly for positive (light) and secondary (dark). The label text is 
 
 **Not done:** vertical orientation (not in code); drag behavior; Code Connect.
 
+### Round 26: StatCard (2026-10-29)
+**Why this one:** a headline-metric composition used on every dashboard, and a quick test of the "type scale" gap (it is the first 36px bold heading: Figma had no style for it).
+
+**Built** (new `Stat Card` section, 3 variants): `StatCard` set, Trend = Positive, Neutral, Negative (trend row in the positive, muted or destructive color). Properties: Value, Label, Show Icon, Show Trend. 280px wide, raised surface, 1px line border, `Radius/M` (the code's `rounded-xl`, which is Tailwind's default 12px and so equals the card radius), 24px padding, 16px row gaps. Height 166px, matching the CSS box model (24 + 40 + 16 + 24 + 16 + 20 + 24 + 2). New text style `Stat / Value` (Bold 36/40). The icon is a 24px `ink-subtle` glyph; the trend row uses the 16px trend glyph and `Field / Message`. Light and Dark panels, including no-icon and no-trend cards.
+
+**One deliberate difference from the code:** the Negative trend uses TrendingDown; the React component draws TrendingUp for every trend type (including negative), which looks like a code oversight (a "-4.2%" trend with an upward arrow). Said so in the description. Not changed in code.
+
+**Defect and fix:** I declared a `Trend Text` TEXT property but didn't wire it, so my own panel override ("+8.1%") silently didn't apply. Found by reading the screenshot. A text property can't carry a different default per Trend, so the property was deleted and the layer is edited directly (the description says so). Same limitation noted in Rounds 5 and 7.
+
+**Process:** one build call with panels, one fix call. All paints bound, all text styled, radius bound.
+
+**Doc site:** `StatCardPage.jsx` already covers `value`, `label`, `icon`, `trend`, `trendLabel`, `trendType`; no change.
+
+**Findings (accessibility)**
+- Label (`ink-muted`) 7.56 / 5.78 and value (`ink`) 17+ pass. The icon (`ink-subtle`) is 2.54 / 3.04 against the card: decorative here, so exempt, but the Positive trend text (green on raised) is 3.30:1 in light mode and the Negative is 4.83 / 3.04: 14px text, so **the positive trend line fails AA in light, and the negative fails in dark.**
+- Code: the trend is communicated by color plus the arrow glyph (and the text), so 1.4.1 is satisfied; the TrendingUp-for-negative bug above would contradict the text for a screen reader user only if the icon had a label (it's `aria-hidden` by default, which is fine).
+
+**Not done:** custom icon choice per card (swap the glyph); Code Connect.
+
 ## Running tally
 
 | Metric | Value |
 | --- | --- |
 | Components audited | inventory-level only (~17 present / ~27 missing of ~44) |
-| Components built in Figma | 15 UI components / 7 families (IconButton 126 variants, Textarea 24, TextInput 24, Select 30 + Option 6 + Group Label 1 + Menu 4, Multi Select 27 + Pill 1 + Option 6 + Menu 4, Combobox 18 + Menu 4, Chip 30 + Chip State 20, Avatar 20 + Avatar Status 20, Divider 10, Spinner 20, Modal 4, Button rebuilt 126, Toast 4, Banner 4, Link 18 + Link State 6, Menu Item 6 + Divider 1 + Menu 1, Segment 15 + Segmented Control 18, Skeleton 3 + Skeleton Text 3, Accordion Item 6 + Accordion 1, Step Indicator 4 + Stepper 8, Popover 8, Slider 18) + 200 Lucide icon components |
+| Components built in Figma | 15 UI components / 7 families (IconButton 126 variants, Textarea 24, TextInput 24, Select 30 + Option 6 + Group Label 1 + Menu 4, Multi Select 27 + Pill 1 + Option 6 + Menu 4, Combobox 18 + Menu 4, Chip 30 + Chip State 20, Avatar 20 + Avatar Status 20, Divider 10, Spinner 20, Modal 4, Button rebuilt 126, Toast 4, Banner 4, Link 18 + Link State 6, Menu Item 6 + Divider 1 + Menu 1, Segment 15 + Segmented Control 18, Skeleton 3 + Skeleton Text 3, Accordion Item 6 + Accordion 1, Step Indicator 4 + Stepper 8, Popover 8, Slider 18, StatCard 3) + 200 Lucide icon components |
 | Components retired | 2 deleted (legacy `Text` and `Dropdown`, after migration with a zero-reference guard) + 1 deprecated awaiting Rob's OK (legacy `Button`, 10 instances migrated) |
 | Doc pages updated | 7 (TextInput, Select, MultiSelect, Combobox, Modal, Button; Chip, Avatar, Divider, Spinner were already accurate) |
 | Token/contrast issues found | 5 failing pairs (see Round 1) + invisible dark-mode elevation + counter text (Round 5) + default field border 1.47 / 1.94 (Round 6) + group heading 2.54 / 3.04 and dark search placeholder 4.06 (Round 7) + unchecked checkbox border 1.47 / 1.94 (Round 8) |
