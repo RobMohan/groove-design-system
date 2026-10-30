@@ -603,12 +603,28 @@ All pass, narrowly for positive (light) and secondary (dark). The label text is 
 
 **Not done:** the pulse animation; Code Connect.
 
+### Round 22: Accordion (2026-10-29)
+**Why this one:** common content pattern; and a chance to apply the Round 11 / Round 20 exposed-instance pattern to a stack of items with dividers.
+
+**Built** (new `Accordion` section): `Accordion Item` (6): Open 2 (False, True) x State 3 (Default, Hover, Disabled); properties Title and Content. Header 16px padding all round (56px closed, the code's `py-4` + 24px line), title in the medium label style, 20px chevron (up when open: the product rotates it 180 degrees), and a panel with 16px side and bottom padding that appears only when open. Hover fills only the header (as the code's button), not the open panel. `Accordion` (assembled): three Accordion Item instances (first open, last disabled) separated by 1px line dividers inside a 1px line border with the card radius (`Radius/M`) and clipped corners; **every nested item is exposed** so Open, State, Title and Content can be set from the accordion. Light and Dark panels.
+
+**Process:** built the sets, the assembled component and both panels in one call, with the lessons of Rounds 17 to 19 applied up front: state fills use the frame's own fill (no absolute layers, no partial-opacity paints), so there was nothing to repair. Verified heights numerically (56 closed, 120 open at the default content) and by screenshot in both modes. All paints bound, all text styled, radius bound.
+
+**Doc site:** `AccordionPage.jsx` already covers `items`, `allowMultiple`, `defaultOpen`, `disabled` and `className`; no change.
+
+**Findings (accessibility)**
+- Code: the header button has **no custom focus style** (no ring class). It relies on the browser's default outline, which is inconsistent with every other interactive component in the system (all use `focus:ring-2 focus:ring-focus`). Not drawn in Figma, since Figma would be inventing a state the code doesn't style; flagged as a code gap.
+- Contrast: content text (`ink-muted` on raised) 7.56 light / 5.78 dark, title (`ink`) 17+ / 13+; chevron (`ink-muted`) passes 3:1. Disabled title is exempt. No new failures.
+- The hover state uses `surface-muted` on the header only: about 1.1:1 against the raised surface in light mode, so hover is subtle by design (hover is a non-essential cue).
+
+**Not done:** `allowMultiple` and `defaultOpen` (behavior); the chevron rotation animation; Code Connect.
+
 ## Running tally
 
 | Metric | Value |
 | --- | --- |
 | Components audited | inventory-level only (~17 present / ~27 missing of ~44) |
-| Components built in Figma | 15 UI components / 7 families (IconButton 126 variants, Textarea 24, TextInput 24, Select 30 + Option 6 + Group Label 1 + Menu 4, Multi Select 27 + Pill 1 + Option 6 + Menu 4, Combobox 18 + Menu 4, Chip 30 + Chip State 20, Avatar 20 + Avatar Status 20, Divider 10, Spinner 20, Modal 4, Button rebuilt 126, Toast 4, Banner 4, Link 18 + Link State 6, Menu Item 6 + Divider 1 + Menu 1, Segment 15 + Segmented Control 18, Skeleton 3 + Skeleton Text 3) + 200 Lucide icon components |
+| Components built in Figma | 15 UI components / 7 families (IconButton 126 variants, Textarea 24, TextInput 24, Select 30 + Option 6 + Group Label 1 + Menu 4, Multi Select 27 + Pill 1 + Option 6 + Menu 4, Combobox 18 + Menu 4, Chip 30 + Chip State 20, Avatar 20 + Avatar Status 20, Divider 10, Spinner 20, Modal 4, Button rebuilt 126, Toast 4, Banner 4, Link 18 + Link State 6, Menu Item 6 + Divider 1 + Menu 1, Segment 15 + Segmented Control 18, Skeleton 3 + Skeleton Text 3, Accordion Item 6 + Accordion 1) + 200 Lucide icon components |
 | Components retired | 2 deleted (legacy `Text` and `Dropdown`, after migration with a zero-reference guard) + 1 deprecated awaiting Rob's OK (legacy `Button`, 10 instances migrated) |
 | Doc pages updated | 7 (TextInput, Select, MultiSelect, Combobox, Modal, Button; Chip, Avatar, Divider, Spinner were already accurate) |
 | Token/contrast issues found | 5 failing pairs (see Round 1) + invisible dark-mode elevation + counter text (Round 5) + default field border 1.47 / 1.94 (Round 6) + group heading 2.54 / 3.04 and dark search placeholder 4.06 (Round 7) + unchecked checkbox border 1.47 / 1.94 (Round 8) |
