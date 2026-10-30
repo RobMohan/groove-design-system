@@ -754,12 +754,27 @@ All pass, narrowly for positive (light) and secondary (dark). The label text is 
 
 **Not done:** stepper hover (muted fill and ink icon: the code has it; not drawn, same trade-off as other hover states in this file); Code Connect.
 
+### Round 30: AvatarGroup (2026-10-29)
+**Why this one:** closes the loose end from Round 11 (the Avatar family's "AvatarGroup not built") and exercises the nested-instance composition one more time.
+
+**Built** (added to the existing `Avatar` section, 10 variants): `Avatar Group` set, Size 5 (XS to XL) x Overflow 2 (False, True). Four `Avatar` instances (circle, initials) each wrapped in a 2px ring in the raised surface color (the code's `ring-2 ring-surface-raised`, drawn as an outside stroke on a circular wrapper so the ring never changes the avatar's size), overlapping by 8px (itemSpacing -8), plus, for Overflow = True, a "+3" chip that is the same size as an avatar (`Surface/Muted`, muted medium text, same ring). The ring wrapper and the chip use the same size-to-text mapping as Avatar. Light and Dark panels show every size with and without the chip.
+
+**Honest notes:** at XS the 8px overlap hides a third of each avatar's initials; the code does the same (a later sibling paints over the earlier one), so it's mirrored, not fixed. The avatars are plain instances (edit initials, shape or status per avatar by selecting them) rather than exposed props, because the count of avatars in a group is open-ended in code; adding or removing an avatar means adding or removing an instance with a ring wrapper. The `max` prop is expressed as the Overflow axis (the chip's count is edited as text).
+
+**Process:** one build call with panels; a clean render in both modes; no repair pass. Verified all variants render the same sizes as their Avatar (24 to 80px) and the ring is outside the avatar box.
+
+**Doc site:** `AvatarPage.jsx` already documents AvatarGroup (`children`, `max`, `size`); no change.
+
+**Findings (accessibility):** no new failures. The chip's muted text on the muted surface is the recurring dark-mode pair (`ink-muted` on `surface-muted`, 4.06 in dark, Rounds 7, 11 and 20). The "+N" chip has no accessible name in code (it's a bare `div`), so a screen reader hears "+3" with no context ("3 more people"); worth an `aria-label` prop.
+
+**Not done:** Code Connect.
+
 ## Running tally
 
 | Metric | Value |
 | --- | --- |
 | Components audited | inventory-level only (~17 present / ~27 missing of ~44) |
-| Components built in Figma | 15 UI components / 7 families (IconButton 126 variants, Textarea 24, TextInput 24, Select 30 + Option 6 + Group Label 1 + Menu 4, Multi Select 27 + Pill 1 + Option 6 + Menu 4, Combobox 18 + Menu 4, Chip 30 + Chip State 20, Avatar 20 + Avatar Status 20, Divider 10, Spinner 20, Modal 4, Button rebuilt 126, Toast 4, Banner 4, Link 18 + Link State 6, Menu Item 6 + Divider 1 + Menu 1, Segment 15 + Segmented Control 18, Skeleton 3 + Skeleton Text 3, Accordion Item 6 + Accordion 1, Step Indicator 4 + Stepper 8, Popover 8, Slider 18, StatCard 3, Button Group 4, EmptyState 3, NumberInput 24) + 200 Lucide icon components |
+| Components built in Figma | 15 UI components / 7 families (IconButton 126 variants, Textarea 24, TextInput 24, Select 30 + Option 6 + Group Label 1 + Menu 4, Multi Select 27 + Pill 1 + Option 6 + Menu 4, Combobox 18 + Menu 4, Chip 30 + Chip State 20, Avatar 20 + Avatar Status 20, Divider 10, Spinner 20, Modal 4, Button rebuilt 126, Toast 4, Banner 4, Link 18 + Link State 6, Menu Item 6 + Divider 1 + Menu 1, Segment 15 + Segmented Control 18, Skeleton 3 + Skeleton Text 3, Accordion Item 6 + Accordion 1, Step Indicator 4 + Stepper 8, Popover 8, Slider 18, StatCard 3, Button Group 4, EmptyState 3, NumberInput 24, Avatar Group 10) + 200 Lucide icon components |
 | Components retired | 2 deleted (legacy `Text` and `Dropdown`, after migration with a zero-reference guard) + 1 deprecated awaiting Rob's OK (legacy `Button`, 10 instances migrated) |
 | Doc pages updated | 10 (TextInput, Select, MultiSelect, Combobox, Modal, Button, Toast, NumberInput, ButtonPage; the rest were already accurate) |
 | Token/contrast issues found | 5 failing pairs (see Round 1) + invisible dark-mode elevation + counter text (Round 5) + default field border 1.47 / 1.94 (Round 6) + group heading 2.54 / 3.04 and dark search placeholder 4.06 (Round 7) + unchecked checkbox border 1.47 / 1.94 (Round 8) |
