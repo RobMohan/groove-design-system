@@ -397,12 +397,23 @@ Reused as-is: `Select Group Label`, the token set, elevation 4, the focus-ring c
 
 **Not done:** AvatarGroup; photo variant; Code Connect.
 
+### Round 12: Divider (2026-10-29)
+**Why this one:** smallest remaining primitive; used inside menus, cards, forms and the sidebar. Also a good test of a build with no prototype and no repair pass.
+
+**Built** (new `Divider` section, 10 variants): Orientation x Style x Label: horizontal Solid and Dashed, each with Label None, Center, Left, Right (8), plus vertical Solid and Dashed (2), matching the code (the label exists only on horizontal dividers). One property, `Label` (TEXT). The rule is a 1px frame with only the top (or left) stroke weight set, bound to the `Line/Default` token, `strokeAlign` inside, and a 4/4 dash pattern for Dashed. The label reuses `Chip / MD` (Medium 14/20, same as the code's `text-sm font-medium`), `Ink/Muted`, 12px gaps. Horizontal dividers are fill-width; the vertical one stretches with its row (as in code, resize the instance).
+
+**Process:** built component and both review panels in one call; screenshot-checked each mode once. No defects. Verified by construction (every paint is a bound variable, the label has a text style, no radii) and visually; the Divider doc page already covers all four props, so no page change.
+
+**Findings:** none new. The rule uses `line` on the page (about 1.2:1), which WCAG treats as decorative, so 3:1 doesn't apply. The vertical divider's `min-h-[1em]` isn't expressible in Figma and is described instead.
+
+**Not done:** Code Connect.
+
 ## Running tally
 
 | Metric | Value |
 | --- | --- |
 | Components audited | inventory-level only (~17 present / ~27 missing of ~44) |
-| Components built in Figma | 15 UI components / 7 families (IconButton 126 variants, Textarea 24, TextInput 24, Select 30 + Option 6 + Group Label 1 + Menu 4, Multi Select 27 + Pill 1 + Option 6 + Menu 4, Combobox 18 + Menu 4, Chip 30 + Chip State 20, Avatar 20 + Avatar Status 20) + 200 Lucide icon components |
+| Components built in Figma | 15 UI components / 7 families (IconButton 126 variants, Textarea 24, TextInput 24, Select 30 + Option 6 + Group Label 1 + Menu 4, Multi Select 27 + Pill 1 + Option 6 + Menu 4, Combobox 18 + Menu 4, Chip 30 + Chip State 20, Avatar 20 + Avatar Status 20, Divider 10) + 200 Lucide icon components |
 | Components retired | 2 (legacy `Text` and `Dropdown` sets: migrated, deprecated, then deleted with a zero-reference guard) |
 | Doc pages updated | 4 (TextInput, Select, MultiSelect, Combobox) |
 | Token/contrast issues found | 5 failing pairs (see Round 1) + invisible dark-mode elevation + counter text (Round 5) + default field border 1.47 / 1.94 (Round 6) + group heading 2.54 / 3.04 and dark search placeholder 4.06 (Round 7) + unchecked checkbox border 1.47 / 1.94 (Round 8) |
