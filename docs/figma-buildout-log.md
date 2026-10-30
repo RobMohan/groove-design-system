@@ -825,6 +825,9 @@ All pass, narrowly for positive (light) and secondary (dark). The label text is 
 
 **Not done:** non-interactive rows with children content; the Logo import (below); Code Connect.
 
+### Housekeeping: Components page layout (2026-10-29)
+After Round 33 the Components page was a single row about 81,000px wide (every new section had been appended to the right). Regrouped the 33 sections into six labeled category rows, wrapping at 16,000px (160px gaps): **Actions** (IconButton, Button, Button Group, Link), **Icons**, **Form controls** (the original Form Controls, Text Fields, Selection, Multi Select, Combobox, Number Input, Input Group, Slider, Segmented Control), **Overlays and feedback** (Modal, Drawer, Popover, Menu, Toast, Banner, the original Feedback, Spinner, Skeleton, Empty State), **Data display** (the original Data Display, Avatar, Chip, List, Accordion, Stat Card, Divider, Data Visualization) and **Navigation and compositions** (the original Navigation, Stepper, App Compositions). The page is now about 15,000 by 26,000px. Positions only: nothing inside any section changed. Also found and fixed a loose end from Round 6: the two TextInput review panels had been left at the page root floating over another section; moved into `Text Fields` where they belong. Lesson: always append a new panel to its section explicitly, and place a new section into its category row instead of at the end of the page.
+
 ## Running tally
 
 | Metric | Value |
