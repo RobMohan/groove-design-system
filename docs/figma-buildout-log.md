@@ -588,12 +588,27 @@ All pass, narrowly for positive (light) and secondary (dark). The label text is 
 
 **Not done:** the sliding animation; Code Connect.
 
+### Round 21: Skeleton (2026-10-29)
+**Why this one:** the simplest remaining component, and a dependency of every loading state in cards, tables and lists. A deliberate low-risk round after two long repair cycles.
+
+**Built** (new `Skeleton` section, 6 variants): `Skeleton` (3): Variant = Text (240 x 16, 4px corners, the code's 1em line), Circle (40, fully rounded), Rect (240 x 96, `Radius/S`), all `Surface/Muted`. `Skeleton Text` (3): Lines = 2, 3, 4, an 8px stack with the last line 60% wide (144 of 240px: Figma has no percentage widths, noted in the description). Light and Dark panels include a "loading card" composed from instances (avatar circle, two text lines, an image rect, three body lines) as the realistic use. Free width and height in code means the components are sized for common cases and meant to be resized; the descriptions say so. The 4px text radius is the code's Tailwind `rounded` default again (off the documented scale, same finding as the Multi Select checkbox in Round 8); left literal.
+
+**Process:** one call for components and panels; one screenshot per mode; no defects, no repair. All paints are bound variables, radii bound except the literal 4px.
+
+**Doc site:** `SkeletonPage.jsx` already covers `variant`, `width`, `height`, `SkeletonText` and `lines`; no change.
+
+**Findings (accessibility)**
+- Skeleton blocks are decorative (`aria-hidden` in code) with `surface-muted` on the raised card at about 1.1:1 in light mode. That's acceptable for decoration, but it means the loading state is invisible to assistive tech unless the container announces it: the code's Skeleton does not (the Spinner has `role=status`). Recommend pairing a Skeleton region with a visually hidden "Loading" status or `aria-busy`.
+- The product pulses the blocks (`animate-pulse`); there's no `prefers-reduced-motion` guard in the component. Not in Figma's scope, but worth a code follow-up.
+
+**Not done:** the pulse animation; Code Connect.
+
 ## Running tally
 
 | Metric | Value |
 | --- | --- |
 | Components audited | inventory-level only (~17 present / ~27 missing of ~44) |
-| Components built in Figma | 15 UI components / 7 families (IconButton 126 variants, Textarea 24, TextInput 24, Select 30 + Option 6 + Group Label 1 + Menu 4, Multi Select 27 + Pill 1 + Option 6 + Menu 4, Combobox 18 + Menu 4, Chip 30 + Chip State 20, Avatar 20 + Avatar Status 20, Divider 10, Spinner 20, Modal 4, Button rebuilt 126, Toast 4, Banner 4, Link 18 + Link State 6, Menu Item 6 + Divider 1 + Menu 1, Segment 15 + Segmented Control 18) + 200 Lucide icon components |
+| Components built in Figma | 15 UI components / 7 families (IconButton 126 variants, Textarea 24, TextInput 24, Select 30 + Option 6 + Group Label 1 + Menu 4, Multi Select 27 + Pill 1 + Option 6 + Menu 4, Combobox 18 + Menu 4, Chip 30 + Chip State 20, Avatar 20 + Avatar Status 20, Divider 10, Spinner 20, Modal 4, Button rebuilt 126, Toast 4, Banner 4, Link 18 + Link State 6, Menu Item 6 + Divider 1 + Menu 1, Segment 15 + Segmented Control 18, Skeleton 3 + Skeleton Text 3) + 200 Lucide icon components |
 | Components retired | 2 deleted (legacy `Text` and `Dropdown`, after migration with a zero-reference guard) + 1 deprecated awaiting Rob's OK (legacy `Button`, 10 instances migrated) |
 | Doc pages updated | 7 (TextInput, Select, MultiSelect, Combobox, Modal, Button; Chip, Avatar, Divider, Spinner were already accurate) |
 | Token/contrast issues found | 5 failing pairs (see Round 1) + invisible dark-mode elevation + counter text (Round 5) + default field border 1.47 / 1.94 (Round 6) + group heading 2.54 / 3.04 and dark search placeholder 4.06 (Round 7) + unchecked checkbox border 1.47 / 1.94 (Round 8) |
