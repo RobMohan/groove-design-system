@@ -661,12 +661,34 @@ All pass, narrowly for positive (light) and secondary (dark). The label text is 
 
 **Not done:** align (start and end) variants (the same layouts shifted); flipping behavior; Code Connect.
 
+### Round 25: Slider (2026-10-29)
+**Why this one:** a primitive form control still missing from Figma, and a geometry-heavy build (track, proportional fill, thumbs that overflow the track) that tests whether the layer lessons hold.
+
+**Built** (new `Slider` section, 18 variants): Size 3 (SM / MD / LG: track 4 / 6 / 8px, thumb 16 / 20 / 24px) x Type 2 (Single at 50%, Range at 25 to 75%) x State 3 (Default, Focus, Disabled). 4 properties: Label, Show Label, Show Value, Show Marks (sample 0, 50, 100 ticks). Track is `Surface/Muted`, fill `Primary/Default`, thumb is a raised circle with a 2px primary border and `Elevation / 2`; Focus draws the 2px focus ring (2px gap) around the first thumb; Disabled is 60% opacity on the track area only, as in code. The thumb deliberately overflows the track's own height (the code's wrapper is only as tall as the track, so thumbs overlap the 8px gaps); reproduced.
+
+**Layer decision, applied from the Menu lesson (Round 19):** the track area is a plain frame with positioned children, not an auto-layout with absolute layers, and fill and thumbs use `SCALE` constraints so they keep their proportions if an instance is resized. No partial-opacity paints (Round 17), no absolute layers in a stacked auto layout. Verified in a stacked panel: no displacement. The fill and thumb positions are baked for the sample values (50, and 25 to 75); the description says to move the layers for other values, because a continuous numeric value can't be a variant property and a variant per value would explode.
+
+**Process:** one build call with panels; one screenshot per mode; no defects, no repair. The third round in a row without one, which is the clearest evidence in this log that front-loading the failure patterns pays.
+
+**Doc site:** `SliderPage.jsx` already covers `min`, `max`, `step`, `value`, `defaultValue`, `marks`, `showValue`, `size`, `label` and `disabled`; no change.
+
+**Findings (accessibility, measured)**
+| Item | Light | Dark | Result |
+| --- | --- | --- | --- |
+| **Track** (`surface-muted`) vs the page | **1.1** | 1.5 | **Fails the 3:1 non-text minimum**: the unfilled track defines the control's extent and hit target |
+| Fill and thumb border (`primary`) vs page | 3.28 | 5.18 | Pass |
+| Value readout (`ink-muted`) | 7.2 | 7.0 | Pass |
+| **Mark labels** (`ink-subtle`, 12px) vs page | **2.43** | **3.67** | **Fails AA** (the fifth place `ink-subtle` carries real content) |
+- Code: each thumb is a proper `role="slider"` with `aria-valuemin`, `aria-valuemax`, `aria-valuenow`, label and full keyboard support; the range case correctly constrains each thumb's valuemin and valuemax to the other thumb. Good practice, no change needed.
+
+**Not done:** vertical orientation (not in code); drag behavior; Code Connect.
+
 ## Running tally
 
 | Metric | Value |
 | --- | --- |
 | Components audited | inventory-level only (~17 present / ~27 missing of ~44) |
-| Components built in Figma | 15 UI components / 7 families (IconButton 126 variants, Textarea 24, TextInput 24, Select 30 + Option 6 + Group Label 1 + Menu 4, Multi Select 27 + Pill 1 + Option 6 + Menu 4, Combobox 18 + Menu 4, Chip 30 + Chip State 20, Avatar 20 + Avatar Status 20, Divider 10, Spinner 20, Modal 4, Button rebuilt 126, Toast 4, Banner 4, Link 18 + Link State 6, Menu Item 6 + Divider 1 + Menu 1, Segment 15 + Segmented Control 18, Skeleton 3 + Skeleton Text 3, Accordion Item 6 + Accordion 1, Step Indicator 4 + Stepper 8, Popover 8) + 200 Lucide icon components |
+| Components built in Figma | 15 UI components / 7 families (IconButton 126 variants, Textarea 24, TextInput 24, Select 30 + Option 6 + Group Label 1 + Menu 4, Multi Select 27 + Pill 1 + Option 6 + Menu 4, Combobox 18 + Menu 4, Chip 30 + Chip State 20, Avatar 20 + Avatar Status 20, Divider 10, Spinner 20, Modal 4, Button rebuilt 126, Toast 4, Banner 4, Link 18 + Link State 6, Menu Item 6 + Divider 1 + Menu 1, Segment 15 + Segmented Control 18, Skeleton 3 + Skeleton Text 3, Accordion Item 6 + Accordion 1, Step Indicator 4 + Stepper 8, Popover 8, Slider 18) + 200 Lucide icon components |
 | Components retired | 2 deleted (legacy `Text` and `Dropdown`, after migration with a zero-reference guard) + 1 deprecated awaiting Rob's OK (legacy `Button`, 10 instances migrated) |
 | Doc pages updated | 7 (TextInput, Select, MultiSelect, Combobox, Modal, Button; Chip, Avatar, Divider, Spinner were already accurate) |
 | Token/contrast issues found | 5 failing pairs (see Round 1) + invisible dark-mode elevation + counter text (Round 5) + default field border 1.47 / 1.94 (Round 6) + group heading 2.54 / 3.04 and dark search placeholder 4.06 (Round 7) + unchecked checkbox border 1.47 / 1.94 (Round 8) |
