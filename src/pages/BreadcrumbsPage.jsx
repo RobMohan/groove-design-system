@@ -115,9 +115,10 @@ export default function BreadcrumbsPage() {
                 </tr>
               </thead>
               <tbody className="text-sm">
-                <PropRow name="items" type="Array<{ label, href, onClick }>" def="[]" desc="The trail of crumbs; the last item renders as the current page" />
+                <PropRow name="items" type="Array<{ label, to?, href?, onClick? }>" def="[]" desc="The trail of crumbs. `to` renders a router Link, `href` a plain anchor, neither a non-interactive label; the last item renders as the current page" />
                 <PropRow name="separator" type="node" def="<ChevronRight />" desc="Custom separator rendered between crumbs" />
                 <PropRow name="maxItems" type="number" def="—" desc="Collapses the middle behind an ellipsis when exceeded" />
+                <PropRow name="linkComponent" type="Component" def="react-router Link" desc="Component used for items with a `to` (swap in your framework's Link)" />
                 <PropRow name="className" type="string" def="''" desc="Additional CSS classes on the nav element" />
               </tbody>
             </table>
