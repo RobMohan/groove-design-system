@@ -1,12 +1,24 @@
 import React, { useState } from 'react';
 import Tabs from '../components/Tabs';
 import Card from '../components/Card';
+import { Home, Settings as SettingsIcon, User } from 'lucide-react';
 
 const CodeBlock = ({ code }) => (
   <pre className="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto text-sm">
     <code>{code}</code>
   </pre>
 );
+
+const rows = [
+  ['tabs', 'Array<{ label, content?, id?, icon?, disabled? }>', '[]', 'Tab definitions. A stable id is tab.id ?? tab.value ?? index. icon is a Lucide component drawn at 16px; disabled dims the tab and skips it in keyboard navigation.'],
+  ['variant', "'underline' | 'pill' | 'enclosed'", "'underline'", 'Visual style of the tab list'],
+  ['orientation', "'horizontal' | 'vertical'", "'horizontal'", 'Direction of the list; arrow keys follow it (Left/Right or Up/Down)'],
+  ['value', 'string | number', 'undefined', 'Active tab id (controlled)'],
+  ['defaultValue', 'string | number', 'undefined', 'Initially active tab id (uncontrolled)'],
+  ['defaultTab', 'number', '0', 'Index of the initially active tab (uncontrolled)'],
+  ['onChange', 'function', 'undefined', 'Called with (id, index) when the active tab changes'],
+  ['className', 'string', "''", 'Additional CSS classes'],
+];
 
 const PropsTable = () => (
   <div className="overflow-x-auto">
@@ -20,32 +32,14 @@ const PropsTable = () => (
         </tr>
       </thead>
       <tbody className="text-sm">
-        <tr className="border-b border-line">
-          <td className="py-3 px-4 font-mono text-sm">tabs</td>
-          <td className="py-3 px-4 font-mono text-xs text-ink-muted">
-            Array&lt;&#123;label: string, content?: ReactNode&#125;&gt;
-          </td>
-          <td className="py-3 px-4 font-mono text-xs">[]</td>
-          <td className="py-3 px-4">Array of tab objects with label and optional content</td>
-        </tr>
-        <tr className="border-b border-line">
-          <td className="py-3 px-4 font-mono text-sm">defaultTab</td>
-          <td className="py-3 px-4 font-mono text-xs text-ink-muted">number</td>
-          <td className="py-3 px-4 font-mono text-xs">0</td>
-          <td className="py-3 px-4">Index of the initially active tab</td>
-        </tr>
-        <tr className="border-b border-line">
-          <td className="py-3 px-4 font-mono text-sm">onChange</td>
-          <td className="py-3 px-4 font-mono text-xs text-ink-muted">function</td>
-          <td className="py-3 px-4 font-mono text-xs">undefined</td>
-          <td className="py-3 px-4">Callback when active tab changes, receives tab index</td>
-        </tr>
-        <tr className="border-b border-line">
-          <td className="py-3 px-4 font-mono text-sm">className</td>
-          <td className="py-3 px-4 font-mono text-xs text-ink-muted">string</td>
-          <td className="py-3 px-4 font-mono text-xs">''</td>
-          <td className="py-3 px-4">Additional CSS classes</td>
-        </tr>
+        {rows.map(([prop, type, def, desc]) => (
+          <tr key={prop} className="border-b border-line">
+            <td className="py-3 px-4 font-mono text-sm">{prop}</td>
+            <td className="py-3 px-4 font-mono text-xs text-ink-muted">{type}</td>
+            <td className="py-3 px-4 font-mono text-xs">{def}</td>
+            <td className="py-3 px-4">{desc}</td>
+          </tr>
+        ))}
       </tbody>
     </table>
   </div>
@@ -362,6 +356,26 @@ export default function TabsPage() {
 <Card title="Premium Product" description="$99.99">
   <Tabs tabs={productTabs} />
 </Card>`} />
+        </section>
+
+        {/* Variants, orientation, icons, disabled */}
+        <section className="mb-12">
+          <h2 className="text-2xl font-bold mb-4">Variants, orientation, icons &amp; disabled</h2>
+          <p className="text-ink-muted mb-6">
+            Three list styles, a vertical orientation, optional 16px icons, and disabled tabs.
+          </p>
+          <div className="bg-surface-raised rounded-lg border border-line p-8 mb-4">
+            <div className="flex flex-col gap-8">
+              <Tabs variant="underline" tabs={[{ label: 'Overview', icon: Home }, { label: 'Profile', icon: User }, { label: 'Settings', icon: SettingsIcon, disabled: true }]} />
+              <Tabs variant="pill" tabs={[{ label: 'Overview' }, { label: 'Activity' }, { label: 'Settings' }]} />
+              <Tabs variant="enclosed" tabs={[{ label: 'Overview' }, { label: 'Activity' }, { label: 'Settings' }]} />
+              <Tabs orientation="vertical" tabs={[{ label: 'Overview', content: <p className="text-ink-muted">Vertical tabs put the panel beside the list.</p> }, { label: 'Activity' }, { label: 'Settings' }]} />
+            </div>
+          </div>
+          <CodeBlock code={`<Tabs variant="pill" tabs={tabs} />
+<Tabs variant="enclosed" tabs={tabs} />
+<Tabs orientation="vertical" tabs={tabs} />
+<Tabs tabs={[{ label: 'Overview', icon: Home }, { label: 'Settings', disabled: true }]} />`} />
         </section>
 
         {/* Props Table */}
