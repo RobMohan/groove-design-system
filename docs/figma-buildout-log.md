@@ -408,12 +408,31 @@ Reused as-is: `Select Group Label`, the token set, elevation 4, the focus-ring c
 
 **Not done:** Code Connect.
 
+### Round 13: Spinner (2026-10-29)
+**Why this one:** the last primitive in the "small and widely depended on" batch (Button loading, Select/Combobox spinners, Toast, Modal). Reuses the Lucide `loader-2` component already in the library, so it stays in step with the icon pipeline.
+
+**Built** (new `Spinner` section, 20 variants): Size 4 (SM 16, MD 24, LG 40, XL 56) x Color 5 (Primary, Secondary, Positive, Destructive, Neutral). Properties `Label` (TEXT) and `Show Label` (BOOLEAN, off by default as the label is optional in code). The glyph is an instance of `lucide/loader-2` scaled with `rescale` so stroke scales with size like the code's `size` prop; strokes are bound to the brand variables (Neutral uses `Ink/Muted`, so it follows the theme mode). Label reuses `Field / Message` at 8px gap.
+
+**Limitation recorded in the description:** the code spins the glyph with a CSS animation (`animate-spin`); a static component can't show motion, so the description points to a prototype rotate animation. Also the `role="status"` and the always-present screen-reader "Loading" text are code behavior with no Figma equivalent.
+
+**Process:** component and both panels in one call; one screenshot per mode; no defects; no repair pass. The Spinner doc page already covers `size` (including the number form), `color`, `label` and `className`, so no page change.
+
+**Findings (accessibility, measured; 3:1 non-text, spinner against page)**
+| Color | Light | Dark |
+| --- | --- | --- |
+| Primary | 3.28 | 5.18 |
+| Secondary | 5.45 | 3.11 |
+| Positive | 3.15 | 5.38 |
+| Destructive | 4.62 | 3.67 |
+| Neutral (theme-aware `ink-muted`) | 7.23 | 6.99 |
+All pass, narrowly for positive (light) and secondary (dark). The label text is `ink-muted` on the page and passes.
+
 ## Running tally
 
 | Metric | Value |
 | --- | --- |
 | Components audited | inventory-level only (~17 present / ~27 missing of ~44) |
-| Components built in Figma | 15 UI components / 7 families (IconButton 126 variants, Textarea 24, TextInput 24, Select 30 + Option 6 + Group Label 1 + Menu 4, Multi Select 27 + Pill 1 + Option 6 + Menu 4, Combobox 18 + Menu 4, Chip 30 + Chip State 20, Avatar 20 + Avatar Status 20, Divider 10) + 200 Lucide icon components |
+| Components built in Figma | 15 UI components / 7 families (IconButton 126 variants, Textarea 24, TextInput 24, Select 30 + Option 6 + Group Label 1 + Menu 4, Multi Select 27 + Pill 1 + Option 6 + Menu 4, Combobox 18 + Menu 4, Chip 30 + Chip State 20, Avatar 20 + Avatar Status 20, Divider 10, Spinner 20) + 200 Lucide icon components |
 | Components retired | 2 (legacy `Text` and `Dropdown` sets: migrated, deprecated, then deleted with a zero-reference guard) |
 | Doc pages updated | 4 (TextInput, Select, MultiSelect, Combobox) |
 | Token/contrast issues found | 5 failing pairs (see Round 1) + invisible dark-mode elevation + counter text (Round 5) + default field border 1.47 / 1.94 (Round 6) + group heading 2.54 / 3.04 and dark search placeholder 4.06 (Round 7) + unchecked checkbox border 1.47 / 1.94 (Round 8) |
