@@ -112,10 +112,11 @@ export default function ModalPage() {
               <tbody className="text-sm">
                 <PropRow name="isOpen" type="boolean" def="—" desc="Whether the modal is visible" />
                 <PropRow name="onClose" type="function" def="—" desc="Called on overlay click, Escape, or close button" />
-                <PropRow name="title" type="string" def="—" desc="Header title" />
+                <PropRow name="title" type="string" def="—" desc="Header title; also labels the dialog for assistive tech" />
+                <PropRow name="description" type="string" def="—" desc="Muted text above the body content; also linked as the dialog description" />
                 <PropRow name="children" type="node" def="—" desc="Body content" />
                 <PropRow name="footer" type="node" def="—" desc="Footer content (usually action buttons)" />
-                <PropRow name="size" type="'sm'|'md'|'lg'|'xl'" def="'md'" desc="Maximum width" />
+                <PropRow name="size" type="'sm'|'md'|'lg'|'xl'|'full'" def="'md'" desc="Maximum width: 384 / 512 / 672 / 896px, or 95% of the viewport for full" />
                 <PropRow name="closeOnOverlay" type="boolean" def="true" desc="Close when the backdrop is clicked" />
                 <PropRow name="showClose" type="boolean" def="true" desc="Show the header close button" />
                 <PropRow name="className" type="string" def="''" desc="Additional CSS classes on the dialog" />

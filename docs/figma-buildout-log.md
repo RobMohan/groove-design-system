@@ -427,14 +427,34 @@ Reused as-is: `Select Group Label`, the token set, elevation 4, the focus-ring c
 | Neutral (theme-aware `ink-muted`) | 7.23 | 6.99 |
 All pass, narrowly for positive (light) and secondary (dark). The label text is `ink-muted` on the page and passes.
 
+### Round 14: Modal (2026-10-29)
+**Why this one:** the first full composition. It stacks tokens, a text style, an elevation style, the close icon and the existing Button instances, so it is a real test of whether the foundation layers hold together.
+
+**Built** (new `Modal` section, 4 variants plus 2 scenes): `Modal` set, Size SM / MD / LG / XL = the code's max widths 384 / 512 / 672 / 896. 7 properties: Title, Show Title, Show Close, Description, Show Description, Body, Show Footer. Structure: header (title and close, 20px padding, 1px bottom divider), body (description and content, 16px gap), footer (Cancel and Confirm Button instances, 12px gap, 1px top divider). Raised surface, `Radius/L` (16), `Elevation / 5`. New text style `Modal / Title` (Semi Bold 18/28). Two review scenes (Light and Dark) show the dialog centered on a page with the code's backdrop (black at 50% opacity), because the backdrop is page-sized and belongs to a scene, not the component.
+
+**Honest scope notes:** `size="full"` (95% of the viewport) is not drawn (it depends on the viewport); the close button sits about 4px lower and further right in code than in Figma because of negative margins; focus trap, Escape and scroll lock have no visual form; the backdrop's raw `black/50` is a hard-coded color in the code and the scene, not a token (it is theme-independent on purpose).
+
+**Dependency finding (important): Figma's Button is out of date.** The footer needed an outline or ghost button for Cancel, but the existing Figma `Button` set has only Primary, Secondary (purple), Destructive, Positive and Link, three states, one size, 4px radius and no Outline, Ghost, Focus, Disabled or Loading variants, versus the code's 7 variants x 3 sizes x 6 states. The footer uses Secondary (purple) as a stand-in and says so. Rebuilding Button on the IconButton matrix (126 variants) is the highest-value next round, but it needs a migration of every existing Button instance in Cards, Tables and App Compositions, so it is a deliberate round rather than a drive-by.
+
+**Process:** component and both scenes in one call, screenshot-checked the Light scene and the set; no defects, no repair pass. Verified by construction (all paints bound except the intentional backdrop, all text styled, radius bound) and visually.
+
+**Doc site:** `ModalPage.jsx` was missing `description` (a real prop with `aria-describedby` wiring) and the `full` size; added both and sharpened `title` and `size`.
+
+**Findings (accessibility)**
+- Close icon (`ink-muted` on raised): 7.56 light / 5.78 dark. Description text: same pair. Pass.
+- The dialog has no border, so on a light page behind a 50% black scrim its edge relies on contrast between the raised surface and the dimmed page (about 7:1 in light mode scene). Fine. In dark the scrim over a near-black page leaves the dialog edge readable but low-contrast; the dark elevation is invisible (Round 2 finding).
+- Code: the close button's focus ring uses `ring-offset-2` against the dialog surface; fine. No findings in the markup (role, aria-modal, labelledby and describedby are all present).
+
+**Not done:** `full` size; Code Connect.
+
 ## Running tally
 
 | Metric | Value |
 | --- | --- |
 | Components audited | inventory-level only (~17 present / ~27 missing of ~44) |
-| Components built in Figma | 15 UI components / 7 families (IconButton 126 variants, Textarea 24, TextInput 24, Select 30 + Option 6 + Group Label 1 + Menu 4, Multi Select 27 + Pill 1 + Option 6 + Menu 4, Combobox 18 + Menu 4, Chip 30 + Chip State 20, Avatar 20 + Avatar Status 20, Divider 10, Spinner 20) + 200 Lucide icon components |
+| Components built in Figma | 15 UI components / 7 families (IconButton 126 variants, Textarea 24, TextInput 24, Select 30 + Option 6 + Group Label 1 + Menu 4, Multi Select 27 + Pill 1 + Option 6 + Menu 4, Combobox 18 + Menu 4, Chip 30 + Chip State 20, Avatar 20 + Avatar Status 20, Divider 10, Spinner 20, Modal 4) + 200 Lucide icon components |
 | Components retired | 2 (legacy `Text` and `Dropdown` sets: migrated, deprecated, then deleted with a zero-reference guard) |
-| Doc pages updated | 4 (TextInput, Select, MultiSelect, Combobox) |
+| Doc pages updated | 6 (TextInput, Select, MultiSelect, Combobox, Modal; Chip, Avatar, Divider, Spinner were already accurate) |
 | Token/contrast issues found | 5 failing pairs (see Round 1) + invisible dark-mode elevation + counter text (Round 5) + default field border 1.47 / 1.94 (Round 6) + group heading 2.54 / 3.04 and dark search placeholder 4.06 (Round 7) + unchecked checkbox border 1.47 / 1.94 (Round 8) |
 | Self-corrections | 10 (Chip: paint opacity reset, false-alarm verification, stale instances; earlier: IconButton stroke scaling, escaped descriptions, Textarea padding double-counting stroke, "Dropdown nests Text" mis-attribution, review-panel row clipping, Multi Select orphaned buttons, Multi Select tail minimum) |
 | Figma variables added | 42 (11 Cool Gray primitives + 11 Theme tokens x Light/Dark + 16 Brand + 4 Brand Warning) |
