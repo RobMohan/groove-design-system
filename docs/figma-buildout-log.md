@@ -644,12 +644,29 @@ All pass, narrowly for positive (light) and secondary (dark). The label text is 
 
 **Not done:** custom step icons (the glyph layers can be swapped); `clickable` focus ring (a standard ring, no visual change at rest); Code Connect.
 
+### Round 24: Popover (2026-10-29)
+**Why this one:** the last of the overlay family (Modal, Toast, Menu, Select menus), reusing the elevation, radius and Button pieces, plus a new geometry problem (an arrow on any of four edges).
+
+**Built** (new `Popover` section, 8 variants): `Popover` set, Placement 4 (Bottom, Top, Left, Right: the side of the trigger where the panel sits) x Arrow 2 (Off, On). The panel is a raised surface with `Radius/M` (the code's `rounded-card`, 12px), line border, `Elevation / 4`, 16px padding, 288px wide here (code allows 160 to 320). Arrow = the code's 10px rotated square in the raised surface with a line border on its two outer edges, placed at the center of the edge that faces the trigger (a Bottom placement gets its arrow on the panel's top edge). Properties: Title, Show Title, Body, Show Actions (small Outline and Primary Button instances); the panel is a free slot in code, so those layers are sample content. Light and Dark panels show a trigger with a popover on each side. Arrow geometry was done with an explicit rotation matrix about the arrow's center so it stays on the edge at exact coordinates.
+
+**Suspected code defect (not confirmed in a browser, flagged for Rob):** in `Popover.jsx`, `resolvedSide` is the side where the *panel* sits (it feeds `computeCoords`), and the arrow edge is derived as `{top:'bottom', bottom:'top', ...}[resolvedSide]` and then used both to pick the border and to index `arrowStyle`. For a panel below its trigger that gives arrowSide `top`, and `arrowStyle.top` is `top: 100%`, i.e. the arrow is placed at the panel's *bottom* edge with its top borders, away from the trigger. If that renders as it reads, every placed arrow is on the wrong edge. I built the intended design (arrow on the edge facing the trigger) rather than mirror what reads as a bug, and said so in the component description. Worth a 5 minute check in the running app.
+
+**Process:** one build call with panels, one screenshot of each; no repair. Verified the arrow positions on the four placements in the set screenshot (top edge for Bottom, bottom edge for Top, right edge for Left, left edge for Right).
+
+**Doc site:** `PopoverPage.jsx` already covers `trigger`, `content`/`children`, `placement`, `showArrow`, `offset`, `closeOnEsc` and `closeOnBlur`; no change.
+
+**Findings (accessibility)**
+- Text pairs reuse tokens already measured: title `ink` on raised (17.7 / 13.3), body `ink-muted` on raised (7.56 / 5.78): pass. The panel edge relies on the shadow plus a `line` border (1.2:1): decorative, with the dialog role carrying structure.
+- Code: the panel has `role="dialog"` and moves focus into it, and `aria-haspopup="dialog"` on the trigger: correct. `closeOnBlur` defaults to closing when focus leaves, which can be surprising for non-modal popovers but is documented.
+
+**Not done:** align (start and end) variants (the same layouts shifted); flipping behavior; Code Connect.
+
 ## Running tally
 
 | Metric | Value |
 | --- | --- |
 | Components audited | inventory-level only (~17 present / ~27 missing of ~44) |
-| Components built in Figma | 15 UI components / 7 families (IconButton 126 variants, Textarea 24, TextInput 24, Select 30 + Option 6 + Group Label 1 + Menu 4, Multi Select 27 + Pill 1 + Option 6 + Menu 4, Combobox 18 + Menu 4, Chip 30 + Chip State 20, Avatar 20 + Avatar Status 20, Divider 10, Spinner 20, Modal 4, Button rebuilt 126, Toast 4, Banner 4, Link 18 + Link State 6, Menu Item 6 + Divider 1 + Menu 1, Segment 15 + Segmented Control 18, Skeleton 3 + Skeleton Text 3, Accordion Item 6 + Accordion 1, Step Indicator 4 + Stepper 8) + 200 Lucide icon components |
+| Components built in Figma | 15 UI components / 7 families (IconButton 126 variants, Textarea 24, TextInput 24, Select 30 + Option 6 + Group Label 1 + Menu 4, Multi Select 27 + Pill 1 + Option 6 + Menu 4, Combobox 18 + Menu 4, Chip 30 + Chip State 20, Avatar 20 + Avatar Status 20, Divider 10, Spinner 20, Modal 4, Button rebuilt 126, Toast 4, Banner 4, Link 18 + Link State 6, Menu Item 6 + Divider 1 + Menu 1, Segment 15 + Segmented Control 18, Skeleton 3 + Skeleton Text 3, Accordion Item 6 + Accordion 1, Step Indicator 4 + Stepper 8, Popover 8) + 200 Lucide icon components |
 | Components retired | 2 deleted (legacy `Text` and `Dropdown`, after migration with a zero-reference guard) + 1 deprecated awaiting Rob's OK (legacy `Button`, 10 instances migrated) |
 | Doc pages updated | 7 (TextInput, Select, MultiSelect, Combobox, Modal, Button; Chip, Avatar, Divider, Spinner were already accurate) |
 | Token/contrast issues found | 5 failing pairs (see Round 1) + invisible dark-mode elevation + counter text (Round 5) + default field border 1.47 / 1.94 (Round 6) + group heading 2.54 / 3.04 and dark search placeholder 4.06 (Round 7) + unchecked checkbox border 1.47 / 1.94 (Round 8) |
