@@ -702,12 +702,31 @@ All pass, narrowly for positive (light) and secondary (dark). The label text is 
 
 **Not done:** custom icon choice per card (swap the glyph); Code Connect.
 
+### Round 27: ButtonGroup (2026-10-29)
+**Why this one:** a pure composition of the rebuilt Button (Round 15), and the first component that has to modify its children (square inner corners) rather than just place them.
+
+**Built** (new `Button Group` section, 4 variants): `Button Group` set: Orientation (Horizontal, Vertical) x Attached (True, False), three `Button` instances (Outline, MD) each. Attached squares the inner corners and overlaps neighbors so the borders collapse; not attached spaces them 8px. The corner squaring is done with per-corner overrides on each Button instance, and every nested Button is **exposed**, so Variant, Size and Label are set per button from the group. Vertical groups stretch their buttons to the widest, as the code's flex column does.
+
+**Honest trade-offs:** (1) the overlap is 2px here (itemSpacing -2) because Figma's Outline button has a 2px stroke, while the code's `-ml-px` overlaps 1px on a 2px border, which leaves the joint 1px thicker in code; mirrored in spirit (collapsed joint), not pixel for pixel, and said so in the description. (2) Corner rounding is per instance, so adding or reordering buttons means re-applying it: a component-level "position in group" property is not possible without variants per position (3 positions x variants x sizes), so I documented the limitation. (3) The group's shared `size` prop sets children that don't specify one; in Figma set Size on each Button.
+
+**Defect found by reading the screenshot, fixed:** vertical groups first rendered with unequal button widths (each hugging its label). The code's `flex-col` stretches items. Fixed by setting each button to fill (96px for all three) and re-checked the widths numerically.
+
+**Process:** component and panels in one call, one fix call. All instances are exposed, so the designer experience is "group first, then tune each button".
+
+**Doc site:** `ButtonGroupPage.jsx` covers `orientation`, `attached`, `size` and `className`; no change.
+
+**Findings (accessibility)**
+- Same Outline button tokens as Round 15: label (`ink` on raised) 17.7 / 13.3 passes; the outline border (`line-strong`, 2px) is 1.47 / 1.94, the recurring 3:1 failure. In an *attached* group the border is the only thing separating adjacent buttons, so the failure is more visible than for a single button.
+- Code: `role="group"` is set but there is no `aria-label` prop pass-through documented; unlabeled groups give a screen reader no context. A small code follow-up.
+
+**Not done:** IconButton-in-group example (works the same; the IconButton set is in Figma); Code Connect.
+
 ## Running tally
 
 | Metric | Value |
 | --- | --- |
 | Components audited | inventory-level only (~17 present / ~27 missing of ~44) |
-| Components built in Figma | 15 UI components / 7 families (IconButton 126 variants, Textarea 24, TextInput 24, Select 30 + Option 6 + Group Label 1 + Menu 4, Multi Select 27 + Pill 1 + Option 6 + Menu 4, Combobox 18 + Menu 4, Chip 30 + Chip State 20, Avatar 20 + Avatar Status 20, Divider 10, Spinner 20, Modal 4, Button rebuilt 126, Toast 4, Banner 4, Link 18 + Link State 6, Menu Item 6 + Divider 1 + Menu 1, Segment 15 + Segmented Control 18, Skeleton 3 + Skeleton Text 3, Accordion Item 6 + Accordion 1, Step Indicator 4 + Stepper 8, Popover 8, Slider 18, StatCard 3) + 200 Lucide icon components |
+| Components built in Figma | 15 UI components / 7 families (IconButton 126 variants, Textarea 24, TextInput 24, Select 30 + Option 6 + Group Label 1 + Menu 4, Multi Select 27 + Pill 1 + Option 6 + Menu 4, Combobox 18 + Menu 4, Chip 30 + Chip State 20, Avatar 20 + Avatar Status 20, Divider 10, Spinner 20, Modal 4, Button rebuilt 126, Toast 4, Banner 4, Link 18 + Link State 6, Menu Item 6 + Divider 1 + Menu 1, Segment 15 + Segmented Control 18, Skeleton 3 + Skeleton Text 3, Accordion Item 6 + Accordion 1, Step Indicator 4 + Stepper 8, Popover 8, Slider 18, StatCard 3, Button Group 4) + 200 Lucide icon components |
 | Components retired | 2 deleted (legacy `Text` and `Dropdown`, after migration with a zero-reference guard) + 1 deprecated awaiting Rob's OK (legacy `Button`, 10 instances migrated) |
 | Doc pages updated | 7 (TextInput, Select, MultiSelect, Combobox, Modal, Button; Chip, Avatar, Divider, Spinner were already accurate) |
 | Token/contrast issues found | 5 failing pairs (see Round 1) + invisible dark-mode elevation + counter text (Round 5) + default field border 1.47 / 1.94 (Round 6) + group heading 2.54 / 3.04 and dark search placeholder 4.06 (Round 7) + unchecked checkbox border 1.47 / 1.94 (Round 8) |
