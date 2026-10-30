@@ -571,12 +571,29 @@ All pass, narrowly for positive (light) and secondary (dark). The label text is 
 
 **Not done:** align and viewport flipping (behavior); Code Connect.
 
+### Round 20: Segmented Control (2026-10-29)
+**Why this one:** a common selection control (view switchers, date ranges) and a clean test of the nested, exposed-instance pattern from Avatar (Round 11) applied to a repeated child.
+
+**Built** (new `Segmented Control` section, 33 variants): `Segment` (15): Size 3 x State 5 (Default, Hover, Selected, Focus, Disabled); properties Label, Show Icon, Icon (swap). `Segmented Control` (18): Size 3 x Segments 3 (2, 3, 4) x State 2 (Default, Disabled). Every nested Segment is exposed, so a designer picks which segment is selected, edits labels and adds icons from the control itself (the first segment is Selected by default). Heights match the CSS box model: 38 / 50 / 58px (segment height plus track padding plus the 1px border). Track = muted surface, line border, `Radius/S`; Selected segment = raised surface with `Elevation / 1` (the code's indicator shadow). Reuses `Chip / MD`, `Field / Label MD` and `Button / LG` for the three label sizes (all Medium, matching `font-medium`). Disabled is 60% node opacity on the whole control, as in code.
+
+**What the code does that Figma doesn't show:** the indicator *slides* under the selected segment (200ms ease-out); in Figma the raised pill is simply part of the Selected segment. Arrow-key radio-group behavior and `fullWidth` (segments share the width) are described, not drawn.
+
+**Process:** built both sets and both panels in one call; verified heights numerically and Light and Dark by screenshot. No defects, and no repair pass: this is the first round since Round 15 with none. It used only constructs already proven in this file (root fills, node-level opacity, effect styles, absolute focus ring in a horizontal frame, exposed nested instances). Bindings are by construction (every paint a bound variable, every text a style, radii bound).
+
+**Doc site:** `SegmentedControlPage.jsx` already covers `options`, `value`, `defaultValue`, `onChange`, `size`, `fullWidth`, `disabled`, `aria-label` and icons; no change.
+
+**Findings (accessibility, measured)**
+- Unselected segment labels (`ink-muted` on the muted track): 6.87 light / **4.06 dark**: fails AA in dark mode (same pair as Avatar initials and the Select search placeholder: `ink-muted` on `surface-muted`). Selected label (`ink` on raised): 17.7 / 11.7. Disabled labels are exempt.
+- Track border (`line`) is decorative here; the raised selected segment is the state indicator, and it relies on a light-versus-muted fill difference (about 1.1:1 in light mode) plus a shadow that is invisible in dark mode (Round 2 finding). Selected state is therefore weakly indicated for low-vision users in both modes; consider a border or heavier weight on the selected segment.
+
+**Not done:** the sliding animation; Code Connect.
+
 ## Running tally
 
 | Metric | Value |
 | --- | --- |
 | Components audited | inventory-level only (~17 present / ~27 missing of ~44) |
-| Components built in Figma | 15 UI components / 7 families (IconButton 126 variants, Textarea 24, TextInput 24, Select 30 + Option 6 + Group Label 1 + Menu 4, Multi Select 27 + Pill 1 + Option 6 + Menu 4, Combobox 18 + Menu 4, Chip 30 + Chip State 20, Avatar 20 + Avatar Status 20, Divider 10, Spinner 20, Modal 4, Button rebuilt 126, Toast 4, Banner 4, Link 18 + Link State 6, Menu Item 6 + Divider 1 + Menu 1) + 200 Lucide icon components |
+| Components built in Figma | 15 UI components / 7 families (IconButton 126 variants, Textarea 24, TextInput 24, Select 30 + Option 6 + Group Label 1 + Menu 4, Multi Select 27 + Pill 1 + Option 6 + Menu 4, Combobox 18 + Menu 4, Chip 30 + Chip State 20, Avatar 20 + Avatar Status 20, Divider 10, Spinner 20, Modal 4, Button rebuilt 126, Toast 4, Banner 4, Link 18 + Link State 6, Menu Item 6 + Divider 1 + Menu 1, Segment 15 + Segmented Control 18) + 200 Lucide icon components |
 | Components retired | 2 deleted (legacy `Text` and `Dropdown`, after migration with a zero-reference guard) + 1 deprecated awaiting Rob's OK (legacy `Button`, 10 instances migrated) |
 | Doc pages updated | 7 (TextInput, Select, MultiSelect, Combobox, Modal, Button; Chip, Avatar, Divider, Spinner were already accurate) |
 | Token/contrast issues found | 5 failing pairs (see Round 1) + invisible dark-mode elevation + counter text (Round 5) + default field border 1.47 / 1.94 (Round 6) + group heading 2.54 / 3.04 and dark search placeholder 4.06 (Round 7) + unchecked checkbox border 1.47 / 1.94 (Round 8) |
