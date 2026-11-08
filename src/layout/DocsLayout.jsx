@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, Moon, Sun } from 'lucide-react';
+import ChatWidget from './ChatWidget';
 
 const gettingStartedItems = [
   { path: '/overview', label: 'Overview' },
@@ -229,6 +230,8 @@ export default function DocsLayout({ children }) {
       <div className={`transition-all duration-300 ${isOpen ? 'ml-64' : 'ml-0'}`}>
         {children}
       </div>
+
+      <ChatWidget />
     </div>
   );
 }

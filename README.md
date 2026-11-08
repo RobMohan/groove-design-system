@@ -97,10 +97,29 @@ groove-design-system/
 │   ├── styles/              # global.css (token definitions + dark overrides)
 │   ├── test/                # Vitest setup
 │   └── main.jsx             # Routes + ToastProvider
+├── api/                     # Serverless function for the docs assistant (chat.mjs + generated knowledge)
+├── scripts/                 # build-knowledge.mjs: docs -> assistant knowledge base
 ├── tailwind.config.js       # Tokens: colors, elevation, radius, motion
 ├── vite.config.js
 └── README.md
 ```
+
+## 💬 Docs assistant ("Ask Groove")
+
+The docs site has a chat assistant (bottom-right) that answers questions about the components, tokens, style rules and setup, using the site's own pages as its source.
+
+**How it works.** `scripts/build-knowledge.mjs` turns every page in `src/pages` (prose, prop tables, token tables, code samples) plus `tailwind.config.js` and `global.css` into `api/_knowledge.mjs`. For each question, `api/chat.mjs` (a Vercel serverless function) picks the most relevant pages with keyword search, sends them to Claude along with a cached core of installation, theming and color-usage docs, and streams the answer back. The API key stays on the server.
+
+**Setup**
+
+1. Create an API key at [console.anthropic.com](https://console.anthropic.com/).
+2. Locally: copy `.env.example` to `.env.local`, set `ANTHROPIC_API_KEY`, run `npm run dev`. The dev server serves `/api/chat` too.
+3. On Vercel: add `ANTHROPIC_API_KEY` under Project Settings, Environment Variables, then redeploy.
+4. Until a key is set, the widget shows "not set up on this deployment yet" and nothing else on the site is affected.
+
+**Keeping it current.** The knowledge file regenerates on every `npm run dev` and `npm run build`, so doc edits flow through automatically. Commit the regenerated `api/_knowledge.mjs` so deployments carry it (run `npm run knowledge` to refresh it on its own).
+
+**Cost and abuse controls.** The endpoint is public, so set a monthly spend limit on the key's workspace in the Anthropic Console. The function also checks the request origin, caps message size and history, and limits each IP to 20 questions per 10 minutes per server instance (`CHAT_RATE_LIMIT`). That limit is best effort, because serverless instances don't share memory; for a hard limit add a Vercel WAF rate-limit rule on `/api/chat`. The model defaults to `claude-opus-5-5`; set `CHAT_MODEL` (for example `claude-haiku-5-5`) for a much cheaper option. Each answer logs its token usage to the Vercel function logs.
 
 ## 🧪 Testing
 
@@ -110,7 +129,7 @@ npm test -- --watch   # watch mode
 npm run test:coverage # coverage report
 ```
 
-Current coverage: **203 tests across 36 suites** — covering every component including the overlays (Popover, Drawer, Command Palette), form controls (Combobox, Multi-Select, Field, Number Input, Slider), and data widgets (Date Picker, File Upload, Stepper, List), plus the accessibility remediation of the original set.
+Current coverage: **258 tests across 38 suites** — covering every component including the overlays (Popover, Drawer, Command Palette), form controls (Combobox, Multi-Select, Field, Number Input, Slider), and data widgets (Date Picker, File Upload, Stepper, List), plus the accessibility remediation of the original set.
 
 ## 🛠️ Built With
 

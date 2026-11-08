@@ -1,11 +1,14 @@
 {
     "name": "groove-design-system",
     "version": "2.0.0",
-    "description": "Groove — a comprehensive, accessible React + Tailwind design system with 44 themeable components and 12 foundations.",
+    "description": "Groove \u2014 a comprehensive, accessible React + Tailwind design system with 44 themeable components and 12 foundations.",
     "main": "src/main.jsx",
     "scripts": {
+        "knowledge": "node scripts/build-knowledge.mjs",
+        "predev": "npm run knowledge",
         "dev": "vite",
         "build": "vite build",
+        "prebuild": "npm run knowledge",
         "preview": "vite preview",
         "deploy": "npm run build && npx gh-pages -d dist",
         "test": "vitest",
@@ -26,6 +29,7 @@
         "react-dom": "^18.0.0"
     },
     "devDependencies": {
+        "@babel/parser": "^8.1.0",
         "@testing-library/jest-dom": "^6.9.1",
         "@testing-library/react": "^16.3.0",
         "@testing-library/user-event": "^14.6.1",
@@ -39,6 +43,7 @@
         "vitest": "^3.2.4"
     },
     "dependencies": {
+        "@anthropic-ai/sdk": "^1.6.0",
         "@tanstack/react-table": "^8.21.3",
         "lucide-react": "^0.263.1",
         "react-router-dom": "^7.9.5"
