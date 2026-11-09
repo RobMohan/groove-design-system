@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import SegmentedControl from '../components/SegmentedControl';
 import AppShellExample from '../examples/AppShellExample';
+import FullscreenFrame from '../layout/FullscreenFrame';
 
 const CodeBlock = ({ code }) => (
   <pre className="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto text-sm">
@@ -104,25 +105,24 @@ export default function AppShellPage() {
             status and an order list. Click through the sidebar, expand it from the icon rail, press{' '}
             <kbd className="text-xs font-mono border border-line rounded px-1.5 py-0.5">⌘K</kbd> (or{' '}
             <kbd className="text-xs font-mono border border-line rounded px-1.5 py-0.5">Ctrl K</kbd>) to search, and open the
-            account menu. Switch the width to see the compact layout, and use the theme toggle in the site sidebar to see dark mode.
+            account menu. Switch the width to see the compact layout, press Expand to fill the whole browser, and use the theme toggle in the site sidebar to see dark mode.
           </p>
-          <div className="mb-3">
-            <SegmentedControl
-              aria-label="Preview width"
-              size="sm"
-              options={viewports}
-              value={viewport}
-              onChange={setViewport}
-            />
-          </div>
-          <div className="rounded-card border border-line bg-surface-muted p-3 sm:p-4">
-            <div
-              className="mx-auto h-[680px] max-w-full overflow-hidden rounded-card border border-line shadow-elevation-3 transition-[width] duration-300 motion-reduce:transition-none"
-              style={{ width: widths[viewport] }}
-            >
-              <AppShellExample />
-            </div>
-          </div>
+          <FullscreenFrame
+            label="Deep Groove, a record pressing plant app built on App Shell"
+            toolbar={
+              <SegmentedControl
+                aria-label="Preview width"
+                size="sm"
+                options={viewports}
+                value={viewport}
+                onChange={setViewport}
+              />
+            }
+            slotClassName="mx-auto h-[680px] max-w-full overflow-hidden rounded-card border border-line shadow-elevation-3 transition-[width] duration-300 motion-reduce:transition-none"
+            slotStyle={{ width: widths[viewport] }}
+          >
+            <AppShellExample />
+          </FullscreenFrame>
         </section>
 
         <section className="mb-12">

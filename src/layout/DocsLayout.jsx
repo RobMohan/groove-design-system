@@ -93,6 +93,12 @@ export default function DocsLayout({ children }) {
 
   const toggleTheme = () => setTheme((t) => (t === 'dark' ? 'light' : 'dark'));
 
+  // The full-screen app view has no site sidebar, so it asks this layout to switch the theme.
+  useEffect(() => {
+    window.addEventListener('groove:toggle-theme', toggleTheme);
+    return () => window.removeEventListener('groove:toggle-theme', toggleTheme);
+  }, []);
+
   const isActive = (path) => {
     if (path === '/') return location.pathname === '/';
     return location.pathname.startsWith(path);
