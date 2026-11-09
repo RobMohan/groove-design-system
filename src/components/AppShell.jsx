@@ -384,7 +384,7 @@ const AppShell = ({
                 />
               )}
 
-              <div className="min-w-[7rem] flex-1 basis-40 overflow-hidden [&_li]:whitespace-nowrap [&_ol]:flex-nowrap">
+              <div className="min-w-[7rem] max-w-[55%] shrink-0 grow overflow-hidden [&_li]:whitespace-nowrap [&_ol]:flex-nowrap">
                 {breadcrumbs?.length ? (
                   compact ? (
                     <div className="truncate text-base font-semibold text-ink">{lastCrumb}</div>

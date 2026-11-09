@@ -100,7 +100,8 @@ export default function AppShellPage() {
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-2">Try it</h2>
           <p className="text-ink-muted mb-4">
-            This is a working app built on the shell. Click through the sidebar, collapse it, press{' '}
+            This is a working record pressing plant dashboard built on the shell, with an accessible chart, live press
+            status and an order list. Click through the sidebar, collapse it, press{' '}
             <kbd className="text-xs font-mono border border-line rounded px-1.5 py-0.5">⌘K</kbd> (or{' '}
             <kbd className="text-xs font-mono border border-line rounded px-1.5 py-0.5">Ctrl K</kbd>) to search, and open the
             account menu. Switch the width to see the compact layout, and use the theme toggle in the site sidebar to see dark mode.
@@ -136,14 +137,14 @@ export default function AppShellPage() {
             the page as children.
           </p>
           <CodeBlock
-            code={`import { LayoutDashboard, FolderKanban, Settings } from 'lucide-react';
+            code={`import { LayoutDashboard, ListChecks, Settings } from 'lucide-react';
 
 const navigation = [
   {
-    title: 'Workspace',
+    title: 'Plant',
     items: [
       { id: 'overview', label: 'Overview', icon: LayoutDashboard, to: '/' },
-      { id: 'projects', label: 'Projects', icon: FolderKanban, to: '/projects', badge: 6 },
+      { id: 'orders', label: 'Orders', icon: ListChecks, to: '/orders', badge: 21 },
     ],
   },
   { title: 'Account', items: [{ id: 'settings', label: 'Settings', icon: Settings, to: '/settings' }] },
@@ -151,14 +152,14 @@ const navigation = [
 
 <div className="h-screen">
   <AppShell
-    brand={{ logo: <MyLogo />, name: 'Northwind' }}
+    brand={{ logo: <MyLogo />, name: 'Deep Groove' }}
     navigation={navigation}
-    activeId="projects"
-    breadcrumbs={[{ label: 'Workspace' }, { label: 'Projects' }]}
-    user={{ name: 'Jordan Lee', email: 'jordan@northwind.io' }}
+    activeId="orders"
+    breadcrumbs={[{ label: 'Deep Groove' }, { label: 'Orders' }]}
+    user={{ name: 'Dana Reyes', email: 'dana@deepgroove.example' }}
     userMenu={[{ label: 'Sign out', danger: true, onClick: signOut }]}
   >
-    <PageHeader title="Projects" description="Everything your team is building." />
+    <PageHeader title="Orders" description="Every job from mastering to shipment." />
     {/* page content */}
   </AppShell>
 </div>`}

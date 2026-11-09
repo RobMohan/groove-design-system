@@ -110,7 +110,7 @@ npm test -- --watch   # watch mode
 npm run test:coverage # coverage report
 ```
 
-Current coverage: **231 tests across 37 suites** — covering every component including the overlays (Popover, Drawer, Command Palette), form controls (Combobox, Multi-Select, Field, Number Input, Slider), and data widgets (Date Picker, File Upload, Stepper, List), plus the accessibility remediation of the original set.
+Current coverage: **251 tests across 38 suites** — covering every component including the overlays (Popover, Drawer, Command Palette), form controls (Combobox, Multi-Select, Field, Number Input, Slider), and data widgets (Date Picker, File Upload, Stepper, List), plus the accessibility remediation of the original set.
 
 ## 🛠️ Built With
 

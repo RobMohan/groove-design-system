@@ -47,7 +47,7 @@ export default function ChangelogPage() {
               <Change type="Added">
                 App Shell: a collapsible sidebar, header with breadcrumbs, search trigger, actions and account menu,
                 and a scrolling content area, with a slide-over layout when narrow. Includes a PageHeader helper and
-                an interactive example app.
+                an interactive example app: a record pressing plant dashboard with an accessible chart.
               </Change>
             </ul>
           </Release>
