@@ -4,7 +4,7 @@ A comprehensive, accessible component library built with React and Tailwind CSS.
 
 ## 🚀 Live Demo
 
-**[View Live Demo](https://component-test-ashy.vercel.app)** | **[GitHub Repository](https://github.com/RobMohan/groove-design-system)**
+**[View Live Demo](https://component-test-ashy.vercel.app)** | **[GitHub Repository](https://github.com/RobMohan/groove-design-system)** | **[Figma File](https://www.figma.com/design/lfrGFBYB7xPSgFfNqOWKpA?node-id=14-266)**
 
 ## ✨ Features
 

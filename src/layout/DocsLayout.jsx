@@ -206,6 +206,15 @@ export default function DocsLayout({ children }) {
               <span>→</span>
             </a>
             <a
+              href="https://www.figma.com/design/lfrGFBYB7xPSgFfNqOWKpA?node-id=14-266"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 text-sm text-ink-muted hover:text-ink px-4 transition-colors"
+            >
+              <span>Figma file</span>
+              <span>→</span>
+            </a>
+            <a
               href="https://www.linkedin.com/in/robmohan/"
               target="_blank"
               rel="noopener noreferrer"

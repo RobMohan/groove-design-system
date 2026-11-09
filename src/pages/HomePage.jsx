@@ -28,6 +28,11 @@ export default function HomePage() {
                 View on GitHub
               </Button>
             </a>
+            <a href="https://www.figma.com/design/lfrGFBYB7xPSgFfNqOWKpA?node-id=14-266" target="_blank" rel="noopener noreferrer">
+              <Button variant="outline" size="large">
+                View Figma file
+              </Button>
+            </a>
           </div>
         </div>
 
