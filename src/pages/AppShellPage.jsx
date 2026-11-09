@@ -101,7 +101,7 @@ export default function AppShellPage() {
           <h2 className="text-2xl font-bold mb-2">Try it</h2>
           <p className="text-ink-muted mb-4">
             This is a working record pressing plant dashboard built on the shell, with an accessible chart, live press
-            status and an order list. Click through the sidebar, collapse it, press{' '}
+            status and an order list. Click through the sidebar, expand it from the icon rail, press{' '}
             <kbd className="text-xs font-mono border border-line rounded px-1.5 py-0.5">⌘K</kbd> (or{' '}
             <kbd className="text-xs font-mono border border-line rounded px-1.5 py-0.5">Ctrl K</kbd>) to search, and open the
             account menu. Switch the width to see the compact layout, and use the theme toggle in the site sidebar to see dark mode.

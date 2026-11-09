@@ -40,7 +40,7 @@ export default function HomePage() {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16">
           <StatCard value="45" label="Components" />
           <StatCard value="12" label="Foundations" />
-          <StatCard value="250" label="Passing tests" />
+          <StatCard value="251" label="Passing tests" />
           <StatCard value="2" label="Themes (light / dark)" />
         </div>
 

@@ -151,8 +151,17 @@ describe('AppShellExample (pressing plant)', () => {
     // the stat tile and the chart's latest-value label agree
     expect(screen.getAllByText('8,420').length).toBeGreaterThanOrEqual(2);
     expect(screen.getByText('Records pressed today')).toBeInTheDocument();
-    expect(screen.getByText('4 of 6 presses running', { selector: 'p' })).toBeInTheDocument();
+    expect(screen.getByText(/Day shift · 4 of 6 presses running/)).toBeInTheDocument();
     expect(screen.getByRole('list', { name: 'Orders by stage' })).toBeInTheDocument();
+  });
+
+  it('starts with the sidebar collapsed to the icon rail and expands on request', async () => {
+    const user = userEvent.setup();
+    app();
+    const sidebar = () => screen.getByRole('complementary', { name: 'Sidebar' });
+    expect(within(sidebar()).queryByText('Deep Groove')).toBeNull();
+    await user.click(screen.getByRole('button', { name: 'Expand sidebar' }));
+    expect(within(sidebar()).getByText('Deep Groove')).toBeInTheDocument();
   });
 
   it('switches the chart to its table view', async () => {

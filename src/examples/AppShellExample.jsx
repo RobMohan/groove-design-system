@@ -80,7 +80,7 @@ const StatusChip = ({ status }) => {
 };
 
 const Panel = ({ title, description, action, flush = false, children, className = '' }) => (
-  <section className={`rounded-card border border-line bg-surface-raised shadow-elevation-1 ${className}`}>
+  <section className={`rounded-card border border-line bg-surface-raised shadow-elevation-3 ${className}`}>
     {(title || action) && (
       <div className="flex items-start justify-between gap-3 border-b border-line px-5 py-4">
         <div className="min-w-0">
@@ -118,9 +118,9 @@ function Overview({ onNewOrder }) {
       />
 
       <div className={`mb-6 grid gap-4 ${statCols}`}>
-        <StatCard value={fmt(recordsToday)} label="Records pressed today" trend={`+${vsAveragePct}% vs weekday average`} />
-        <StatCard value={openOrders} label="Open orders" trendLabel="7 due this week" trendType="neutral" />
-        <StatCard value="96%" label="On-time delivery" trend="+1 pt vs last month" />
+        <StatCard className="shadow-elevation-3" value={fmt(recordsToday)} label="Records pressed today" trend={`+${vsAveragePct}% vs weekday average`} />
+        <StatCard className="shadow-elevation-3" value={openOrders} label="Open orders" trendLabel="7 due this week" trendType="neutral" />
+        <StatCard className="shadow-elevation-3" value="96%" label="On-time delivery" trend="+1 pt vs last month" />
       </div>
 
       <Panel
@@ -398,6 +398,7 @@ export default function AppShellExample() {
           name: 'Deep Groove',
         }}
         navigation={navigation}
+        defaultCollapsed
         activeId={view}
         onNavigate={onNavigate}
         sidebarFooter={<ShiftCard />}
