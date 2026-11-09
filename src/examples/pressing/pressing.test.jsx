@@ -199,17 +199,4 @@ describe('AppShellExample (pressing plant)', () => {
     await user.click(within(dialog).getByText('Go to Presses'));
     expect(await screen.findByRole('heading', { name: 'Presses' })).toBeInTheDocument();
   });
-
-  it('can leave the ⌘K shortcut to the host page', async () => {
-    const user = userEvent.setup();
-    render(
-      <MemoryRouter>
-        <ToastProvider>
-          <AppShellExample shortcut={false} />
-        </ToastProvider>
-      </MemoryRouter>,
-    );
-    await user.keyboard('{Control>}k{/Control}');
-    expect(screen.queryByRole('dialog')).toBeNull();
-  });
 });

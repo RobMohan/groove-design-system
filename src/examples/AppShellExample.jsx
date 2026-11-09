@@ -356,16 +356,12 @@ const ShiftCard = () => (
   </div>
 );
 
-/**
- * @param {{ shortcut?: boolean }} props  shortcut: bind ⌘K / Ctrl K to the palette. Turn it off
- *   on a page that should keep that shortcut for itself; the search button still works.
- */
-export default function AppShellExample({ shortcut = true }) {
+export default function AppShellExample() {
   const { toast } = useToast();
   const [view, setView] = useState('overview');
   const [paletteOpen, setPaletteOpen] = useState(false);
 
-  useCommandK(() => shortcut && setPaletteOpen((open) => !open));
+  useCommandK(() => setPaletteOpen((open) => !open));
 
   const note = (title, description) => toast({ title, description, variant: 'info' });
   const newOrder = () => note('New order', 'This is a demo, so nothing was created.');

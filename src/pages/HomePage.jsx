@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import Button from '../components/Button';
 import Card from '../components/Card';
 import StatCard from '../components/StatCard';
-import AppShellExample from '../examples/AppShellExample';
 import { Component, Moon, TestTube2, Accessibility, ArrowRight } from 'lucide-react';
 
 export default function HomePage() {
@@ -37,34 +36,11 @@ export default function HomePage() {
           </div>
         </div>
 
-        {/* Showcase: a real app built from Groove, wider than the text column */}
-      </div>
-
-      <section aria-labelledby="showcase-heading" className="max-w-6xl mx-auto mb-16">
-        <div className="mb-6 max-w-3xl">
-          <h2 id="showcase-heading" className="text-3xl font-bold mb-2">See it in action</h2>
-          <p className="text-ink-muted">
-            Deep Groove is a record pressing plant dashboard built only from Groove components and tokens: App
-            Shell, Stat Card, Segmented Control, Chip, Progress, Command Palette and an accessible chart. Click
-            around, collapse the sidebar, open search, and use the theme toggle to see dark mode.{' '}
-            <Link to="/app-shell" className="text-primary font-medium hover:underline">
-              Read the App Shell docs
-            </Link>
-          </p>
-        </div>
-        <div className="rounded-card border border-line bg-surface-muted p-3 sm:p-4">
-          <div className="h-[720px] overflow-hidden rounded-card border border-line shadow-elevation-4">
-            <AppShellExample shortcut={false} />
-          </div>
-        </div>
-      </section>
-
-      <div className="max-w-5xl mx-auto">
         {/* Stats */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16">
           <StatCard value="45" label="Components" />
           <StatCard value="12" label="Foundations" />
-          <StatCard value="251" label="Passing tests" />
+          <StatCard value="250" label="Passing tests" />
           <StatCard value="2" label="Themes (light / dark)" />
         </div>
 
