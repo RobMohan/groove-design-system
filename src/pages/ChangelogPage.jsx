@@ -41,6 +41,17 @@ export default function ChangelogPage() {
         </div>
 
         <div className="mt-8">
+          <Release version="Unreleased" date="November 2026">
+            <p className="text-ink-muted mb-4">An application frame to start new apps from.</p>
+            <ul>
+              <Change type="Added">
+                App Shell: a collapsible sidebar, header with breadcrumbs, search trigger, actions and account menu,
+                and a scrolling content area, with a slide-over layout when narrow. Includes a PageHeader helper and
+                an interactive example app.
+              </Change>
+            </ul>
+          </Release>
+
           <Release version="2.0.0" date="July 2026">
             <p className="text-ink-muted mb-4">
               The parity release — a major expansion bringing Groove to full design-system coverage, with a

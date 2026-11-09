@@ -26,6 +26,7 @@ const foundationItems = [
 const componentItems = [
   { path: '/accordion', label: 'Accordion' },
   { path: '/alert', label: 'Alert' },
+  { path: '/app-shell', label: 'App Shell' },
   { path: '/avatar', label: 'Avatar' },
   { path: '/badge', label: 'Badge' },
   { path: '/banner', label: 'Banner' },

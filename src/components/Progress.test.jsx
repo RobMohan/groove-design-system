@@ -31,4 +31,13 @@ describe('Progress Component', () => {
     render(<Progress indeterminate />);
     expect(screen.getByRole('progressbar')).not.toHaveAttribute('aria-valuenow');
   });
+  it('names the progressbar from its visible label', () => {
+    render(<Progress value={40} label="Upload" />);
+    expect(screen.getByRole('progressbar', { name: 'Upload' })).toBeInTheDocument();
+  });
+
+  it('names the progressbar from aria-label when there is no visible label', () => {
+    render(<Progress value={40} aria-label="Storage used" />);
+    expect(screen.getByRole('progressbar', { name: 'Storage used' })).toBeInTheDocument();
+  });
 });

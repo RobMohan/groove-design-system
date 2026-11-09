@@ -42,6 +42,7 @@ export default function StatusPage() {
     { name: 'Accordion', path: '/accordion', status: 'Beta', notes: 'Expandable sections with aria-expanded.' },
     { name: 'Breadcrumbs', path: '/breadcrumbs', status: 'Beta', notes: 'Navigation trail with aria-current.' },
     { name: 'Menu', path: '/menu', status: 'Beta', notes: 'Dropdown with roving keyboard focus.' },
+    { name: 'App Shell', path: '/app-shell', status: 'Beta', notes: 'Sidebar, header and content frame; responsive slide-over.' },
   ];
 
   const counts = components.reduce((acc, c) => {

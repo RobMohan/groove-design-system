@@ -29,6 +29,7 @@ import AccessibilityPage from './pages/AccessibilityPage';
 // Components
 import AccordionPage from './pages/AccordionPage';
 import AlertPage from './pages/AlertPage';
+import AppShellPage from './pages/AppShellPage';
 import AvatarPage from './pages/AvatarPage';
 import BadgePage from './pages/BadgePage';
 import BannerPage from './pages/BannerPage';
@@ -108,6 +109,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
             {/* Components */}
             <Route path="/accordion" element={<AccordionPage />} />
             <Route path="/alert" element={<AlertPage />} />
+            <Route path="/app-shell" element={<AppShellPage />} />
             <Route path="/avatar" element={<AvatarPage />} />
             <Route path="/badge" element={<BadgePage />} />
             <Route path="/banner" element={<BannerPage />} />

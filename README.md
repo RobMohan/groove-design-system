@@ -1,6 +1,6 @@
 # Groove Design System
 
-A comprehensive, accessible component library built with React and Tailwind CSS. Groove ships **44 components** and **12 design foundations**, with a token-driven **light & dark theme**, a **TanStack-powered data table**, full **keyboard accessibility** (WCAG 2.2 AA), and interactive documentation for every piece. This project explores how AI can accelerate design system workflows and improve design-to-development collaboration.
+A comprehensive, accessible component library built with React and Tailwind CSS. Groove ships **45 components** and **12 design foundations**, with a token-driven **light & dark theme**, a **TanStack-powered data table**, full **keyboard accessibility** (WCAG 2.2 AA), and interactive documentation for every piece. This project explores how AI can accelerate design system workflows and improve design-to-development collaboration.
 
 ## 🚀 Live Demo
 
@@ -9,7 +9,7 @@ A comprehensive, accessible component library built with React and Tailwind CSS.
 ## ✨ Features
 
 - 🎨 **Token-driven theming** — semantic color/typography/spacing/elevation/radius tokens power a built-in light & dark mode (toggle from the sidebar)
-- 🧩 **44 components** — from buttons, inputs, and overlays to comboboxes, sliders, date pickers, a command palette, and a full data table
+- 🧩 **45 components** — from buttons, inputs, and overlays to comboboxes, sliders, date pickers, a command palette, and a full data table
 - 📊 **TanStack data table** — headless sorting, filtering, global search, row selection, column visibility, and pagination, wrapped in the Groove visual style
 - 📚 **Interactive documentation** — a dedicated page with live examples and props tables for every component and foundation
 - ♿ **Accessible** — WCAG 2.2 AA target: focus traps, portaled overlays with a named z-index scale, ARIA roles/keyboard nav, and a semantic focus ring
@@ -110,7 +110,7 @@ npm test -- --watch   # watch mode
 npm run test:coverage # coverage report
 ```
 
-Current coverage: **203 tests across 36 suites** — covering every component including the overlays (Popover, Drawer, Command Palette), form controls (Combobox, Multi-Select, Field, Number Input, Slider), and data widgets (Date Picker, File Upload, Stepper, List), plus the accessibility remediation of the original set.
+Current coverage: **231 tests across 37 suites** — covering every component including the overlays (Popover, Drawer, Command Palette), form controls (Combobox, Multi-Select, Field, Number Input, Slider), and data widgets (Date Picker, File Upload, Stepper, List), plus the accessibility remediation of the original set.
 
 ## 🛠️ Built With
 

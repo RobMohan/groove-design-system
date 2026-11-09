@@ -17,6 +17,7 @@ const Progress = ({
   size = 'md',
   showLabel = false,
   label,
+  'aria-label': ariaLabel,
   className = '',
   ...props
 }) => {
@@ -36,6 +37,7 @@ const Progress = ({
       )}
       <div
         role="progressbar"
+        aria-label={ariaLabel || label || undefined}
         aria-valuemin={0}
         aria-valuemax={max}
         aria-valuenow={indeterminate ? undefined : Math.round(value)}
